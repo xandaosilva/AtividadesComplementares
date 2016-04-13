@@ -31,8 +31,7 @@ public class Modalidade implements Serializable{
 	private String nome;
 	
 	@ManyToMany
-	@JoinTable(name="CursoModalidade",
-	joinColumns=@JoinColumn(name="codigoModalidade"),
+	@JoinTable(name="CursoModalidade",joinColumns=@JoinColumn(name="modalidade"),
 	inverseJoinColumns=@JoinColumn(name="codigo"))
 	private List<Curso> cursos;
 	

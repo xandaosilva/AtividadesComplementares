@@ -27,7 +27,7 @@ public class Curso implements Serializable{
 	@Column(name="codigo")
 	private Long codigo;
 	
-	@Column(name="nome",nullable=false)
+	@Column(name="nome",unique=true,nullable=false)
 	private String nome;
 	
 	@ManyToMany

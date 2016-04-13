@@ -29,6 +29,9 @@ public class Ppc implements Serializable{
 	@Column(name="codigo")
 	private Long codigo;
 	
+	@Column(name="nome",unique=true,nullable=false)
+	private String nome;
+	
 	@Column(name="cargaHoraria",nullable=false)
 	private Double cargaHoraria;
 	
@@ -49,17 +52,14 @@ public class Ppc implements Serializable{
 	public Ppc(){
 	}
 
-	public Ppc(Long codigo, Double cargaHoraria, Date dataPpc, Curso curso,List<Turma> turmas, Boolean ativo) {
+	public Ppc(Long codigo, String nome, Double cargaHoraria, Date dataPpc, Curso curso, List<Turma> turmas,Boolean ativo) {
 		this.codigo = codigo;
+		this.nome = nome;
 		this.cargaHoraria = cargaHoraria;
 		this.dataPpc = dataPpc;
 		this.curso = curso;
 		this.turmas = turmas;
 		this.ativo = ativo;
-	}
-	
-	public boolean validar(){
-		return true;
 	}
 
 	public Long getCodigo() {
@@ -68,6 +68,14 @@ public class Ppc implements Serializable{
 
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Double getCargaHoraria() {
@@ -137,7 +145,7 @@ public class Ppc implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ppc [codigo=" + codigo + ", cargaHoraria=" + cargaHoraria + ", dataPpc=" + dataPpc + ", ativo=" + ativo
-				+ "]";
+		return "Ppc [codigo=" + codigo + ", nome=" + nome + ", cargaHoraria=" + cargaHoraria + ", dataPpc=" + dataPpc
+				+ ", ativo=" + ativo + "]";
 	}
 }

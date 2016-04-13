@@ -125,7 +125,6 @@ public class Turma implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Turma [codigo=" + codigo + ", semestre=" + semestre + ", ppc="
-				+ ppc + ", alunos=" + alunos + ", ativo=" + ativo + "]";
+		return "Turma [codigo=" + codigo + ", semestre=" + semestre + ", ativo=" + ativo + "]";
 	}
 }

@@ -127,7 +127,6 @@ public class Aluno extends Usuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Aluno [cpf=" + cpf + ", horas=" + horas + ", totalHoras="
-				+ totalHoras + ", turma=" + turma + "]";
+		return "Aluno [cpf=" + cpf + ", horas=" + horas + ", totalHoras=" + totalHoras + "]";
 	}
 }

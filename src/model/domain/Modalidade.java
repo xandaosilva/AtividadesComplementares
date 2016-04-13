@@ -9,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,9 +30,11 @@ public class Modalidade implements Serializable{
 	@Column(name="nome",nullable=false)
 	private String nome;
 	
-	@ManyToOne
-	@JoinColumn(name="curso",referencedColumnName="codigo")
-	private Curso curso;
+	@ManyToMany
+	@JoinTable(name="CursoModalidade",
+	joinColumns=@JoinColumn(name="codigoModalidade"),
+	inverseJoinColumns=@JoinColumn(name="codigo"))
+	private List<Curso> cursos;
 	
 	@OneToMany(mappedBy="modalidade")
 	private List<Categoria> categorias;
@@ -42,10 +45,10 @@ public class Modalidade implements Serializable{
 	public Modalidade(){
 	}
 
-	public Modalidade(Long codigo, String nome, Curso curso,List<Categoria> categorias, Boolean ativo) {
+	public Modalidade(Long codigo, String nome, List<Curso> cursos,List<Categoria> categorias, Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.curso = curso;
+		this.cursos = cursos;
 		this.categorias = categorias;
 		this.ativo = ativo;
 	}
@@ -70,12 +73,12 @@ public class Modalidade implements Serializable{
 		this.nome = nome;
 	}
 
-	public Curso getCurso() {
-		return curso;
+	public List<Curso> getCurso() {
+		return cursos;
 	}
 
-	public void setCurso(Curso curso) {
-		this.curso = curso;
+	public void setCurso(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 	public List<Categoria> getCategorias() {
@@ -121,8 +124,6 @@ public class Modalidade implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Modalidade [codigo=" + codigo + ", nome=" + nome + ", curso="
-				+ curso + ", categorias=" + categorias + ", ativo=" + ativo
-				+ "]";
+		return "Modalidade [codigo=" + codigo + ", nome=" + nome + ", ativo=" + ativo + "]";
 	}
 }

@@ -116,8 +116,7 @@ public abstract class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", login="
-				+ login + ", senha=" + senha + ", observacoes=" + observacoes
-				+ ", ativo=" + ativo + "]";
+		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", login=" + login + ", senha=" + senha
+				+ ", observacoes=" + observacoes + ", ativo=" + ativo + "]";
 	}	
 }

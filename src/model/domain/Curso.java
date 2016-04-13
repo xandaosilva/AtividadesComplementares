@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,7 +30,10 @@ public class Curso implements Serializable{
 	@Column(name="nome",nullable=false)
 	private String nome;
 	
-	@OneToMany(mappedBy="curso")
+	@ManyToMany
+	@JoinTable(name="CursoModalidade",
+	joinColumns=@JoinColumn(name="codigoCurso"),
+	inverseJoinColumns=@JoinColumn(name="codigo"))
 	private List<Modalidade> modalidades;
 	
 	@OneToMany(mappedBy="curso")
@@ -118,7 +124,6 @@ public class Curso implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Curso [codigo=" + codigo + ", nome=" + nome + ", modalidades="
-				+ modalidades + ", ppcs=" + ppcs + ", ativo=" + ativo + "]";
+		return "Curso [codigo=" + codigo + ", nome=" + nome + ", ativo=" + ativo + "]";
 	}
 }

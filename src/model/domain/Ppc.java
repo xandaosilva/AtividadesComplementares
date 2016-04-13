@@ -137,8 +137,7 @@ public class Ppc implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ppc [codigo=" + codigo + ", cargaHoraria=" + cargaHoraria
-				+ ", dataPpc=" + dataPpc + ", curso=" + curso + ", turmas="
-				+ turmas + ", ativo=" + ativo + "]";
+		return "Ppc [codigo=" + codigo + ", cargaHoraria=" + cargaHoraria + ", dataPpc=" + dataPpc + ", ativo=" + ativo
+				+ "]";
 	}
 }

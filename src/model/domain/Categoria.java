@@ -179,11 +179,8 @@ public class Categoria implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Categoria [codigo=" + codigo + ", nome=" + nome
-				+ ", porcentagemDaCategoria=" + porcentagemDaCategoria
-				+ ", porcentagemPorAtividade=" + porcentagemPorAtividade
-				+ ", atividadesPorSemestre=" + atividadesPorSemestre
-				+ ", observacoes=" + observacoes + ", modalidade=" + modalidade
-				+ ", ativo=" + ativo + "]";
+		return "Categoria [codigo=" + codigo + ", nome=" + nome + ", porcentagemDaCategoria=" + porcentagemDaCategoria
+				+ ", porcentagemPorAtividade=" + porcentagemPorAtividade + ", atividadesPorSemestre="
+				+ atividadesPorSemestre + ", observacoes=" + observacoes + ", ativo=" + ativo + "]";
 	}
 }

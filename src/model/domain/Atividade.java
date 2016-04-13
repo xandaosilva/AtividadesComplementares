@@ -59,9 +59,8 @@ public class Atividade implements Serializable{
 	public Atividade(){
 	}
 
-	public Atividade(Long codigo, Date dataAtividade, Date dataRegistro,
-			Double horas, String descricao, Aluno aluno,
-			Administrador administrador, Categoria categoria, Boolean ativo) {
+	public Atividade(Long codigo, Date dataAtividade, Date dataRegistro, Double horas, String descricao, 
+			Aluno aluno, Administrador administrador, Categoria categoria, Boolean ativo) {
 		this.codigo = codigo;
 		this.dataAtividade = dataAtividade;
 		this.dataRegistro = dataRegistro;
@@ -190,10 +189,7 @@ public class Atividade implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Atividade [codigo=" + codigo + ", dataAtividade="
-				+ dataAtividade + ", dataRegistro=" + dataRegistro + ", horas="
-				+ horas + ", descricao=" + descricao + ", aluno=" + aluno
-				+ ", administrador=" + administrador + ", categoria="
-				+ categoria + ", ativo=" + ativo + "]";
+		return "Atividade [codigo=" + codigo + ", dataAtividade=" + dataAtividade + ", dataRegistro=" + 
+				dataRegistro + ", horas=" + horas + ", descricao=" + descricao + ", ativo=" + ativo + "]";
 	}
 }

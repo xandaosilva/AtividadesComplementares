@@ -28,7 +28,7 @@ public class TurmaFacade {
 	
 	@GET
 	@Path("/{codigo}")
-	public List<Turma> getTurmas(@PathParam("codigo") Long codigo){
+	public List<Turma> getTurmas(@PathParam("codigo") Integer codigo){
 		Turma turma = new Turma();
 		turma.setCodigo(codigo);
 		return turmaService.getTurmas(turma);

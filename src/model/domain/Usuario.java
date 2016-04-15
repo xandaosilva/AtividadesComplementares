@@ -17,7 +17,7 @@ public abstract class Usuario {
 	@Id
 	@Column(name="codigo")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long codigo;
+	private Integer codigo;
 	
 	@Column(name="nome",nullable=false)
 	private String nome;
@@ -37,7 +37,7 @@ public abstract class Usuario {
 	public Usuario(){
 	}
 
-	public Usuario(Long codigo, String nome, String login, String senha,String observacoes, Boolean ativo) {
+	public Usuario(Integer codigo, String nome, String login, String senha,String observacoes, Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.login = login;
@@ -46,11 +46,11 @@ public abstract class Usuario {
 		this.ativo = ativo;
 	}
 	
-	public Long getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 

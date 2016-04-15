@@ -20,17 +20,19 @@ public class TurmaFacade {
 	}
 	
 	@WebMethod
-	public List<Turma> getTurmas(@WebParam Turma turma){
+	public List<Turma> getTurmas(@WebParam(name="codigo") Integer codigo){
+		Turma turma = new Turma();
+		turma.setCodigo(codigo);
 		return turmaService.getTurmas(turma);
 	}
 	
 	@WebMethod
-	public Turma salvar(@WebParam Turma turma){
+	public Turma salvar(@WebParam(name="turma") Turma turma){
 		return turmaService.salvar(turma);
 	}
 	
 	@WebMethod
-	public void atualizar(@WebParam Turma turma){
+	public void atualizar(@WebParam(name="turma") Turma turma){
 		turmaService.atualizar(turma);
 	}
 }

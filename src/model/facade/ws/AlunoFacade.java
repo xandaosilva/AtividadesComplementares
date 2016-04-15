@@ -20,17 +20,19 @@ public class AlunoFacade {
 	}
 	
 	@WebMethod
-	public List<Aluno> getAlunos(@WebParam Aluno aluno){
+	public List<Aluno> getAlunos(@WebParam(name="codigo") Integer codigo){
+		Aluno aluno = new Aluno();
+		aluno.setCodigo(codigo);
 		return alunoService.getAlunos(aluno);
 	}
 	
 	@WebMethod
-	public Aluno salvar(@WebParam Aluno aluno){
+	public Aluno salvar(@WebParam(name="aluno") Aluno aluno){
 		return alunoService.salvar(aluno);
 	}
 	
 	@WebMethod
-	public void atualizar(@WebParam Aluno aluno){
+	public void atualizar(@WebParam(name="aluno") Aluno aluno){
 		alunoService.atualizar(aluno);
 	}
 }

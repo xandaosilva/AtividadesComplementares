@@ -28,7 +28,7 @@ public class Ppc implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="codigo")
-	private Long codigo;
+	private Integer codigo;
 	
 	@Column(name="nome",unique=true,nullable=false)
 	private String nome;
@@ -53,7 +53,7 @@ public class Ppc implements Serializable{
 	public Ppc(){
 	}
 
-	public Ppc(Long codigo, String nome, Double cargaHoraria, Date dataPpc, Curso curso, List<Turma> turmas,Boolean ativo) {
+	public Ppc(Integer codigo, String nome, Double cargaHoraria, Date dataPpc, Curso curso, List<Turma> turmas,Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.cargaHoraria = cargaHoraria;
@@ -63,11 +63,11 @@ public class Ppc implements Serializable{
 		this.ativo = ativo;
 	}
 
-	public Long getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 

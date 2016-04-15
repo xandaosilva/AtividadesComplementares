@@ -28,7 +28,7 @@ public class PpcFacade {
 	
 	@GET
 	@Path("/{codigo}")
-	public List<Ppc> getPpcs(@PathParam("codigo") Long codigo){
+	public List<Ppc> getPpcs(@PathParam("codigo") Integer codigo){
 		Ppc ppc = new Ppc();
 		ppc.setCodigo(codigo);
 		return ppcService.getPpcs(ppc);

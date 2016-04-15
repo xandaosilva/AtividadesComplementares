@@ -28,7 +28,7 @@ public class AdministradorFacade {
 	
 	@GET
 	@Path("/{codigo}")
-	public List<Administrador> getAdministrador(@PathParam("codigo") Long codigo){
+	public List<Administrador> getAdministrador(@PathParam("codigo") Integer codigo){
 		Administrador administrador = new Administrador();
 		administrador.setCodigo(codigo);
 		return administradorService.getAdministradores(administrador);

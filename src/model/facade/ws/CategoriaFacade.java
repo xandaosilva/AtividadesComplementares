@@ -20,17 +20,19 @@ public class CategoriaFacade {
 	}
 	
 	@WebMethod
-	public List<Categoria> getCategorias(@WebParam Categoria categoria){
+	public List<Categoria> getCategorias(@WebParam(name="codigo") Integer codigo){
+		Categoria categoria = new Categoria();
+		categoria.setCodigo(codigo);
 		return categoriaService.getCategorias(categoria);
 	}
 	
 	@WebMethod
-	public Categoria salvar(@WebParam Categoria categoria){
+	public Categoria salvar(@WebParam(name="categoria") Categoria categoria){
 		return categoriaService.salvar(categoria);
 	}
 	
 	@WebMethod
-	public void atualizar(@WebParam Categoria categoria){
+	public void atualizar(@WebParam(name="categoria") Categoria categoria){
 		categoriaService.atualizar(categoria);
 	}
 }

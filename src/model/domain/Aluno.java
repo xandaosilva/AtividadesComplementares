@@ -22,7 +22,7 @@ public class Aluno extends Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="cpf",unique=true,nullable=false)
-	private Long cpf;
+	private String cpf;
 	
 	@Column(name="horas",nullable=false)
 	private Double horas;
@@ -40,8 +40,8 @@ public class Aluno extends Usuario implements Serializable{
 	public Aluno(){
 	}
 
-	public Aluno(Long codigo, String nome, String login, String senha, String observacoes, Boolean ativo, 
-			Long cpf, Double horas, Double totalHoras, Turma turma, List<Atividade> atividades) {
+	public Aluno(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo, 
+			String cpf, Double horas, Double totalHoras, Turma turma, List<Atividade> atividades) {
 		super(codigo, nome, login, senha, observacoes, ativo);
 		this.cpf = cpf;
 		this.horas = horas;
@@ -64,11 +64,11 @@ public class Aluno extends Usuario implements Serializable{
 		return this.totalHoras;
 	}
 	
-	public Long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

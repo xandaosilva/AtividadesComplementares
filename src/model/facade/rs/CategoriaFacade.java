@@ -28,7 +28,7 @@ public class CategoriaFacade {
 	
 	@GET
 	@Path("/{codigo}")
-	public List<Categoria> getCategorias(@PathParam("codigo") Long codigo){
+	public List<Categoria> getCategorias(@PathParam("codigo") Integer codigo){
 		Categoria categoria = new Categoria();
 		categoria.setCodigo(codigo);
 		return categoriaService.getCategorias(categoria);

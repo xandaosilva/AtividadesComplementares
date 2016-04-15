@@ -20,17 +20,19 @@ public class AtividadeFacade {
 	}
 	
 	@WebMethod
-	public List<Atividade> getAtividades(@WebParam Atividade atividade){
+	public List<Atividade> getAtividades(@WebParam(name="codigo") Integer codigo){
+		Atividade atividade = new Atividade();
+		atividade.setCodigo(codigo);
 		return atividadeService.getAtividades(atividade);
 	}
 	
 	@WebMethod
-	public Atividade salvar(@WebParam Atividade atividade){
+	public Atividade salvar(@WebParam(name="atividade") Atividade atividade){
 		return atividadeService.salvar(atividade);
 	}
 	
 	@WebMethod
-	public void atualizar(@WebParam Atividade atividade){
+	public void atualizar(@WebParam(name="atividade") Atividade atividade){
 		atividadeService.atualizar(atividade);
 	}
 }

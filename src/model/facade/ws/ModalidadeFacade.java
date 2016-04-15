@@ -20,17 +20,19 @@ public class ModalidadeFacade {
 	}
 	
 	@WebMethod
-	public List<Modalidade> getModalidades(@WebParam Modalidade modalidade){
+	public List<Modalidade> getModalidades(@WebParam(name="codigo") Integer codigo){
+		Modalidade modalidade = new Modalidade();
+		modalidade.setCodigo(codigo);
 		return modalidadeService.getModalidades(modalidade);
 	}
 	
 	@WebMethod
-	public Modalidade salvar(@WebParam Modalidade modalidade){
+	public Modalidade salvar(@WebParam(name="modalidade") Modalidade modalidade){
 		return modalidadeService.salvar(modalidade);
 	}
 	
 	@WebMethod
-	public void atualizar(@WebParam Modalidade modalidade){
+	public void atualizar(@WebParam(name="modalidade") Modalidade modalidade){
 		modalidadeService.atualizar(modalidade);
 	}
 }

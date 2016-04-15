@@ -20,17 +20,19 @@ public class AdministradorFacade {
 	}
 	
 	@WebMethod
-	public List<Administrador> getAdministradores(@WebParam Administrador administrador){
+	public List<Administrador> getAdministradores(@WebParam(name="codigo") Integer codigo){
+		Administrador administrador = new Administrador();
+		administrador.setCodigo(codigo);
 		return administradorService.getAdministradores(administrador);
 	}
 	
 	@WebMethod
-	public Administrador salvar(@WebParam Administrador administrador){
+	public Administrador salvar(@WebParam(name="administrador") Administrador administrador){
 		return administradorService.salvar(administrador);
 	}
 	
 	@WebMethod
-	public void atualizar(@WebParam Administrador administrador){
+	public void atualizar(@WebParam(name="administrador") Administrador administrador){
 		administradorService.atualizar(administrador);
 	}
 }

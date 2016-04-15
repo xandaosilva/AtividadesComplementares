@@ -26,7 +26,7 @@ public class Curso implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="codigo")
-	private Long codigo;
+	private Integer codigo;
 	
 	@Column(name="nome",unique=true,nullable=false)
 	private String nome;
@@ -44,7 +44,7 @@ public class Curso implements Serializable{
 	public Curso(){
 	}
 
-	public Curso(Long codigo, String nome, List<Modalidade> modalidades,List<Ppc> ppcs, Boolean ativo) {
+	public Curso(Integer codigo, String nome, List<Modalidade> modalidades,List<Ppc> ppcs, Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.modalidades = modalidades;
@@ -56,11 +56,11 @@ public class Curso implements Serializable{
 		return true;
 	}
 
-	public Long getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 

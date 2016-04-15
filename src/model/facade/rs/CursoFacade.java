@@ -28,7 +28,7 @@ public class CursoFacade {
 	
 	@GET
 	@Path("/{codigo}")
-	public List<Curso> getCursos(@PathParam("codigo") Long codigo){
+	public List<Curso> getCursos(@PathParam("codigo") Integer codigo){
 		Curso curso = new Curso();
 		curso.setCodigo(codigo);
 		return cursoService.getCursos(curso);

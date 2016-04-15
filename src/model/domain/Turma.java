@@ -28,7 +28,7 @@ public class Turma implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="codigo")
-	private Long codigo;
+	private Integer codigo;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="semestre",nullable=false)
@@ -47,7 +47,7 @@ public class Turma implements Serializable{
 	public Turma(){
 	}
 
-	public Turma(Long codigo, Date semestre, Ppc ppc, List<Aluno> alunos,Boolean ativo) {
+	public Turma(Integer codigo, Date semestre, Ppc ppc, List<Aluno> alunos,Boolean ativo) {
 		this.codigo = codigo;
 		this.semestre = semestre;
 		this.ppc = ppc;
@@ -59,11 +59,11 @@ public class Turma implements Serializable{
 		return true;
 	}
 
-	public Long getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 

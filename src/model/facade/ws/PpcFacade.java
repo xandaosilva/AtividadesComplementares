@@ -20,17 +20,19 @@ public class PpcFacade {
 	}
 	
 	@WebMethod
-	public List<Ppc> getPpcs(@WebParam Ppc ppc){
+	public List<Ppc> getPpcs(@WebParam(name="codigo") Integer codigo){
+		Ppc ppc = new Ppc();
+		ppc.setCodigo(codigo);
 		return ppcService.getPpcs(ppc);
 	}
 	
 	@WebMethod
-	public Ppc salvar(@WebParam Ppc ppc){
+	public Ppc salvar(@WebParam(name="ppc") Ppc ppc){
 		return ppcService.salvar(ppc);
 	}
 	
 	@WebMethod
-	public void atualizar(@WebParam Ppc ppc){
+	public void atualizar(@WebParam(name="ppc") Ppc ppc){
 		ppcService.atualizar(ppc);
 	}
 }

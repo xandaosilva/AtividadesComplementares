@@ -20,7 +20,7 @@ public class Administrador extends Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="siape",unique=true,nullable=false)
-	private Long siape;
+	private String siape;
 	
 	@Column(name="atividades")
 	@OneToMany(mappedBy="administrador")
@@ -29,18 +29,18 @@ public class Administrador extends Usuario implements Serializable{
 	public Administrador(){
 	}
 
-	public Administrador(Long codigo, String nome, String login, String senha,
-			String observacoes, Boolean ativo,Long siape,List<Atividade> atividades) {
+	public Administrador(Integer codigo, String nome, String login, String senha,
+			String observacoes, Boolean ativo,String siape,List<Atividade> atividades) {
 		super(codigo, nome, login, senha, observacoes, ativo);
 		this.siape = siape;
 		this.atividades = atividades;
 	}
 
-	public Long getSiape() {
+	public String getSiape() {
 		return siape;
 	}
 
-	public void setSiape(Long siape) {
+	public void setSiape(String siape) {
 		this.siape = siape;
 	}
 

@@ -28,7 +28,7 @@ public class ModalidadeFacade {
 	
 	@GET
 	@Path("/{codigo}")
-	public List<Modalidade> getModalidades(@PathParam("codigo") Long codigo){
+	public List<Modalidade> getModalidades(@PathParam("codigo") Integer codigo){
 		Modalidade modalidade = new Modalidade();
 		modalidade.setCodigo(codigo);
 		return modalidadeService.getModalidades(modalidade);

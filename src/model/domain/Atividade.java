@@ -25,7 +25,7 @@ public class Atividade implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="codigo")
-	private Long codigo;
+	private Integer codigo;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="dataAtividade",nullable=false)
@@ -59,7 +59,7 @@ public class Atividade implements Serializable{
 	public Atividade(){
 	}
 
-	public Atividade(Long codigo, Date dataAtividade, Date dataRegistro, Double horas, String descricao, 
+	public Atividade(Integer codigo, Date dataAtividade, Date dataRegistro, Double horas, String descricao, 
 			Aluno aluno, Administrador administrador, Categoria categoria, Boolean ativo) {
 		this.codigo = codigo;
 		this.dataAtividade = dataAtividade;
@@ -83,11 +83,11 @@ public class Atividade implements Serializable{
 			return false;
 	}
 
-	public Long getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 

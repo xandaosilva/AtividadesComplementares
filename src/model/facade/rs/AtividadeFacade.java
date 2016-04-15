@@ -30,7 +30,7 @@ public class AtividadeFacade {
 	
 	@GET
 	@Path("/{codigo}")
-	public List<Atividade> getAtividades(@PathParam("codigo") Long codigo){
+	public List<Atividade> getAtividades(@PathParam("codigo") Integer codigo){
 		Atividade atividade = new Atividade();
 		atividade.setCodigo(codigo);
 		return atividadeService.getAtividades(atividade);

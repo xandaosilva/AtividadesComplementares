@@ -35,7 +35,7 @@ public class Turma implements Serializable{
 	private Date semestre;
 	
 	@ManyToOne
-	@JoinColumn(name="turma",referencedColumnName="codigo")
+	@JoinColumn(name="ppc",referencedColumnName="codigo")
 	private Ppc ppc;
 	
 	@OneToMany(mappedBy="turma")

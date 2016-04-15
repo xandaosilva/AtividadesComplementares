@@ -42,11 +42,11 @@ public class Atividade implements Serializable{
 	private String descricao;
 	
 	@ManyToOne
-	@JoinColumn(name="aluno",referencedColumnName="codigo")
+	@JoinColumn(name="aluno",referencedColumnName="cpf")
 	private Aluno aluno;
 	
 	@ManyToOne
-	@JoinColumn(name="administrador",referencedColumnName="codigo")
+	@JoinColumn(name="administrador",referencedColumnName="siape")
 	private Administrador administrador;
 	
 	@ManyToOne

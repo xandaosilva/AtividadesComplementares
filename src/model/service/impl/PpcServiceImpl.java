@@ -14,26 +14,17 @@ public class PpcServiceImpl implements PpcService {
 	@Inject
 	private PpcDao ppcDao;
 	
-	/* (non-Javadoc)
-	 * @see model.service.PpcService#getPpcs(model.domain.Ppc)
-	 */
 	@Override
 	public List<Ppc> getPpcs(Ppc ppc){
 		return ppcDao.getPpcs(ppc);
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.service.PpcService#salvar(model.domain.Ppc)
-	 */
 	@Override
 	@Transactional
 	public Ppc salvar(Ppc ppc){
 		return ppcDao.salvar(ppc);
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.service.PpcService#atualizar(model.domain.Ppc)
-	 */
 	@Override
 	@Transactional
 	public void atualizar(Ppc ppc){

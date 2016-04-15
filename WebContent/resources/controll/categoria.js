@@ -1,15 +1,19 @@
 var categoriaModule = angular.module("categoriaModule",[]);
 
 categoriaModule.controller("categoriaController", function($scope,$http) {
-	url = "http://localhost:8080/Atividades/rs/categoria";
+	url = "http://localhost:8080/AtividadesComplementares/rs/categoria";
 	
 	$scope.novo = function(){
 		$scope.categoria = "";
-	};
-	
+	}
+
 	$scope.seleciona = function(categoria){
 		$scope.categoria = categoria;
-	};
+	}
+	
+	$scope.selecionaModalidade = function(modalidade){
+		$scope.categoria.modalidade = modalidade;
+	}
 	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(categorias) {
@@ -17,7 +21,7 @@ categoriaModule.controller("categoriaController", function($scope,$http) {
 		}).error(function(erro) {
 			alert(erro);
 		});
-	};
+	}
 	
 	$scope.salvar = function(){
 		if($scope.categoria.codigo === ""){
@@ -36,7 +40,7 @@ categoriaModule.controller("categoriaController", function($scope,$http) {
 				alert(erro);
 			});
 		}
-	};
+	}
 	
 	$scope.pesquisar();
 });

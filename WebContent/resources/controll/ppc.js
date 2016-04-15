@@ -1,15 +1,19 @@
 var ppcModule = angular.module("ppcModule",[]);
 
 ppcModule.controller("ppcController", function($scope,$http) {
-	url = "http://localhost:8080/Atividades/rs/ppc";
+	url = "http://localhost:8080/AtividadesComplementares/rs/ppc";
 	
 	$scope.novo = function(){
 		$scope.ppc = "";
-	};
+	}
 	
 	$scope.seleciona = function(ppc){
 		$scope.ppc = ppc;
-	};
+	}
+	
+	$scope.selecionaCurso = function(curso){
+		$scope.ppc.curso = curso;
+	}
 	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(ppcs) {

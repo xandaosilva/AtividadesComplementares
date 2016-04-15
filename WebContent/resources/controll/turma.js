@@ -1,15 +1,19 @@
 var turmaModule = angular.module("turmaModule",[]);
 
 turmaModule.controller("turmaController", function($scope,$http) {
-	url = "http://localhost:8080/Atividades/rs/turma";
+	url = "http://localhost:8080/AtividadesComplementares/rs/turma";
 	
 	$scope.novo = function(){
 		$scope.turma = "";
-	};
+	}
 	
 	$scope.seleciona = function(turma){
 		$scope.turma = turma;
-	};
+	}
+	
+	$scope.selecionaPpc = function(ppc){
+		$scope.turma.ppc = ppc;
+	}
 	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(turmas) {

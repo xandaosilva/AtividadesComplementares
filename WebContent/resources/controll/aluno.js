@@ -1,15 +1,20 @@
 var alunoModule = angular.module("alunoModule",[]);
 
 alunoModule.controller("alunoController", function($scope,$http) {
-	url = "http://localhost:8080/Atividades/rs/aluno";
+	url = "http://localhost:8080/AtividadesComplementares/rs/aluno";
+	urlAtividades = "http://localhost:8080/AtividadesComplementares/rs/atividades";
 	
 	$scope.novo = function(){
 		$scope.aluno = "";
-	};
+	}
 	
 	$scope.seleciona = function(aluno){
 		$scope.aluno = aluno;
-	};
+	}
+	
+	$scope.selecionarTurma = function(turma) {
+		$scope.aluno.turma = turma;
+	}
 	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(alunos) {
@@ -17,7 +22,15 @@ alunoModule.controller("alunoController", function($scope,$http) {
 		}).error(function(erro) {
 			alert(erro);
 		});
-	};
+	}
+	
+	$scope.pesquisarAtividades = function(){
+		$http.get(urlAtividades).success(function(atividades) {
+			$scope.atividades = atividades;
+		}).error(function(erro) {
+			alert(erro);
+		});
+	}
 	
 	$scope.salvar = function(){
 		if($scope.aluno.codigo === ""){
@@ -36,7 +49,7 @@ alunoModule.controller("alunoController", function($scope,$http) {
 				alert(erro);
 			});
 		}
-	};
+	}
 	
 	$scope.pesquisar();
 });

@@ -1,15 +1,15 @@
 var modalidadeModule = angular.module("modalidadeModule",[]);
 
 modalidadeModule.controller("modalidadeController", function($scope,$http) {
-	url = "http://localhost:8080/Atividades/rs/modalidade";
+	url = "http://localhost:8080/AtividadesComplementares/rs/modalidade";
 	
 	$scope.novo = function(){
 		$scope.modalidade = "";
-	};
+	}
 	
 	$scope.seleciona = function(modalidade){
 		$scope.modalidade = modalidade;
-	};
+	}
 	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(modalidades) {
@@ -17,7 +17,7 @@ modalidadeModule.controller("modalidadeController", function($scope,$http) {
 		}).error(function(erro) {
 			alert(erro);
 		});
-	};
+	}
 	
 	$scope.salvar = function(){
 		if($scope.modalidade.codigo === ""){
@@ -36,7 +36,7 @@ modalidadeModule.controller("modalidadeController", function($scope,$http) {
 				alert(erro);
 			});
 		}
-	};
+	}
 	
 	$scope.pesquisar();
 });

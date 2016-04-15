@@ -1,15 +1,15 @@
 var cursoModule = angular.module("cursoModule",[]);
 
 cursoModule.controller("cursoController", function($scope,$http) {
-	url = "http://localhost:8080/Atividades/rs/curso";
+	url = "http://localhost:8080/AtividadesComplementares/rs/curso";
 	
 	$scope.novo = function(){
 		$scope.curso = "";
-	};
+	}
 	
 	$scope.seleciona = function(curso){
 		$scope.curso = curso;
-	};
+	}
 	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(cursos) {
@@ -17,7 +17,7 @@ cursoModule.controller("cursoController", function($scope,$http) {
 		}).error(function(erro) {
 			alert(erro);
 		});
-	};
+	}
 	
 	$scope.salvar = function(){
 		if($scope.curso.codigo === ""){
@@ -36,7 +36,7 @@ cursoModule.controller("cursoController", function($scope,$http) {
 				alert(erro);
 			});
 		}
-	};
+	}
 	
 	$scope.pesquisar();
 });

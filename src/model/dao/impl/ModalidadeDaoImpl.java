@@ -14,26 +14,17 @@ public class ModalidadeDaoImpl implements ModalidadeDao {
 	@PersistenceContext(unitName="AtividadePU")
 	private EntityManager entityManager;
 	
-	/* (non-Javadoc)
-	 * @see model.dao.ModalidadeDao#salvar(model.domain.Modalidade)
-	 */
 	@Override
 	public Modalidade salvar(Modalidade modalidade){
 		entityManager.persist(modalidade);
 		return modalidade;
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.ModalidadeDao#atualizar(model.domain.Modalidade)
-	 */
 	@Override
 	public void atualizar(Modalidade modalidade){
 		salvar(entityManager.merge(modalidade));
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.ModalidadeDao#getModalidades(model.domain.Modalidade)
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Modalidade> getModalidades(Modalidade modalidade){

@@ -14,26 +14,17 @@ public class CategoriaDaoImpl implements CategoriaDao {
 	@PersistenceContext(unitName="AtividadePU")
 	private EntityManager entityManager;
 	
-	/* (non-Javadoc)
-	 * @see model.dao.CategoriaDao#salvar(model.domain.Categoria)
-	 */
 	@Override
 	public Categoria salvar(Categoria categoria){
 		entityManager.persist(categoria);
 		return categoria;
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.CategoriaDao#atualizar(model.domain.Categoria)
-	 */
 	@Override
 	public void atualizar(Categoria categoria){
 		salvar(entityManager.merge(categoria));
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.CategoriaDao#getCategorias(model.domain.Categoria)
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Categoria> getCategorias(Categoria categoria){

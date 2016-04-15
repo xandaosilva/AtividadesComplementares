@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -31,8 +32,7 @@ public class Curso implements Serializable{
 	private String nome;
 	
 	@ManyToMany
-	@JoinTable(name="CursoModalidade",joinColumns=@JoinColumn(name="curso"),
-	inverseJoinColumns=@JoinColumn(name="codigo"))
+	@JoinTable(name="CursoModalidade",joinColumns=@JoinColumn(name="curso"),inverseJoinColumns=@JoinColumn(name="codigo"))
 	private List<Modalidade> modalidades;
 	
 	@OneToMany(mappedBy="curso")
@@ -72,6 +72,7 @@ public class Curso implements Serializable{
 		this.nome = nome;
 	}
 
+	@XmlTransient
 	public List<Modalidade> getModalidades() {
 		return modalidades;
 	}
@@ -80,6 +81,7 @@ public class Curso implements Serializable{
 		this.modalidades = modalidades;
 	}
 
+	@XmlTransient
 	public List<Ppc> getPpcs() {
 		return ppcs;
 	}

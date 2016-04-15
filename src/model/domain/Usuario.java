@@ -26,7 +26,7 @@ public abstract class Usuario {
 	@Column(name="observacoes")
 	private String observacoes;
 	
-	@Column(name="ativo",nullable=false)
+	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
 	private Boolean ativo;
 	
 	public Usuario(){

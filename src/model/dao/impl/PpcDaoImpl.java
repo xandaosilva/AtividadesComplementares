@@ -14,26 +14,17 @@ public class PpcDaoImpl implements PpcDao {
 	@PersistenceContext(unitName="AtividadePU")
 	private EntityManager entityManager;
 	
-	/* (non-Javadoc)
-	 * @see model.dao.PpcDao#salvar(model.domain.Ppc)
-	 */
 	@Override
 	public Ppc salvar(Ppc ppc){
 		entityManager.persist(ppc);
 		return ppc;
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.PpcDao#atualizar(model.domain.Ppc)
-	 */
 	@Override
 	public void atualizar(Ppc ppc){
 		salvar(entityManager.merge(ppc));
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.PpcDao#getPpcs(model.domain.Ppc)
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Ppc> getPpcs(Ppc ppc){

@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -56,7 +57,8 @@ public class Aluno extends Usuario implements Serializable{
 	
 	public double somarTotalHorasDoAluno(){
 		for(Atividade aux : this.atividades)
-			this.totalHoras = this.totalHoras + aux.getHoras();
+			if(aux.getAtivo() == true)
+				this.totalHoras = this.totalHoras + aux.getHoras();
 		return this.totalHoras;
 	}
 	
@@ -92,6 +94,7 @@ public class Aluno extends Usuario implements Serializable{
 		this.turma = turma;
 	}
 
+	@XmlTransient
 	public List<Atividade> getAtividades() {
 		return atividades;
 	}

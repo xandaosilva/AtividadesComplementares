@@ -14,26 +14,17 @@ public class AtividadeDaoImpl implements AtividadeDao {
 	@PersistenceContext(unitName="AtividadePU")
 	private EntityManager entityManager;
 	
-	/* (non-Javadoc)
-	 * @see model.dao.AtividadeDao#salvar(model.domain.Atividade)
-	 */
 	@Override
 	public Atividade salvar(Atividade atividade){
 		entityManager.persist(atividade);
 		return atividade;
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.AtividadeDao#atualizar(model.domain.Atividade)
-	 */
 	@Override
 	public void atualizar(Atividade atividade){
 		salvar(entityManager.merge(atividade));
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.AtividadeDao#getAtividades(model.domain.Atividade)
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Atividade> getAtividades(Atividade atividade){

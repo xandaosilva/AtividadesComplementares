@@ -14,26 +14,17 @@ public class AdministradorDaoImpl implements AdministradorDao {
 	@PersistenceContext(unitName="AtividadePU")
 	private EntityManager entityManager;
 	
-	/* (non-Javadoc)
-	 * @see model.dao.AdministradorDao#salvar(model.domain.Administrador)
-	 */
 	@Override
 	public Administrador salvar(Administrador administrador){
 		entityManager.persist(administrador);
 		return administrador;
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.AdministradorDao#atualizar(model.domain.Administrador)
-	 */
 	@Override
 	public void atualizar(Administrador administrador){
 		salvar(entityManager.merge(administrador));
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.AdministradorDao#getAdministradores(model.domain.Administrador)
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Administrador> getAdministradores(Administrador administrador){

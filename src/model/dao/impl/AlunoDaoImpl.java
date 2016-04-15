@@ -14,26 +14,17 @@ public class AlunoDaoImpl implements AlunoDao {
 	@PersistenceContext(unitName="AtividadePU")
 	private EntityManager entityManager;
 	
-	/* (non-Javadoc)
-	 * @see model.dao.AlunoDao#salvar(model.domain.Aluno)
-	 */
 	@Override
 	public Aluno salvar(Aluno aluno){
 		entityManager.persist(aluno);
 		return aluno;
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.AlunoDao#atualizar(model.domain.Aluno)
-	 */
 	@Override
 	public void atualizar(Aluno aluno){
 		salvar(entityManager.merge(aluno));
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.AlunoDao#getAlunos(model.domain.Aluno)
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Aluno> getAlunos(Aluno aluno){

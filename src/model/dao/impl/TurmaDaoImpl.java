@@ -14,26 +14,17 @@ public class TurmaDaoImpl implements TurmaDao {
 	@PersistenceContext(unitName="AtividadePU")
 	private EntityManager entityManager;
 	
-	/* (non-Javadoc)
-	 * @see model.dao.TurmaDao#salvar(model.domain.Turma)
-	 */
 	@Override
 	public Turma salvar(Turma turma){
 		entityManager.persist(turma);
 		return turma;
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.TurmaDao#atualizar(model.domain.Turma)
-	 */
 	@Override
 	public void atualizar(Turma turma){
 		salvar(entityManager.merge(turma));
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.TurmaDao#getTurmas(model.domain.Turma)
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Turma> getTurmas(Turma turma){

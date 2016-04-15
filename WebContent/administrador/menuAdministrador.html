@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Perfil do administrador</title>
+	<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css">
+	<script src="../resources/js/angular.min.js"></script>
+	<script src="../resources/js/jquery.min.js"></script>
+	<script src="../resources/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+			    </button>
+		      	<a class="navbar-brand" href="../index.html">Atividades complementares</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="../login.html" class="dropdown-toggle">Logout</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							Documentos<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+				            <li><a href="../resources/documentos/Anexo01.pdf">Anexo 1</a></li>
+				            <li><a href="../resources/documentos/Anexo02.pdf">Anexo 2</a></li>
+				            <li><a href="../resources/documentos/Anexo02.pdf">Regulamento</a></li>
+			          	</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div ng-include="'opcoes.html'"></div>
+</body>
+</html>

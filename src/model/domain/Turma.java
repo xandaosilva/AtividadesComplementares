@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -82,6 +83,7 @@ public class Turma implements Serializable{
 		this.ppc = ppc;
 	}
 
+	@XmlTransient
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}

@@ -72,22 +72,15 @@ public class Atividade implements Serializable{
 		this.ativo = ativo;
 	}
 	
-	public double calcularHorasRegistradas(){
+	public double calcularHorasRegistradas(Date dataInicio,Date dataFinal){
 		return 0.0;
 	}
 	
 	public boolean validar(){
-		if(this.dataAtividade.after(this.dataRegistro)){
-			if(this.horas > 0.0){
-				return true;
-			}
-			else{
-				return false;
-			}
-		}
-		else{
+		if(this.dataAtividade.before(this.dataRegistro))
+			return true;
+		else
 			return false;
-		}
 	}
 
 	public Long getCodigo() {

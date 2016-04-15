@@ -14,26 +14,17 @@ public class CategoriaServiceImpl implements CategoriaService {
 	@Inject
 	private CategoriaDao categoriaDao;
 	
-	/* (non-Javadoc)
-	 * @see model.service.CategoriaService#getCategorias(model.domain.Categoria)
-	 */
 	@Override
 	public List<Categoria> getCategorias(Categoria categoria){
 		return categoriaDao.getCategorias(categoria);
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.service.CategoriaService#salvar(model.domain.Categoria)
-	 */
 	@Override
 	@Transactional
 	public Categoria salvar(Categoria categoria){
 		return categoriaDao.salvar(categoria);
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.service.CategoriaService#atualizar(model.domain.Categoria)
-	 */
 	@Override
 	@Transactional
 	public void atualizar(Categoria categoria){

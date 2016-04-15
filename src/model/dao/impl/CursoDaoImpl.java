@@ -14,38 +14,17 @@ public class CursoDaoImpl implements CursoDao{
 	@PersistenceContext(unitName="AtividadePU")
 	private EntityManager entityManager;
 	
-	/* (non-Javadoc)
-	 * @see model.dao.Curso#salvar(model.domain.Curso)
-	 */
-	/* (non-Javadoc)
-	 * @see model.dao.CursoDao#salvar(model.domain.Curso)
-	 */
-
 	@Override
 	public Curso salvar(Curso curso){
 		entityManager.persist(curso);
 		return curso;
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.Curso#atualizar(model.domain.Curso)
-	 */
-	/* (non-Javadoc)
-	 * @see model.dao.CursoDao#atualizar(model.domain.Curso)
-	 */
-
 	@Override
 	public void atualizar(Curso curso){
 		salvar(entityManager.merge(curso));
 	}
 	
-	/* (non-Javadoc)
-	 * @see model.dao.Curso#getCursos(model.domain.Curso)
-	 */
-	/* (non-Javadoc)
-	 * @see model.dao.CursoDao#getCursos(model.domain.Curso)
-	 */
-
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Curso> getCursos(Curso curso){

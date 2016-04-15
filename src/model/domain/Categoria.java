@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -68,8 +69,12 @@ public class Categoria implements Serializable{
 		this.ativo = ativo;
 	}
 
-	public double calcularHorasAproveitadasPorCategoria(Ppc ppc){
-		return 0.0;
+	public Double calcularHoraMaximaAproveitadaPorCategoria(Ppc ppc){
+		return ((this.porcentagemDaCategoria * (ppc.getCargaHoraria()/100.0)));
+	}
+	
+	public Double calcularHorasAproveitadasPorAtividade(Ppc ppc){
+		return (calcularHoraMaximaAproveitadaPorCategoria(ppc)/this.atividadesPorSemestre);
 	}
 	
 	public boolean validar(){
@@ -132,6 +137,7 @@ public class Categoria implements Serializable{
 		this.modalidade = modalidade;
 	}
 
+	@XmlTransient
 	public List<Atividade> getAtividades() {
 		return atividades;
 	}

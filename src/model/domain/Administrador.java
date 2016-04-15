@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -41,6 +42,7 @@ public class Administrador extends Usuario implements Serializable{
 		this.siape = siape;
 	}
 
+	@XmlTransient
 	public List<Atividade> getAtividades() {
 		return atividades;
 	}

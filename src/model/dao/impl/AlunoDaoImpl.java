@@ -28,12 +28,12 @@ public class AlunoDaoImpl implements AlunoDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Aluno> getAlunos(Aluno aluno){
-		StringBuilder hql = new StringBuilder("from Usuario u where 1 = 1");
+		StringBuilder hql = new StringBuilder("from Aluno a where 1 = 1");
 		
 		if(aluno.getCodigo() != null)
-			hql.append(" and u.codigo = :codigo");
+			hql.append(" and a.codigo = :codigo");
 		if(aluno.getNome() != null && !aluno.getNome().equals(""))
-			hql.append(" and u.nome like :nome");
+			hql.append(" and a.nome like :nome");
 		
 		Query query = entityManager.createQuery(hql.toString());
 		

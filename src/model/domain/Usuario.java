@@ -1,5 +1,7 @@
 package model.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,13 +12,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Usuario")
-@Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Usuario {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class Usuario implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="codigo")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigo;
 	
 	@Column(name="nome",nullable=false)

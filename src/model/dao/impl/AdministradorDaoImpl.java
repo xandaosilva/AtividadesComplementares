@@ -28,12 +28,12 @@ public class AdministradorDaoImpl implements AdministradorDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Administrador> getAdministradores(Administrador administrador){
-		StringBuilder hql = new StringBuilder("from Usuario u where 1 = 1");
+		StringBuilder hql = new StringBuilder("from Administrador a where 1 = 1");
 		
 		if(administrador.getCodigo() != null)
-			hql.append(" and u.codigo = :codigo");
+			hql.append(" and a.codigo = :codigo");
 		if(administrador.getNome() != null && !administrador.getNome().equals(""))
-			hql.append(" and u.nome like :nome");
+			hql.append(" and a.nome like :nome");
 		
 		Query query = entityManager.createQuery(hql.toString());
 		

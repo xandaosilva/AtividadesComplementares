@@ -1,6 +1,5 @@
 package model.domain;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,8 +13,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @Entity
 @Table(name="Administrador")
-@PrimaryKeyJoinColumn(name="usuario")
-public class Administrador extends Usuario implements Serializable{
+@PrimaryKeyJoinColumn(name="codigo")
+public class Administrador extends Usuario {
 	
 	private static final long serialVersionUID = 1L;
 	

@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -25,14 +28,21 @@ public class Administrador extends Usuario {
 	@OneToMany(mappedBy="administrador")
 	private List<Atividade> atividades;
 	
+	@ManyToMany
+	@JoinTable(name="AdministradorCurso",
+	joinColumns=@JoinColumn(name="administrador"),
+	inverseJoinColumns=@JoinColumn(name="curso"))
+	private List<Curso> curso;
+	
 	public Administrador(){
 	}
 
-	public Administrador(Integer codigo, String nome, String login, String senha,
-			String observacoes, Boolean ativo,String siape,List<Atividade> atividades) {
+	public Administrador(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo,
+			String siape, List<Atividade> atividades, List<Curso> curso) {
 		super(codigo, nome, login, senha, observacoes, ativo);
 		this.siape = siape;
 		this.atividades = atividades;
+		this.curso = curso;
 	}
 
 	public String getSiape() {
@@ -42,7 +52,7 @@ public class Administrador extends Usuario {
 	public void setSiape(String siape) {
 		this.siape = siape;
 	}
-
+	
 	@XmlTransient
 	public List<Atividade> getAtividades() {
 		return atividades;
@@ -50,6 +60,15 @@ public class Administrador extends Usuario {
 
 	public void setAtividades(List<Atividade> atividades) {
 		this.atividades = atividades;
+	}
+
+	@XmlTransient
+	public List<Curso> getCurso() {
+		return curso;
+	}
+
+	public void setCurso(List<Curso> curso) {
+		this.curso = curso;
 	}
 
 	@Override

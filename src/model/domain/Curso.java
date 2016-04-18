@@ -40,20 +40,30 @@ public class Curso implements Serializable{
 	@OneToMany(mappedBy="curso")
 	private List<Ppc> ppcs;
 	
+	@ManyToMany
+	@JoinTable(name="AdministradorCurso",
+	joinColumns=@JoinColumn(name="curso"),
+	inverseJoinColumns=@JoinColumn(name="administrador"))
+	private List<Administrador> administradores;
+	
 	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
 	private Boolean ativo;
 	
 	public Curso(){
 	}
 
-	public Curso(Integer codigo, String nome, List<Modalidade> modalidades,List<Ppc> ppcs, Boolean ativo) {
+	
+	
+	public Curso(Integer codigo, String nome, List<Modalidade> modalidades, List<Ppc> ppcs,
+			List<Administrador> administradores, Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.modalidades = modalidades;
 		this.ppcs = ppcs;
+		this.administradores = administradores;
 		this.ativo = ativo;
 	}
-	
+
 	public boolean validar(){
 		return true;
 	}
@@ -90,6 +100,15 @@ public class Curso implements Serializable{
 
 	public void setPpcs(List<Ppc> ppcs) {
 		this.ppcs = ppcs;
+	}
+
+	@XmlTransient
+	public List<Administrador> getAdministradores() {
+		return administradores;
+	}
+
+	public void setAdministradores(List<Administrador> administradores) {
+		this.administradores = administradores;
 	}
 
 	public Boolean getAtivo() {

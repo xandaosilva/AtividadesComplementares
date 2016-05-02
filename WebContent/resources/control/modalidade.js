@@ -2,6 +2,7 @@ var modalidadeModule = angular.module("modalidadeModule",[]);
 
 modalidadeModule.controller("modalidadeController", function($scope,$http) {
 	url = "http://localhost:8080/AtividadesComplementares/rs/modalidade";
+	urlCurso = "http://localhost:8080/AtividadesComplementares/rs/modalidade";
 	
 	$scope.novo = function(){
 		$scope.modalidade = "";
@@ -14,6 +15,14 @@ modalidadeModule.controller("modalidadeController", function($scope,$http) {
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(modalidades) {
 			$scope.modalidades = modalidades;
+		}).error(function(erro) {
+			alert(erro);
+		});
+	}
+	
+	$scope.pesquisarCurso = function(){
+		$http.get(urlCurso).success(function(cursos) {
+			$scope.cursos = cursos;
 		}).error(function(erro) {
 			alert(erro);
 		});
@@ -38,5 +47,6 @@ modalidadeModule.controller("modalidadeController", function($scope,$http) {
 		}
 	}
 	
+	$scope.pesquisarCurso();
 	$scope.pesquisar();
 });

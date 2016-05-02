@@ -2,6 +2,7 @@ var ppcModule = angular.module("ppcModule",[]);
 
 ppcModule.controller("ppcController", function($scope,$http) {
 	url = "http://localhost:8080/AtividadesComplementares/rs/ppc";
+	urlCurso = "http://localhost:8080/AtividadesComplementares/rs/modalidade";
 	
 	$scope.novo = function(){
 		$scope.ppc = "";
@@ -11,10 +12,6 @@ ppcModule.controller("ppcController", function($scope,$http) {
 		$scope.ppc = ppc;
 	}
 	
-	$scope.selecionaCurso = function(curso){
-		$scope.ppc.curso = curso;
-	}
-	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(ppcs) {
 			$scope.ppcs = ppcs;
@@ -22,6 +19,14 @@ ppcModule.controller("ppcController", function($scope,$http) {
 			alert(erro);
 		});
 	};
+	
+	$scope.pesquisarCurso = function(){
+		$http.get(urlCurso).success(function(cursos) {
+			$scope.cursos = cursos;
+		}).error(function(erro) {
+			alert(erro);
+		});
+	}
 	
 	$scope.salvar = function(){
 		if($scope.ppc.codigo === ""){
@@ -42,5 +47,6 @@ ppcModule.controller("ppcController", function($scope,$http) {
 		}
 	};
 	
+	$scope.pesquisarCurso();
 	$scope.pesquisar();
 });

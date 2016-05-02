@@ -2,6 +2,9 @@ var atividadeModule = angular.module("atividadeModule",[]);
 
 atividadeModule.controller("atividadeController", function($scope,$http) {
 	url = "http://localhost:8080/AtividadesComplementares/rs/atividade";
+	urlAluno = "http://localhost:8080/AtividadesComplementares/rs/aluno";
+	urlAdministrador = "http://localhost:8080/AtividadesComplementares/rs/administrador";
+	urlCategoria = "http://localhost:8080/AtividadesComplementares/rs/categoria";
 	
 	$scope.novo = function(){
 		$scope.atividade = "";
@@ -11,18 +14,6 @@ atividadeModule.controller("atividadeController", function($scope,$http) {
 		$scope.atividade = atividade;
 	}
 	
-	$scope.selecionaAluno = function(aluno) {
-		$scope.atividade.aluno = aluno;
-	}
-	
-	$scope.selecionaAdministrador = function(administrador){
-		$scope.atividade.administrador = administrador;
-	}
-	
-	$scope.selecionaCategoria = function(categoria){
-		$scope.atividade.categoria = categoria;
-	}
-	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(atividades) {
 			$scope.atividades = atividades;
@@ -30,6 +21,30 @@ atividadeModule.controller("atividadeController", function($scope,$http) {
 			alert(erro);
 		});
 	};
+	
+	$scope.pesquisarAluno = function(){
+		$http.get(urlAluno).success(function(alunos) {
+			$scope.alunos = alunos;
+		}).error(function(erro) {
+			alert(erro);
+		});
+	}
+	
+	$scope.pesquisarAdministrador = function(){
+		$http.get(urlAdministrador).success(function(administradores) {
+			$scope.administradores = administradores;
+		}).error(function(erro) {
+			alert(erro);
+		});
+	}
+	
+	$scope.pesquisarCategoria = function(){
+		$http.get(urlCategoria).success(function(categorias) {
+			$scope.categorias = categorias;
+		}).error(function(erro) {
+			alert(erro);
+		});
+	}
 	
 	$scope.salvar = function(){
 		if($scope.atividade.codigo === ""){
@@ -50,5 +65,8 @@ atividadeModule.controller("atividadeController", function($scope,$http) {
 		}
 	};
 	
+	$scope.pesquisarAluno();
+	$scope.pesquisarAdministrador();
+	$scope.pesquisarCategoria();
 	$scope.pesquisar();
 });

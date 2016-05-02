@@ -2,6 +2,7 @@ var categoriaModule = angular.module("categoriaModule",[]);
 
 categoriaModule.controller("categoriaController", function($scope,$http) {
 	url = "http://localhost:8080/AtividadesComplementares/rs/categoria";
+	urlModalidade = "http://localhost:8080/AtividadesComplementares/rs/modalidade";
 	
 	$scope.novo = function(){
 		$scope.categoria = "";
@@ -11,13 +12,17 @@ categoriaModule.controller("categoriaController", function($scope,$http) {
 		$scope.categoria = categoria;
 	}
 	
-	$scope.selecionaModalidade = function(modalidade){
-		$scope.categoria.modalidade = modalidade;
-	}
-	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(categorias) {
 			$scope.categorias = categorias;
+		}).error(function(erro) {
+			alert(erro);
+		});
+	}
+	
+	$scope.pesquisarModalidade = function(){
+		$http.get(urlModalidade).success(function(modalidades) {
+			$scope.modalidades = modalidades;
 		}).error(function(erro) {
 			alert(erro);
 		});
@@ -42,5 +47,6 @@ categoriaModule.controller("categoriaController", function($scope,$http) {
 		}
 	}
 	
+	$scope.pesquisarModalidade();
 	$scope.pesquisar();
 });

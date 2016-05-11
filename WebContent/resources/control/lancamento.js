@@ -47,7 +47,7 @@ lancamentoModule.controller("lancamentoController", function($scope,$http) {
 	}
 	
 	$scope.salvar = function(){
-		if($scope.lancamento.codigo === ""){
+		if($scope.lancamento.codigo == undefined){
 			$http.post(url,$scope.lancamento).success(function(lancamento) {
 				$scope.lancamento.push(lancamento);
 				$scope.novo();
@@ -56,7 +56,7 @@ lancamentoModule.controller("lancamentoController", function($scope,$http) {
 			});
 		}
 		else{
-			$hhtp.put(url,$scope.lancamento).success(function() {
+			$http.put(url,$scope.lancamento).success(function() {
 				$scope.pesquisar();
 				$scope.novo();
 			}).error(function(erro){

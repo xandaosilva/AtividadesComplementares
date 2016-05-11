@@ -52,7 +52,7 @@ public class Atividade implements Serializable{
 	@OneToMany(mappedBy="atividade")
 	private List<Lancamento> lancamentos;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
+	@Column(name="ativo",columnDefinition="TINYINT(1)")
 	private Boolean ativo;
 	
 	public Atividade(){

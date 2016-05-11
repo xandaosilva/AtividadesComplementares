@@ -25,17 +25,17 @@ public class Administrador extends Usuario {
 	private List<Lancamento> lancamentos;
 	
 	@OneToMany(mappedBy="administrador")
-	private List<Curso> curso;
+	private List<Curso> cursos;
 	
 	public Administrador(){
 	}
 
 	public Administrador(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo,
-			String siape, List<Lancamento> lancamentos, List<Curso> curso) {
+			String siape, List<Lancamento> lancamentos, List<Curso> cursos) {
 		super(codigo, nome, login, senha, observacoes, ativo);
 		this.siape = siape;
 		this.lancamentos = lancamentos;
-		this.curso = curso;
+		this.cursos = cursos;
 	}
 	
 	public boolean validar(){
@@ -70,12 +70,12 @@ public class Administrador extends Usuario {
 	}
 
 	@XmlTransient
-	public List<Curso> getCurso() {
-		return curso;
+	public List<Curso> getCursos() {
+		return cursos;
 	}
 
 	public void setCurso(List<Curso> curso) {
-		this.curso = curso;
+		this.cursos = curso;
 	}
 
 	@Override

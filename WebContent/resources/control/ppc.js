@@ -29,7 +29,7 @@ ppcModule.controller("ppcController", function($scope,$http) {
 	}
 	
 	$scope.salvar = function(){
-		if($scope.ppc.codigo === ""){
+		if($scope.ppc.codigo == undefined){
 			$http.post(url,$scope.ppc).success(function(ppc) {
 				$scope.ppc.push(ppc);
 				$scope.novo();
@@ -38,7 +38,7 @@ ppcModule.controller("ppcController", function($scope,$http) {
 			});
 		}
 		else{
-			$hhtp.put(url,$scope.ppc).success(function() {
+			$http.put(url,$scope.ppc).success(function() {
 				$scope.pesquisar();
 				$scope.novo();
 			}).error(function(erro){

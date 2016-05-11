@@ -40,7 +40,7 @@ public class Ppc implements Serializable{
 	@OneToMany(mappedBy="ppc")
 	private List<Turma> turmas;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
+	@Column(name="ativo",columnDefinition="TINYINT(1)")
 	private Boolean ativo;
 	
 	public Ppc(){}

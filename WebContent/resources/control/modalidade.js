@@ -20,7 +20,7 @@ modalidadeModule.controller("modalidadeController", function($scope,$http) {
 	}
 	
 	$scope.salvar = function(){
-		if($scope.modalidade.codigo === ""){
+		if($scope.modalidade.codigo == undefined){
 			$http.post(url,$scope.modalidade).success(function(modalidade) {
 				$scope.modalidade.push(modalidade);
 				$scope.novo();
@@ -29,7 +29,7 @@ modalidadeModule.controller("modalidadeController", function($scope,$http) {
 			});
 		}
 		else{
-			$hhtp.put(url,$scope.modalidade).success(function() {
+			$http.put(url,$scope.modalidade).success(function() {
 				$scope.pesquisar();
 				$scope.novo();
 			}).error(function(erro){

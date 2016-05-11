@@ -29,26 +29,26 @@ public class Curso implements Serializable{
 	
 	@Column(name="nome",unique=true,nullable=false)
 	private String nome;
-	
-	@OneToMany(mappedBy="curso")
-	private List<Ppc> ppcs;
 		
 	@ManyToOne
 	@JoinColumn(name="administrador",referencedColumnName="siape")
 	private Administrador administrador;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
+	@Column(name="ativo",columnDefinition="TINYINT(1)")
 	private Boolean ativo;
+	
+	@OneToMany(mappedBy="curso")
+	private List<Ppc> ppcs;
 	
 	public Curso(){
 	}
 
-	public Curso(Integer codigo, String nome, List<Ppc> ppcs, Administrador administrador, Boolean ativo) {
+	public Curso(Integer codigo, String nome, Administrador administrador, Boolean ativo, List<Ppc> ppcs) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.ppcs = ppcs;
 		this.administrador = administrador;
 		this.ativo = ativo;
+		this.ppcs = ppcs;
 	}
 	
 	public boolean validar(){

@@ -31,7 +31,7 @@ public class Modalidade implements Serializable{
 	@OneToMany(mappedBy="modalidade")
 	private List<Atividade> atividades;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
+	@Column(name="ativo",columnDefinition="TINYINT(1)")
 	private Boolean ativo;
 	
 	public Modalidade(){}

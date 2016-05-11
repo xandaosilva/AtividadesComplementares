@@ -20,7 +20,7 @@ administradorModule.controller("administradorController", function($scope,$http)
 	}
 	
 	$scope.salvar = function(){
-		if($scope.administrador.codigo === ""){
+		if($scope.administrador.codigo == undefined){
 			$http.post(url,$scope.administrador).success(function(administrador) {
 				$scope.administrador.push(administrador);
 				$scope.novo();
@@ -29,7 +29,7 @@ administradorModule.controller("administradorController", function($scope,$http)
 			});
 		}
 		else{
-			$hhtp.put(url,$scope.administrador).success(function() {
+			$http.put(url,$scope.administrador).success(function() {
 				$scope.pesquisar();
 				$scope.novo();
 			}).error(function(erro){

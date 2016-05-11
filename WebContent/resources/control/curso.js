@@ -29,18 +29,21 @@ cursoModule.controller("cursoController", function($scope,$http) {
 	}
 	
 	$scope.salvar = function(){
-		if($scope.curso.codigo === ""){
+		if($scope.curso.codigo == undefined){
+			alert("Código cadastrado " + $scope.curso.codigo);
 			$http.post(url,$scope.curso).success(function(curso) {
-				$scope.curso.push(curso);
+				$scope.cursos.push($scope.curso);
 				$scope.novo();
+				alert("Cadastro realizado com sucesso.");
 			}).error(function(erro){
 				alert(erro);
 			});
-		}
-		else{
-			$hhtp.put(url,$scope.curso).success(function() {
+		}else{
+			alert("Código atualizado " + $scope.curso.codigo);
+			$http.put(url,$scope.curso).success(function() {
 				$scope.pesquisar();
 				$scope.novo();
+				alert("Alteralção realizada com sucesso.");
 			}).error(function(erro){
 				alert(erro);
 			});

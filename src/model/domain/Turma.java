@@ -37,7 +37,7 @@ public class Turma implements Serializable{
 	@OneToMany(mappedBy="turma")
 	private List<Aluno> alunos;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
+	@Column(name="ativo",columnDefinition="TINYINT(1)")
 	private Boolean ativo;
 	
 	public Turma(){

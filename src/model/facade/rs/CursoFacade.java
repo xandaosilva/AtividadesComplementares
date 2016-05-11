@@ -14,8 +14,8 @@ import model.domain.Curso;
 import model.service.CursoService;
 
 @Path("/curso")
-@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 public class CursoFacade {
 
 	@Inject

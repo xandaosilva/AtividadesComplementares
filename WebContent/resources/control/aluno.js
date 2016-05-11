@@ -29,7 +29,7 @@ alunoModule.controller("alunoController", function($scope,$http) {
 	}
 	
 	$scope.salvar = function(){
-		if($scope.aluno.codigo === ""){
+		if($scope.aluno.codigo == undefined){
 			$http.post(url,$scope.aluno).success(function(aluno) {
 				$scope.aluno.push(aluno);
 				$scope.novo();
@@ -38,7 +38,7 @@ alunoModule.controller("alunoController", function($scope,$http) {
 			});
 		}
 		else{
-			$hhtp.put(url,$scope.aluno).success(function() {
+			$http.put(url,$scope.aluno).success(function() {
 				$scope.pesquisar();
 				$scope.novo();
 			}).error(function(erro){

@@ -29,7 +29,7 @@ atividadeModule.controller("atividadeController", function($scope,$http) {
 	}
 	
 	$scope.salvar = function(){
-		if($scope.atividade.codigo === ""){
+		if($scope.atividade.codigo == undefined){
 			$http.post(url,$scope.atividade).success(function(atividade) {
 				$scope.atividade.push(atividade);
 				$scope.novo();
@@ -38,7 +38,7 @@ atividadeModule.controller("atividadeController", function($scope,$http) {
 			});
 		}
 		else{
-			$hhtp.put(url,$scope.atividade).success(function() {
+			$http.put(url,$scope.atividade).success(function() {
 				$scope.pesquisar();
 				$scope.novo();
 			}).error(function(erro){

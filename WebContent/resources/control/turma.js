@@ -29,7 +29,7 @@ turmaModule.controller("turmaController", function($scope,$http) {
 	}
 	
 	$scope.salvar = function(){
-		if($scope.turma.codigo === ""){
+		if($scope.turma.codigo == undefined){
 			$http.post(url,$scope.turma).success(function(turma) {
 				$scope.turma.push(turma);
 				$scope.novo();
@@ -38,7 +38,7 @@ turmaModule.controller("turmaController", function($scope,$http) {
 			});
 		}
 		else{
-			$hhtp.put(url,$scope.turma).success(function() {
+			$http.put(url,$scope.turma).success(function() {
 				$scope.pesquisar();
 				$scope.novo();
 			}).error(function(erro){

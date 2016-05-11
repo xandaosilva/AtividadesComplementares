@@ -33,7 +33,7 @@ public abstract class Usuario implements Serializable{
 	@Column(name="observacoes")
 	private String observacoes;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
+	@Column(name="ativo",columnDefinition="TINYINT(1)")
 	private Boolean ativo;
 	
 	public Usuario(){

@@ -42,6 +42,40 @@ public class Aluno extends Usuario {
 	public Aluno(){
 	}
 
+	public boolean validar(){
+		if(this.getTurma().getCodigo() != null){
+			if(this.getTurma().validar() == true){
+				if(super.validar() == true){
+					if(!this.getCpf().equals("") && this.getHoras() >= 0 && this.totalHoras >= 0){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public boolean isAprovado(){
+		if(this.getHoras() >= this.getTurma().getPpc().getCargaHoraria()){
+			this.aprovado = true;
+		}
+		else{
+			this.aprovado = false;
+		}
+		return this.getAprovado();
+	}
+	
 	public Aluno(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo, String cpf,
 			Integer horas, Integer totalHoras, Boolean aprovado, Turma turma, List<Lancamento> lancamentos) {
 		super(codigo, nome, login, senha, observacoes, ativo);

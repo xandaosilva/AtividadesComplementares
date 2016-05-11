@@ -9,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,12 +32,10 @@ public class Curso implements Serializable{
 	
 	@OneToMany(mappedBy="curso")
 	private List<Ppc> ppcs;
-	
-	@ManyToMany
-	@JoinTable(name="AdministradorCurso",
-	joinColumns=@JoinColumn(name="curso"),
-	inverseJoinColumns=@JoinColumn(name="administrador"))
-	private List<Administrador> administradores;
+		
+	@ManyToOne
+	@JoinColumn(name="administrador",referencedColumnName="siape")
+	private Administrador administrador;
 	
 	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
 	private Boolean ativo;
@@ -46,12 +43,31 @@ public class Curso implements Serializable{
 	public Curso(){
 	}
 
-	public Curso(Integer codigo, String nome, List<Ppc> ppcs, List<Administrador> administradores, Boolean ativo) {
+	public Curso(Integer codigo, String nome, List<Ppc> ppcs, Administrador administrador, Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.ppcs = ppcs;
-		this.administradores = administradores;
+		this.administrador = administrador;
 		this.ativo = ativo;
+	}
+	
+	public boolean validar(){
+		if(this.getAdministrador().getCodigo() != null){
+			if(this.getAdministrador().validar() == true){
+				if(!this.getNome().equals("")){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
 	}
 
 	public Integer getCodigo() {
@@ -79,13 +95,13 @@ public class Curso implements Serializable{
 		this.ppcs = ppcs;
 	}
 
-	@XmlTransient
-	public List<Administrador> getAdministradores() {
-		return administradores;
+	
+	public Administrador getAdministrador() {
+		return administrador;
 	}
 
-	public void setAdministradores(List<Administrador> administradores) {
-		this.administradores = administradores;
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
 	}
 
 	public Boolean getAtivo() {

@@ -22,12 +22,18 @@ public class AtividadeServiceImpl implements AtividadeService {
 	@Override
 	@Transactional
 	public Atividade salvar(Atividade atividade){
-		return atividadeDao.salvar(atividade);
+		if(atividade.validar() == true)
+			return atividadeDao.salvar(atividade);
+		else
+			return null;
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Atividade atividade){
-		atividadeDao.atualizar(atividade);
+		if(atividade.validar() == true)
+			atividadeDao.atualizar(atividade);
+		else
+			return;
 	}
 }

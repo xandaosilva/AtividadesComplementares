@@ -22,12 +22,18 @@ public class AlunoServiceImpl implements AlunoService {
 	@Override
 	@Transactional
 	public Aluno salvar(Aluno aluno){
-		return alunoDao.salvar(aluno);
+		if(aluno.validar() == true)
+			return alunoDao.salvar(aluno);
+		else
+			return null;
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Aluno aluno){
-		alunoDao.atualizar(aluno);
+		if(aluno.validar() == true)
+			alunoDao.atualizar(aluno);
+		else 
+			return;
 	}
 }

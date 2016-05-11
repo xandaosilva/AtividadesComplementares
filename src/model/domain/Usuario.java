@@ -47,6 +47,15 @@ public abstract class Usuario implements Serializable{
 		this.observacoes = observacoes;
 		this.ativo = ativo;
 	}
+	
+	public boolean validar(){
+		if(!this.getLogin().equals("") && !this.getNome().equals("") && !this.getSenha().equals("")){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 	public Integer getCodigo() {
 		return codigo;

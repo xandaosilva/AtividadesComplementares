@@ -54,6 +54,25 @@ public class Ppc implements Serializable{
 		this.ativo = ativo;
 	}
 
+	public boolean validar(){
+		if(this.getCurso().getCodigo() != null){
+			if(this.getCurso().validar() == true){
+				if(!this.getVersao().equals("")){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
+	
 	public Integer getCodigo() {
 		return codigo;
 	}

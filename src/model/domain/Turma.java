@@ -50,6 +50,25 @@ public class Turma implements Serializable{
 		this.alunos = alunos;
 		this.ativo = ativo;
 	}
+	
+	public boolean validar(){
+		if(this.getPpc().getCodigo() != null){
+			if(this.getPpc().validar() == true){
+				if(!this.getAnoSemestre().equals("")){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
 
 	public Integer getCodigo() {
 		return codigo;

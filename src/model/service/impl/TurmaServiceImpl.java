@@ -22,12 +22,18 @@ public class TurmaServiceImpl implements TurmaService {
 	@Override
 	@Transactional
 	public Turma salvar(Turma turma){
-		return turmaDao.salvar(turma);
+		if(turma.validar() == true)
+			return turmaDao.salvar(turma);
+		else
+			return null;
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Turma turma){
-		turmaDao.atualizar(turma);
+		if(turma.validar() == true)
+			turmaDao.atualizar(turma);
+		else
+			return;
 	}
 }

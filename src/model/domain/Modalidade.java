@@ -42,6 +42,15 @@ public class Modalidade implements Serializable{
 		this.atividades = atividades;
 		this.ativo = ativo;
 	}
+	
+	public boolean validar(){
+		if(!this.getNome().equals("")){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 	public Integer getCodigo() {
 		return codigo;

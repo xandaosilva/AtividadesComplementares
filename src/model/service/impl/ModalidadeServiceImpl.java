@@ -22,12 +22,18 @@ public class ModalidadeServiceImpl implements ModalidadeService {
 	@Override
 	@Transactional
 	public Modalidade salvar(Modalidade modalidade){
-		return modalidadeDao.salvar(modalidade);
+		if(modalidade.validar() == true)
+			return modalidadeDao.salvar(modalidade);
+		else
+			return null;
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Modalidade modalidade){
-		modalidadeDao.atualizar(modalidade);
+		if(modalidade.validar() == true)
+			modalidadeDao.atualizar(modalidade);
+		else
+			return;
 	}
 }

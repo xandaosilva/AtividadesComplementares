@@ -30,8 +30,11 @@ public class Atividade implements Serializable{
 	@Column(name="nome",unique=true,nullable=false)
 	private String nome;
 	
-	@Column(name="porcentagemDaCategoria",nullable=false)
-	private Integer porcentagemDaCategoria;
+	@Column(name="descricao",nullable=false)
+	private String descricao;
+	
+	@Column(name="porcentagemSemestral",nullable=false)
+	private Integer porcentagemSemestral;
 	
 	@Column(name="porcentagemPorAtividade",nullable=false)
 	private Integer porcentagemPorAtividade;
@@ -55,12 +58,13 @@ public class Atividade implements Serializable{
 	public Atividade(){
 	}
 
-	public Atividade(Integer codigo, String nome, Integer porcentagemDaCategoria, Integer porcentagemPorAtividade,
-			Integer atividadesPorSemestre, String observacoes, Modalidade modalidade, List<Lancamento> lancamentos,
-			Boolean ativo) {
+	public Atividade(Integer codigo, String nome, String descricao, Integer porcentagemSemestral,
+			Integer porcentagemPorAtividade, Integer atividadesPorSemestre, String observacoes, Modalidade modalidade,
+			List<Lancamento> lancamentos, Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.porcentagemDaCategoria = porcentagemDaCategoria;
+		this.descricao = descricao;
+		this.porcentagemSemestral = porcentagemSemestral;
 		this.porcentagemPorAtividade = porcentagemPorAtividade;
 		this.atividadesPorSemestre = atividadesPorSemestre;
 		this.observacoes = observacoes;
@@ -68,7 +72,31 @@ public class Atividade implements Serializable{
 		this.lancamentos = lancamentos;
 		this.ativo = ativo;
 	}
-
+	
+	public boolean validar(){
+		if(this.getModalidade().getCodigo() != null){
+			if(this.getModalidade().validar() == true){
+				if(!this.getNome().equals("") && !this.getDescricao().equals("") && !this.getObservacoes().equals("")){
+					if(this.getporcentagemSemestral() > 0 && this.getPorcentagemPorAtividade() > 0 && this.getAtividadesPorSemestre()  > 0){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -85,12 +113,20 @@ public class Atividade implements Serializable{
 		this.nome = nome;
 	}
 
-	public Integer getPorcentagemDaCategoria() {
-		return porcentagemDaCategoria;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setPorcentagemDaCategoria(Integer porcentagemDaCategoria) {
-		this.porcentagemDaCategoria = porcentagemDaCategoria;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Integer getporcentagemSemestral() {
+		return porcentagemSemestral;
+	}
+
+	public void setporcentagemSemestral(Integer porcentagemSemestral) {
+		this.porcentagemSemestral = porcentagemSemestral;
 	}
 
 	public Integer getPorcentagemPorAtividade() {
@@ -169,8 +205,9 @@ public class Atividade implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Atividade [codigo=" + codigo + ", nome=" + nome + ", porcentagemDaCategoria=" + porcentagemDaCategoria
-				+ ", porcentagemPorAtividade=" + porcentagemPorAtividade + ", atividadesPorSemestre="
-				+ atividadesPorSemestre + ", observacoes=" + observacoes + ", ativo=" + ativo + "]";
+		return "Atividade [codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao
+				+ ", porcentagemSemestral=" + porcentagemSemestral + ", porcentagemPorAtividade="
+				+ porcentagemPorAtividade + ", atividadesPorSemestre=" + atividadesPorSemestre + ", observacoes="
+				+ observacoes + ", ativo=" + ativo + "]";
 	}
 }

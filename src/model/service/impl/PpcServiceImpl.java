@@ -22,12 +22,18 @@ public class PpcServiceImpl implements PpcService {
 	@Override
 	@Transactional
 	public Ppc salvar(Ppc ppc){
-		return ppcDao.salvar(ppc);
+		if(ppc.validar() == true)
+			return ppcDao.salvar(ppc);
+		else
+			return null;
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Ppc ppc){
-		ppcDao.atualizar(ppc);
+		if(ppc.validar() == true)
+			ppcDao.atualizar(ppc);
+		else
+			return;
 	}
 }

@@ -70,6 +70,25 @@ public class Lancamento implements Serializable{
 		this.atividade = atividade;
 		this.ativo = ativo;
 	}
+	
+	public boolean validar(){
+		if(this.getAdministrador().validar() == true && this.getAluno().validar() == true && this.getAtividade().validar() == true){
+			if(this.getDataAtividade().before(this.getDataRegistro())){
+				if(!this.getDescricao().equals("") && this.getHoras() > 0){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
 
 	public Integer getCodigo() {
 		return codigo;

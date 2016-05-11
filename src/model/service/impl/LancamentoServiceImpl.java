@@ -22,12 +22,18 @@ public class LancamentoServiceImpl implements LancamentoService {
 	@Override
 	@Transactional
 	public Lancamento salvar(Lancamento lancamento){
-		return lancamentoDao.salvar(lancamento);
+		if(lancamento.validar() == true)
+			return lancamentoDao.salvar(lancamento);
+		else
+			return null;
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Lancamento lancamento){
-		lancamentoDao.atualizar(lancamento);
+		if(lancamento.validar() == true)
+			lancamentoDao.atualizar(lancamento);
+		else
+			return;
 	}
 }

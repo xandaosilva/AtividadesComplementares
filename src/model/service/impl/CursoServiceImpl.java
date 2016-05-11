@@ -22,12 +22,18 @@ public class CursoServiceImpl implements CursoService {
 	@Override
 	@Transactional
 	public Curso salvar(Curso curso){
-		return cursoDao.salvar(curso);
+		if(curso.validar() == true)
+			return cursoDao.salvar(curso);
+		else
+			return null;
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Curso curso){
-		cursoDao.atualizar(curso);
+		if(curso.validar() == true)
+			cursoDao.atualizar(curso);
+		else
+			return;
 	}
 }

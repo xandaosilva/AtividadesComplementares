@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -27,10 +24,7 @@ public class Administrador extends Usuario {
 	@OneToMany(mappedBy="administrador")
 	private List<Lancamento> lancamentos;
 	
-	@ManyToMany
-	@JoinTable(name="AdministradorCurso",
-	joinColumns=@JoinColumn(name="administrador"),
-	inverseJoinColumns=@JoinColumn(name="curso"))
+	@OneToMany(mappedBy="administrador")
 	private List<Curso> curso;
 	
 	public Administrador(){
@@ -42,6 +36,20 @@ public class Administrador extends Usuario {
 		this.siape = siape;
 		this.lancamentos = lancamentos;
 		this.curso = curso;
+	}
+	
+	public boolean validar(){
+		if(super.validar() == true){
+			if(!this.getSiape().equals("")){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
 	}
 
 	public String getSiape() {
@@ -61,6 +69,7 @@ public class Administrador extends Usuario {
 		this.lancamentos = lancamentos;
 	}
 
+	@XmlTransient
 	public List<Curso> getCurso() {
 		return curso;
 	}

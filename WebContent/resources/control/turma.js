@@ -2,7 +2,7 @@ var turmaModule = angular.module("turmaModule",[]);
 
 turmaModule.controller("turmaController", function($scope,$http) {
 	url = "http://localhost:8080/AtividadesComplementares/rs/turma";
-	urlPpc = "http://localhost:8080/AtividadesComplementares/rs/turma";
+	urlPpc = "http://localhost:8080/AtividadesComplementares/rs/ppc";
 	
 	$scope.novo = function(){
 		$scope.turma = "";

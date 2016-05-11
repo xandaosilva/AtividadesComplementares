@@ -2,7 +2,7 @@ var ppcModule = angular.module("ppcModule",[]);
 
 ppcModule.controller("ppcController", function($scope,$http) {
 	url = "http://localhost:8080/AtividadesComplementares/rs/ppc";
-	urlCurso = "http://localhost:8080/AtividadesComplementares/rs/modalidade";
+	urlCurso = "http://localhost:8080/AtividadesComplementares/rs/curso";
 	
 	$scope.novo = function(){
 		$scope.ppc = "";

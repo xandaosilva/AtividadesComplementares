@@ -2,14 +2,12 @@ var atividadeModule = angular.module("atividadeModule",[]);
 
 atividadeModule.controller("atividadeController", function($scope,$http) {
 	url = "http://localhost:8080/AtividadesComplementares/rs/atividade";
-	urlAluno = "http://localhost:8080/AtividadesComplementares/rs/aluno";
-	urlAdministrador = "http://localhost:8080/AtividadesComplementares/rs/administrador";
-	urlCategoria = "http://localhost:8080/AtividadesComplementares/rs/categoria";
+	urlModalidade = "http://localhost:8080/AtividadesComplementares/rs/modalidade";
 	
 	$scope.novo = function(){
 		$scope.atividade = "";
 	}
-	
+
 	$scope.seleciona = function(atividade){
 		$scope.atividade = atividade;
 	}
@@ -20,27 +18,11 @@ atividadeModule.controller("atividadeController", function($scope,$http) {
 		}).error(function(erro) {
 			alert(erro);
 		});
-	};
-	
-	$scope.pesquisarAluno = function(){
-		$http.get(urlAluno).success(function(alunos) {
-			$scope.alunos = alunos;
-		}).error(function(erro) {
-			alert(erro);
-		});
 	}
 	
-	$scope.pesquisarAdministrador = function(){
-		$http.get(urlAdministrador).success(function(administradores) {
-			$scope.administradores = administradores;
-		}).error(function(erro) {
-			alert(erro);
-		});
-	}
-	
-	$scope.pesquisarCategoria = function(){
-		$http.get(urlCategoria).success(function(categorias) {
-			$scope.categorias = categorias;
+	$scope.pesquisarModalidade = function(){
+		$http.get(urlModalidade).success(function(modalidades) {
+			$scope.modalidades = modalidades;
 		}).error(function(erro) {
 			alert(erro);
 		});
@@ -63,10 +45,8 @@ atividadeModule.controller("atividadeController", function($scope,$http) {
 				alert(erro);
 			});
 		}
-	};
+	}
 	
-	$scope.pesquisarAluno();
-	$scope.pesquisarAdministrador();
-	$scope.pesquisarCategoria();
+	$scope.pesquisarModalidade();
 	$scope.pesquisar();
 });

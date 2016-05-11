@@ -2,6 +2,7 @@ var cursoModule = angular.module("cursoModule",[]);
 
 cursoModule.controller("cursoController", function($scope,$http) {
 	url = "http://localhost:8080/AtividadesComplementares/rs/curso";
+	urlAdministrador = "http://localhost:8080/AtividadesComplementares/rs/administrador";
 	
 	$scope.novo = function(){
 		$scope.curso = "";
@@ -14,6 +15,14 @@ cursoModule.controller("cursoController", function($scope,$http) {
 	$scope.pesquisar = function(){
 		$http.get(url).success(function(cursos) {
 			$scope.cursos = cursos;
+		}).error(function(erro) {
+			alert(erro);
+		});
+	}
+	
+	$scope.pesquisarAdministrador = function(){
+		$http.get(urlAdministrador).success(function(administradores) {
+			$scope.administradores = administradores;
 		}).error(function(erro) {
 			alert(erro);
 		});
@@ -38,5 +47,6 @@ cursoModule.controller("cursoController", function($scope,$http) {
 		}
 	}
 	
+	$scope.pesquisarAdministrador();
 	$scope.pesquisar();
 });

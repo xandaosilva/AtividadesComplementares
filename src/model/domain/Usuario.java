@@ -39,7 +39,7 @@ public abstract class Usuario implements Serializable{
 	public Usuario(){
 	}
 
-	public Usuario(Integer codigo, String nome, String login, String senha,String observacoes, Boolean ativo) {
+	public Usuario(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.login = login;
@@ -47,7 +47,7 @@ public abstract class Usuario implements Serializable{
 		this.observacoes = observacoes;
 		this.ativo = ativo;
 	}
-	
+
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -125,5 +125,5 @@ public abstract class Usuario implements Serializable{
 	public String toString() {
 		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", login=" + login + ", senha=" + senha
 				+ ", observacoes=" + observacoes + ", ativo=" + ativo + "]";
-	}	
+	}
 }

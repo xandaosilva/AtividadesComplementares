@@ -1,7 +1,6 @@
 package model.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,15 +27,11 @@ public class Ppc implements Serializable{
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Column(name="nome",unique=true,nullable=false)
-	private String nome;
+	@Column(name="versao",unique=true,nullable=false)
+	private String versao;
 	
 	@Column(name="cargaHoraria",nullable=false)
-	private Double cargaHoraria;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="dataPpc",nullable=false)
-	private Date dataPpc;
+	private Integer cargaHoraria;
 	
 	@ManyToOne
 	@JoinColumn(name="curso",referencedColumnName="codigo")
@@ -50,14 +43,12 @@ public class Ppc implements Serializable{
 	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
 	private Boolean ativo;
 	
-	public Ppc(){
-	}
+	public Ppc(){}
 
-	public Ppc(Integer codigo, String nome, Double cargaHoraria, Date dataPpc, Curso curso, List<Turma> turmas,Boolean ativo) {
+	public Ppc(Integer codigo, String versao, Integer cargaHoraria, Curso curso, List<Turma> turmas, Boolean ativo) {
 		this.codigo = codigo;
-		this.nome = nome;
+		this.versao = versao;
 		this.cargaHoraria = cargaHoraria;
-		this.dataPpc = dataPpc;
 		this.curso = curso;
 		this.turmas = turmas;
 		this.ativo = ativo;
@@ -71,28 +62,20 @@ public class Ppc implements Serializable{
 		this.codigo = codigo;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getVersao() {
+		return versao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setVersao(String versao) {
+		this.versao = versao;
 	}
 
-	public Double getCargaHoraria() {
+	public Integer getCargaHoraria() {
 		return cargaHoraria;
 	}
 
-	public void setCargaHoraria(Double cargaHoraria) {
+	public void setCargaHoraria(Integer cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
-	}
-
-	public Date getDataPpc() {
-		return dataPpc;
-	}
-
-	public void setDataPpc(Date dataPpc) {
-		this.dataPpc = dataPpc;
 	}
 
 	public Curso getCurso() {
@@ -147,7 +130,7 @@ public class Ppc implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ppc [codigo=" + codigo + ", nome=" + nome + ", cargaHoraria=" + cargaHoraria + ", dataPpc=" + dataPpc
-				+ ", ativo=" + ativo + "]";
+		return "Ppc [codigo=" + codigo + ", versao=" + versao + ", cargaHoraria=" + cargaHoraria + ", ativo=" + ativo
+				+ "]";
 	}
 }

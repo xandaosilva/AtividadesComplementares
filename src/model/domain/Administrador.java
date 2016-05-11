@@ -24,9 +24,8 @@ public class Administrador extends Usuario {
 	@Column(name="siape",unique=true,nullable=false)
 	private String siape;
 	
-	@Column(name="atividades")
 	@OneToMany(mappedBy="administrador")
-	private List<Atividade> atividades;
+	private List<Lancamento> lancamentos;
 	
 	@ManyToMany
 	@JoinTable(name="AdministradorCurso",
@@ -38,10 +37,10 @@ public class Administrador extends Usuario {
 	}
 
 	public Administrador(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo,
-			String siape, List<Atividade> atividades, List<Curso> curso) {
+			String siape, List<Lancamento> lancamentos, List<Curso> curso) {
 		super(codigo, nome, login, senha, observacoes, ativo);
 		this.siape = siape;
-		this.atividades = atividades;
+		this.lancamentos = lancamentos;
 		this.curso = curso;
 	}
 
@@ -52,17 +51,16 @@ public class Administrador extends Usuario {
 	public void setSiape(String siape) {
 		this.siape = siape;
 	}
-	
-	@XmlTransient
-	public List<Atividade> getAtividades() {
-		return atividades;
-	}
-
-	public void setAtividades(List<Atividade> atividades) {
-		this.atividades = atividades;
-	}
 
 	@XmlTransient
+	public List<Lancamento> getLancamentos() {
+		return lancamentos;
+	}
+
+	public void setLancamentos(List<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
+	}
+
 	public List<Curso> getCurso() {
 		return curso;
 	}
@@ -72,32 +70,7 @@ public class Administrador extends Usuario {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((siape == null) ? 0 : siape.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Administrador other = (Administrador) obj;
-		if (siape == null) {
-			if (other.siape != null)
-				return false;
-		} else if (!siape.equals(other.siape))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return "Administrador [siape=" + siape + "]";
+		return "Administrador [siape=" + siape + ", toString()=" + super.toString() + "]";
 	}
 }

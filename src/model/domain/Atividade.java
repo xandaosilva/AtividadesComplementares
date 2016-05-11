@@ -1,7 +1,7 @@
 package model.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -27,31 +27,27 @@ public class Atividade implements Serializable{
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="dataAtividade",nullable=false)
-	private Date dataAtividade;
+	@Column(name="nome",unique=true,nullable=false)
+	private String nome;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="dataRegistro",nullable=false)
-	private Date dataRegistro;
+	@Column(name="porcentagemDaCategoria",nullable=false)
+	private Integer porcentagemDaCategoria;
 	
-	@Column(name="horas",nullable=false)
-	private Double horas;
+	@Column(name="porcentagemPorAtividade",nullable=false)
+	private Integer porcentagemPorAtividade;
 	
-	@Column(name="descricao")
-	private String descricao;
+	@Column(name="atividadesPorSemestre",nullable=false)
+	private Integer atividadesPorSemestre;
 	
-	@ManyToOne
-	@JoinColumn(name="aluno",referencedColumnName="cpf")
-	private Aluno aluno;
+	@Column(name="observacoes",nullable=false)
+	private String observacoes;
 	
 	@ManyToOne
-	@JoinColumn(name="administrador",referencedColumnName="siape")
-	private Administrador administrador;
+	@JoinColumn(name="modalidade",referencedColumnName="codigo")
+	private Modalidade modalidade;
 	
-	@ManyToOne
-	@JoinColumn(name="categoria",referencedColumnName="codigo")
-	private Categoria categoria;
+	@OneToMany(mappedBy="atividade")
+	private List<Lancamento> lancamentos;
 	
 	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
 	private Boolean ativo;
@@ -59,28 +55,18 @@ public class Atividade implements Serializable{
 	public Atividade(){
 	}
 
-	public Atividade(Integer codigo, Date dataAtividade, Date dataRegistro, Double horas, String descricao, 
-			Aluno aluno, Administrador administrador, Categoria categoria, Boolean ativo) {
+	public Atividade(Integer codigo, String nome, Integer porcentagemDaCategoria, Integer porcentagemPorAtividade,
+			Integer atividadesPorSemestre, String observacoes, Modalidade modalidade, List<Lancamento> lancamentos,
+			Boolean ativo) {
 		this.codigo = codigo;
-		this.dataAtividade = dataAtividade;
-		this.dataRegistro = dataRegistro;
-		this.horas = horas;
-		this.descricao = descricao;
-		this.aluno = aluno;
-		this.administrador = administrador;
-		this.categoria = categoria;
+		this.nome = nome;
+		this.porcentagemDaCategoria = porcentagemDaCategoria;
+		this.porcentagemPorAtividade = porcentagemPorAtividade;
+		this.atividadesPorSemestre = atividadesPorSemestre;
+		this.observacoes = observacoes;
+		this.modalidade = modalidade;
+		this.lancamentos = lancamentos;
 		this.ativo = ativo;
-	}
-	
-	public double calcularHorasRegistradas(Date dataInicio,Date dataFinal){
-		return 0.0;
-	}
-	
-	public boolean validar(){
-		if(this.dataAtividade.before(this.dataRegistro))
-			return true;
-		else
-			return false;
 	}
 
 	public Integer getCodigo() {
@@ -91,60 +77,61 @@ public class Atividade implements Serializable{
 		this.codigo = codigo;
 	}
 
-	public Date getDataAtividade() {
-		return dataAtividade;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDataAtividade(Date dataAtividade) {
-		this.dataAtividade = dataAtividade;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Date getDataRegistro() {
-		return dataRegistro;
+	public Integer getPorcentagemDaCategoria() {
+		return porcentagemDaCategoria;
 	}
 
-	public void setDataRegistro(Date dataRegistro) {
-		this.dataRegistro = dataRegistro;
+	public void setPorcentagemDaCategoria(Integer porcentagemDaCategoria) {
+		this.porcentagemDaCategoria = porcentagemDaCategoria;
 	}
 
-	public Double getHoras() {
-		return horas;
+	public Integer getPorcentagemPorAtividade() {
+		return porcentagemPorAtividade;
 	}
 
-	public void setHoras(Double horas) {
-		this.horas = horas;
+	public void setPorcentagemPorAtividade(Integer porcentagemPorAtividade) {
+		this.porcentagemPorAtividade = porcentagemPorAtividade;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public Integer getAtividadesPorSemestre() {
+		return atividadesPorSemestre;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setAtividadesPorSemestre(Integer atividadesPorSemestre) {
+		this.atividadesPorSemestre = atividadesPorSemestre;
 	}
 
-	public Aluno getAluno() {
-		return aluno;
+	public String getObservacoes() {
+		return observacoes;
 	}
 
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
 	}
 
-	public Administrador getAdministrador() {
-		return administrador;
+	public Modalidade getModalidade() {
+		return modalidade;
 	}
 
-	public void setAdministrador(Administrador administrador) {
-		this.administrador = administrador;
+	public void setModalidade(Modalidade modalidade) {
+		this.modalidade = modalidade;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	@XmlTransient
+	public List<Lancamento> getLancamentos() {
+		return lancamentos;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setLancamentos(List<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
 	}
 
 	public Boolean getAtivo() {
@@ -182,7 +169,8 @@ public class Atividade implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Atividade [codigo=" + codigo + ", dataAtividade=" + dataAtividade + ", dataRegistro=" + 
-				dataRegistro + ", horas=" + horas + ", descricao=" + descricao + ", ativo=" + ativo + "]";
+		return "Atividade [codigo=" + codigo + ", nome=" + nome + ", porcentagemDaCategoria=" + porcentagemDaCategoria
+				+ ", porcentagemPorAtividade=" + porcentagemPorAtividade + ", atividadesPorSemestre="
+				+ atividadesPorSemestre + ", observacoes=" + observacoes + ", ativo=" + ativo + "]";
 	}
 }

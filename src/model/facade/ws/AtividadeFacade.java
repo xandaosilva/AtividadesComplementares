@@ -20,7 +20,7 @@ public class AtividadeFacade {
 	}
 	
 	@WebMethod
-	public List<Atividade> getAtividades(@WebParam(name="codigo") Integer codigo){
+	public List<Atividade> getatividades(@WebParam(name="codigo") Integer codigo){
 		Atividade atividade = new Atividade();
 		atividade.setCodigo(codigo);
 		return atividadeService.getAtividades(atividade);

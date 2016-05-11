@@ -8,9 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,31 +27,20 @@ public class Modalidade implements Serializable{
 	
 	@Column(name="nome",unique=true,nullable=false)
 	private String nome;
-	
-	@ManyToMany
-	@JoinTable(name="CursoModalidade",
-	joinColumns=@JoinColumn(name="modalidade"),inverseJoinColumns=@JoinColumn(name="curso"))
-	private List<Curso> cursos;
-	
+		
 	@OneToMany(mappedBy="modalidade")
-	private List<Categoria> categorias;
+	private List<Atividade> atividades;
 	
 	@Column(name="ativo",columnDefinition="TINYINT(1)",nullable=false)
 	private Boolean ativo;
 	
-	public Modalidade(){
-	}
+	public Modalidade(){}
 
-	public Modalidade(Integer codigo, String nome, List<Curso> cursos,List<Categoria> categorias, Boolean ativo) {
+	public Modalidade(Integer codigo, String nome, List<Atividade> atividades, Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.cursos = cursos;
-		this.categorias = categorias;
+		this.atividades = atividades;
 		this.ativo = ativo;
-	}
-	
-	public boolean validar(){
-		return true;
 	}
 
 	public Integer getCodigo() {
@@ -74,21 +60,12 @@ public class Modalidade implements Serializable{
 	}
 
 	@XmlTransient
-	public List<Curso> getCurso() {
-		return cursos;
+	public List<Atividade> getAtividades() {
+		return atividades;
 	}
 
-	public void setCurso(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
-
-	@XmlTransient
-	public List<Categoria> getCategorias() {
-		return categorias;
-	}
-
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
+	public void setAtividades(List<Atividade> atividades) {
+		this.atividades = atividades;
 	}
 
 	public Boolean getAtivo() {
@@ -124,8 +101,10 @@ public class Modalidade implements Serializable{
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Modalidade [codigo=" + codigo + ", nome=" + nome + ", ativo=" + ativo + "]";
+	public Modalidade(Integer codigo, String nome, Boolean ativo) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.ativo = ativo;
 	}
 }

@@ -1,7 +1,6 @@
 package model.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,9 +27,8 @@ public class Turma implements Serializable{
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="semestre",nullable=false)
-	private Date semestre;
+	@Column(name="anoSemestre",nullable=false)
+	private String anoSemestre;
 	
 	@ManyToOne
 	@JoinColumn(name="ppc",referencedColumnName="codigo")
@@ -47,16 +43,12 @@ public class Turma implements Serializable{
 	public Turma(){
 	}
 
-	public Turma(Integer codigo, Date semestre, Ppc ppc, List<Aluno> alunos,Boolean ativo) {
+	public Turma(Integer codigo, String anoSemestre, Ppc ppc, List<Aluno> alunos, Boolean ativo) {
 		this.codigo = codigo;
-		this.semestre = semestre;
+		this.anoSemestre = anoSemestre;
 		this.ppc = ppc;
 		this.alunos = alunos;
 		this.ativo = ativo;
-	}
-	
-	public boolean validar(){
-		return true;
 	}
 
 	public Integer getCodigo() {
@@ -67,12 +59,12 @@ public class Turma implements Serializable{
 		this.codigo = codigo;
 	}
 
-	public Date getSemestre() {
-		return semestre;
+	public String getAnoSemestre() {
+		return anoSemestre;
 	}
 
-	public void setSemestre(Date semestre) {
-		this.semestre = semestre;
+	public void setAnoSemestre(String anoSemestre) {
+		this.anoSemestre = anoSemestre;
 	}
 
 	public Ppc getPpc() {
@@ -127,6 +119,6 @@ public class Turma implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Turma [codigo=" + codigo + ", semestre=" + semestre + ", ativo=" + ativo + "]";
+		return "Turma [codigo=" + codigo + ", anoSemestre=" + anoSemestre + ", ativo=" + ativo + "]";
 	}
 }

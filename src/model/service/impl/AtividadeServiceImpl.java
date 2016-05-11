@@ -10,7 +10,7 @@ import model.domain.Atividade;
 import model.service.AtividadeService;
 
 public class AtividadeServiceImpl implements AtividadeService {
-	
+
 	@Inject
 	private AtividadeDao atividadeDao;
 	

@@ -31,12 +31,6 @@ public class Curso implements Serializable{
 	@Column(name="nome",unique=true,nullable=false)
 	private String nome;
 	
-	@ManyToMany
-	@JoinTable(name="CursoModalidade",
-	joinColumns=@JoinColumn(name="curso"),
-	inverseJoinColumns=@JoinColumn(name="modalidade"))
-	private List<Modalidade> modalidades;
-	
 	@OneToMany(mappedBy="curso")
 	private List<Ppc> ppcs;
 	
@@ -52,20 +46,12 @@ public class Curso implements Serializable{
 	public Curso(){
 	}
 
-	
-	
-	public Curso(Integer codigo, String nome, List<Modalidade> modalidades, List<Ppc> ppcs,
-			List<Administrador> administradores, Boolean ativo) {
+	public Curso(Integer codigo, String nome, List<Ppc> ppcs, List<Administrador> administradores, Boolean ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.modalidades = modalidades;
 		this.ppcs = ppcs;
 		this.administradores = administradores;
 		this.ativo = ativo;
-	}
-
-	public boolean validar(){
-		return true;
 	}
 
 	public Integer getCodigo() {
@@ -82,15 +68,6 @@ public class Curso implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	@XmlTransient
-	public List<Modalidade> getModalidades() {
-		return modalidades;
-	}
-
-	public void setModalidades(List<Modalidade> modalidades) {
-		this.modalidades = modalidades;
 	}
 
 	@XmlTransient

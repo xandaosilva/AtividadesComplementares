@@ -1,7 +1,6 @@
 package model.facade.rs;
 
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import model.domain.Atividade;
 import model.service.AtividadeService;
 
@@ -24,13 +22,13 @@ public class AtividadeFacade {
 	private AtividadeService atividadeService;
 	
 	@GET
-	public List<Atividade> getAtividadesSemParametros(){
+	public List<Atividade> getCategoriasSemParametros(){
 		return atividadeService.getAtividades(new Atividade());
 	}
 	
 	@GET
 	@Path("/{codigo}")
-	public List<Atividade> getAtividades(@PathParam("codigo") Integer codigo){
+	public List<Atividade> getCategorias(@PathParam("codigo") Integer codigo){
 		Atividade atividade = new Atividade();
 		atividade.setCodigo(codigo);
 		return atividadeService.getAtividades(atividade);

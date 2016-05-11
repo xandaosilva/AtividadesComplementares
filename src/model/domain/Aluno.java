@@ -24,45 +24,35 @@ public class Aluno extends Usuario {
 	private String cpf;
 	
 	@Column(name="horas",nullable=false)
-	private Double horas;
+	private Integer horas;
 	
 	@Column(name="totalHoras",nullable=false)
-	private Double totalHoras;
+	private Integer totalHoras;
+	
+	@Column(name="aprovado",columnDefinition="TINYINT(1)",nullable=false)
+	private Boolean aprovado;
 	
 	@ManyToOne
 	@JoinColumn(name="turma",referencedColumnName="codigo")
 	private Turma turma;
 	
 	@OneToMany(mappedBy="aluno")
-	private List<Atividade> atividades;
+	private List<Lancamento> lancamentos;
 	
 	public Aluno(){
 	}
 
-	public Aluno(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo, 
-			String cpf, Double horas, Double totalHoras, Turma turma, List<Atividade> atividades) {
+	public Aluno(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo, String cpf,
+			Integer horas, Integer totalHoras, Boolean aprovado, Turma turma, List<Lancamento> lancamentos) {
 		super(codigo, nome, login, senha, observacoes, ativo);
 		this.cpf = cpf;
 		this.horas = horas;
 		this.totalHoras = totalHoras;
+		this.aprovado = aprovado;
 		this.turma = turma;
-		this.atividades = atividades;
+		this.lancamentos = lancamentos;
 	}
 
-	public boolean verificarAprovacao(){
-		if(this.horas >= this.turma.getPpc().getCargaHoraria())
-			return true;
-		else
-			return false;
-	}
-	
-	public double somarTotalHorasDoAluno(){
-		for(Atividade aux : this.atividades)
-			if(aux.getAtivo() == true)
-				this.totalHoras = this.totalHoras + aux.getHoras();
-		return this.totalHoras;
-	}
-	
 	public String getCpf() {
 		return cpf;
 	}
@@ -71,20 +61,28 @@ public class Aluno extends Usuario {
 		this.cpf = cpf;
 	}
 
-	public Double getHoras() {
+	public Integer getHoras() {
 		return horas;
 	}
 
-	public void setHoras(Double horas) {
+	public void setHoras(Integer horas) {
 		this.horas = horas;
 	}
 
-	public Double getTotalHoras() {
+	public Integer getTotalHoras() {
 		return totalHoras;
 	}
 
-	public void setTotalHoras(Double totalHoras) {
+	public void setTotalHoras(Integer totalHoras) {
 		this.totalHoras = totalHoras;
+	}
+
+	public Boolean getAprovado() {
+		return aprovado;
+	}
+
+	public void setAprovado(Boolean aprovado) {
+		this.aprovado = aprovado;
 	}
 
 	public Turma getTurma() {
@@ -96,41 +94,17 @@ public class Aluno extends Usuario {
 	}
 
 	@XmlTransient
-	public List<Atividade> getAtividades() {
-		return atividades;
+	public List<Lancamento> getLancamentos() {
+		return lancamentos;
 	}
 
-	public void setAtividades(List<Atividade> atividades) {
-		this.atividades = atividades;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Aluno other = (Aluno) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
-			return false;
-		return true;
+	public void setLancamentos(List<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
 	}
 
 	@Override
 	public String toString() {
-		return "Aluno [cpf=" + cpf + ", horas=" + horas + ", totalHoras=" + totalHoras + "]";
+		return "Aluno [cpf=" + cpf + ", horas=" + horas + ", totalHoras=" + totalHoras + ", aprovado=" + aprovado
+				+ ", toString()=" + super.toString() + "]";
 	}
 }

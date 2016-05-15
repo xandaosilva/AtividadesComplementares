@@ -110,10 +110,8 @@ public class Modalidade implements Serializable{
 		return true;
 	}
 
-	public Modalidade(Integer codigo, String nome, Boolean ativo) {
-		super();
-		this.codigo = codigo;
-		this.nome = nome;
-		this.ativo = ativo;
+	@Override
+	public String toString() {
+		return "Modalidade [codigo=" + codigo + ", nome=" + nome + ", ativo=" + ativo + "]";
 	}
 }

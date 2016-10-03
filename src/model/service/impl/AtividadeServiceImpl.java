@@ -20,20 +20,19 @@ public class AtividadeServiceImpl implements AtividadeService {
 	}
 	
 	@Override
+	public List<Atividade> getAtividadesAtivas(){
+		return atividadeDao.getAtividadesAtivas();
+	}
+	
+	@Override
 	@Transactional
 	public Atividade salvar(Atividade atividade){
-		if(atividade.validar() == true)
-			return atividadeDao.salvar(atividade);
-		else
-			return null;
+		return atividadeDao.salvar(atividade);
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Atividade atividade){
-		if(atividade.validar() == true)
-			atividadeDao.atualizar(atividade);
-		else
-			return;
+		atividadeDao.atualizar(atividade);
 	}
 }

@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import model.dao.TurmaDao;
+import model.domain.Ativo;
 import model.domain.Turma;
 
 public class TurmaDaoImpl implements TurmaDao {
@@ -38,6 +39,15 @@ public class TurmaDaoImpl implements TurmaDao {
 		if(turma.getCodigo() != null)
 			query.setParameter("codigo",turma.getCodigo());
 		
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Turma> getTurmasAtivas(){
+		StringBuilder hql = new StringBuilder("from Turma t where t.ativo like :ativo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("ativo",Ativo.ATIVO);
 		return query.getResultList();
 	}
 }

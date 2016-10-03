@@ -20,20 +20,19 @@ public class AlunoServiceImpl implements AlunoService {
 	}
 	
 	@Override
+	public List<Aluno> getAlunosAtivos(){
+		return alunoDao.getAlunosAtivos();
+	}
+	
+	@Override
 	@Transactional
 	public Aluno salvar(Aluno aluno){
-		if(aluno.validar() == true)
-			return alunoDao.salvar(aluno);
-		else
-			return null;
+		return alunoDao.salvar(aluno);
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Aluno aluno){
-		if(aluno.validar() == true)
-			alunoDao.atualizar(aluno);
-		else 
-			return;
+		alunoDao.atualizar(aluno);
 	}
 }

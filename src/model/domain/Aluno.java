@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -20,17 +24,23 @@ public class Aluno extends Usuario {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="cpf",unique=true,nullable=false)
+	@NotNull(message="preencha o cpf")
+	@Size(min=11,max=11,message="cpf deve conter 11 digitos")
+	@Column(name="cpf",unique=true)
 	private String cpf;
 	
-	@Column(name="horas",nullable=false)
-	private Integer horas;
-	
-	@Column(name="totalHoras",nullable=false)
+	@NotNull(message="preencha o total de horas")
+	@Column(name="totalHoras")
 	private Integer totalHoras;
 	
-	@Column(name="aprovado",columnDefinition="TINYINT(1)",nullable=false)
-	private Boolean aprovado;
+	@NotNull(message="preencha o total de horas aproveitadas")
+	@Column(name="horasAproveitadas")
+	private Integer horasAproveitadas;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="aprovado")
+	private Aprovado aprovado;
 	
 	@ManyToOne
 	@JoinColumn(name="turma",referencedColumnName="codigo")
@@ -39,52 +49,46 @@ public class Aluno extends Usuario {
 	@OneToMany(mappedBy="aluno")
 	private List<Lancamento> lancamentos;
 	
-	public Aluno(){
-	}
+	public Aluno(){}
 
-	public boolean validar(){
-		if(this.getTurma().getCodigo() != null){
-			if(this.getTurma().validar() == true){
-				if(super.validar() == true){
-					if(!this.getCpf().equals("") && this.getHoras() >= 0 && this.totalHoras >= 0){
-						return true;
-					}
-					else{
-						return false;
-					}
-				}
-				else{
-					return false;
-				}
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
-	}
-	
-	public boolean isAprovado(){
-		if(this.getHoras() >= this.getTurma().getPpc().getCargaHoraria()){
-			this.aprovado = true;
-		}
-		else{
-			this.aprovado = false;
-		}
-		return this.getAprovado();
-	}
-	
-	public Aluno(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo, String cpf,
-			Integer horas, Integer totalHoras, Boolean aprovado, Turma turma, List<Lancamento> lancamentos) {
+	public Aluno(Integer codigo, String nome, String login, String senha, String observacoes, Ativo ativo, String cpf,
+			Integer totalHoras, Integer horasAproveitadas, Aprovado aprovado, Turma turma,
+			List<Lancamento> lancamentos) {
 		super(codigo, nome, login, senha, observacoes, ativo);
 		this.cpf = cpf;
-		this.horas = horas;
 		this.totalHoras = totalHoras;
+		this.horasAproveitadas = horasAproveitadas;
 		this.aprovado = aprovado;
 		this.turma = turma;
 		this.lancamentos = lancamentos;
+	}
+
+	public int calcularHorasPorAtividade(Atividade atividade){
+		return 0;
+	}
+	
+	public int calcularHorasPorSemestre(Atividade atividade){
+		return 0;
+	}
+	
+	public int calcularHorasDentroDaInstituicao(){
+		return 0;
+	}
+	
+	public int calcularHorasForaDaInstituicao(){
+		return 0;
+	}
+	
+	public int calcularTotalHorasAproveitadas(){
+		return 0;
+	}
+	
+	public int calcularTotalHoras(){
+		return 0;
+	}
+	
+	public void aprovarAluno(){
+		return;
 	}
 
 	public String getCpf() {
@@ -95,14 +99,6 @@ public class Aluno extends Usuario {
 		this.cpf = cpf;
 	}
 
-	public Integer getHoras() {
-		return horas;
-	}
-
-	public void setHoras(Integer horas) {
-		this.horas = horas;
-	}
-
 	public Integer getTotalHoras() {
 		return totalHoras;
 	}
@@ -111,11 +107,19 @@ public class Aluno extends Usuario {
 		this.totalHoras = totalHoras;
 	}
 
-	public Boolean getAprovado() {
+	public Integer getHorasAproveitadas() {
+		return horasAproveitadas;
+	}
+
+	public void setHorasAproveitadas(Integer horasAproveitadas) {
+		this.horasAproveitadas = horasAproveitadas;
+	}
+
+	public Aprovado getAprovado() {
 		return aprovado;
 	}
 
-	public void setAprovado(Boolean aprovado) {
+	public void setAprovado(Aprovado aprovado) {
 		this.aprovado = aprovado;
 	}
 
@@ -138,7 +142,7 @@ public class Aluno extends Usuario {
 
 	@Override
 	public String toString() {
-		return "Aluno [cpf=" + cpf + ", horas=" + horas + ", totalHoras=" + totalHoras + ", aprovado=" + aprovado
-				+ ", toString()=" + super.toString() + "]";
+		return "Aluno [cpf=" + cpf + ", totalHoras=" + totalHoras + ", horasAproveitadas=" + horasAproveitadas
+				+ ", aprovado=" + aprovado + "]";
 	}
 }

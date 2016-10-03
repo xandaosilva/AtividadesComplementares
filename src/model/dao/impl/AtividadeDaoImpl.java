@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import model.dao.AtividadeDao;
 import model.domain.Atividade;
+import model.domain.Ativo;
 
 public class AtividadeDaoImpl implements AtividadeDao {
 	
@@ -42,6 +43,15 @@ public class AtividadeDaoImpl implements AtividadeDao {
 		if(atividade.getNome() != null && !atividade.getNome().equals(""))
 			query.setParameter("nome","%"+atividade.getNome()+"%");
 		
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Atividade> getAtividadesAtivas(){
+		StringBuilder hql = new StringBuilder("from Atividade a where a.ativo like :ativo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("ativo",Ativo.ATIVO);
 		return query.getResultList();
 	}
 }

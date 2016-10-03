@@ -20,20 +20,19 @@ public class ModalidadeServiceImpl implements ModalidadeService {
 	}
 	
 	@Override
+	public List<Modalidade> getModalidadesAtivas(){
+		return modalidadeDao.getModalidadesAtivas();
+	}
+	
+	@Override
 	@Transactional
 	public Modalidade salvar(Modalidade modalidade){
-		if(modalidade.validar() == true)
-			return modalidadeDao.salvar(modalidade);
-		else
-			return null;
+		return modalidadeDao.salvar(modalidade);
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Modalidade modalidade){
-		if(modalidade.validar() == true)
-			modalidadeDao.atualizar(modalidade);
-		else
-			return;
+		modalidadeDao.atualizar(modalidade);
 	}
 }

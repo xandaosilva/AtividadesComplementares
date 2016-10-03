@@ -4,11 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -16,45 +20,42 @@ public abstract class Usuario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@Id
-	@Column(name="codigo")
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Column(name="nome",nullable=false)
+	@NotNull(message="preencha o nome")
+	@Size(min=10,max=50,message="o nome deve conter entre 10 e 50 caracteres .")
+	@Column(name="nome")
 	private String nome;
 	
-	@Column(name="login",unique=true,nullable=false)
+	@NotNull(message="preencha o email")
+	@Column(name="email",unique=true)
 	private String login;
 	
-	@Column(name="senha",nullable=false)
+	@NotNull(message="preencha a senha")
+	@Column(name="senha")
 	private String senha;
 	
 	@Column(name="observacoes")
 	private String observacoes;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)")
-	private Boolean ativo;
-	
-	public Usuario(){
-	}
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="ativo")
+	private Ativo ativo;
 
-	public Usuario(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo) {
+	public Usuario(){}
+	
+	public Usuario(Integer codigo, String nome, String login, String senha, String observacoes, Ativo ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
 		this.observacoes = observacoes;
 		this.ativo = ativo;
-	}
-	
-	public boolean validar(){
-		if(!this.getLogin().equals("") && !this.getNome().equals("") && !this.getSenha().equals("")){
-			return true;
-		}
-		else{
-			return false;
-		}
 	}
 
 	public Integer getCodigo() {
@@ -97,11 +98,11 @@ public abstract class Usuario implements Serializable{
 		this.observacoes = observacoes;
 	}
 
-	public Boolean getAtivo() {
+	public Ativo getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(Boolean ativo) {
+	public void setAtivo(Ativo ativo) {
 		this.ativo = ativo;
 	}
 

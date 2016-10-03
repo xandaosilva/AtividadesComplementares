@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import model.dao.AdministradorDao;
 import model.domain.Administrador;
+import model.domain.Ativo;
 
 public class AdministradorDaoImpl implements AdministradorDao {
 
@@ -42,6 +43,15 @@ public class AdministradorDaoImpl implements AdministradorDao {
 		if (administrador.getNome() != null && !administrador.getNome().equals(""))
 			query.setParameter("nome","%"+administrador.getNome()+"%");
 		
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Administrador> getAdministradoresAtivos(){
+		StringBuilder hql = new StringBuilder("from Administrador a where a.ativo like :ativo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("ativo",Ativo.ATIVO);
 		return query.getResultList();
 	}
 }

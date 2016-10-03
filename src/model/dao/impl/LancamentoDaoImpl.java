@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import model.dao.LancamentoDao;
+import model.domain.Ativo;
 import model.domain.Lancamento;
 
 public class LancamentoDaoImpl implements LancamentoDao {
@@ -38,6 +39,15 @@ public class LancamentoDaoImpl implements LancamentoDao {
 		if(lancamento.getCodigo() != null)
 			query.setParameter("codigo",lancamento.getCodigo());
 		
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Lancamento> getLancamentosAtivos(){
+		StringBuilder hql = new StringBuilder("from Lancamento l where and l.ativo like :ativo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("ativo",Ativo.ATIVO);
 		return query.getResultList();
 	}
 }

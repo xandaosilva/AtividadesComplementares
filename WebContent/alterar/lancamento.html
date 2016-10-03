@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html ng-app="categoriaModule">
+<html ng-app="lancamentoModule">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title>Alterar categoria</title>
+	<title>Alterar lancamento</title>
 	<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../resources/css/sticky-footer.css">
 	<script src="../resources/js/angular.min.js"></script>
 	<script src="../resources/js/jquery.min.js"></script>
 	<script src="../resources/js/bootstrap.min.js"></script>
-	<script src="../resources/control/categoria.js"></script>
+	<script src="../resources/js/ui-bootstrap-tpls-0.14.1.min.js"></script>
+	<script src="../resources/control/lancamento.js"></script>
 </head>
-<body ng-controller="categoriaController">
-	<div ng-include="'../administrador/menuAdministrador.html'"></div>
-	<div ng-include="'../administrador/opcoes.html'"></div>
+<body ng-controller="lancamentoController">
+	<div ng-include="'../util/menu.html'"></div>
+	<div ng-include="'../rodape.html'"></div>
 </body>
 </html>

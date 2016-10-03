@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import model.dao.PpcDao;
+import model.domain.Ativo;
 import model.domain.Ppc;
 
 public class PpcDaoImpl implements PpcDao {
@@ -38,6 +39,15 @@ public class PpcDaoImpl implements PpcDao {
 		if(ppc.getCodigo() != null)
 			query.setParameter("codigo",ppc.getCodigo());
 		
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Ppc> getPpcsAtivos(){
+		StringBuilder hql = new StringBuilder("from Ppc p where p.ativo like :ativo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("ativo",Ativo.ATIVO);
 		return query.getResultList();
 	}
 }

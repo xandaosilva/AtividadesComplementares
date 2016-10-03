@@ -21,20 +21,19 @@ public class AdministradorServiceImpl implements AdministradorService {
 	}
 	
 	@Override
+	public List<Administrador> getAdministradoresAtivos(){
+		return administradorDao.getAdministradoresAtivos();
+	}
+	
+	@Override
 	@Transactional
 	public Administrador salvar(Administrador administrador){
-		if(administrador.validar() == true)
-			return administradorDao.salvar(administrador);
-		else
-			return null;
+		return administradorDao.salvar(administrador);
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Administrador administrador){
-		if(administrador.validar() == true)
-			administradorDao.atualizar(administrador);
-		else
-			return;
+		administradorDao.atualizar(administrador);
 	}
 }

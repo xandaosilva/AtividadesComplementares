@@ -5,11 +5,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -20,36 +24,32 @@ public class Modalidade implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@NotNull
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Column(name="nome",unique=true,nullable=false)
+	@NotNull(message="preencha o nome")
+	@Size(min=10,max=40,message="o nome deve conter entre 10 e 40 caracteres .")
+	@Column(name="nome")
 	private String nome;
-		
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="ativo")
+	private Ativo ativo;
+	
 	@OneToMany(mappedBy="modalidade")
 	private List<Atividade> atividades;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)")
-	private Boolean ativo;
-	
 	public Modalidade(){}
 
-	public Modalidade(Integer codigo, String nome, List<Atividade> atividades, Boolean ativo) {
+	public Modalidade(Integer codigo, String nome, Ativo ativo, List<Atividade> atividades) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.atividades = atividades;
 		this.ativo = ativo;
-	}
-	
-	public boolean validar(){
-		if(!this.getNome().equals("")){
-			return true;
-		}
-		else{
-			return false;
-		}
+		this.atividades = atividades;
 	}
 
 	public Integer getCodigo() {
@@ -68,6 +68,14 @@ public class Modalidade implements Serializable{
 		this.nome = nome;
 	}
 
+	public Ativo getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Ativo ativo) {
+		this.ativo = ativo;
+	}
+
 	@XmlTransient
 	public List<Atividade> getAtividades() {
 		return atividades;
@@ -75,14 +83,6 @@ public class Modalidade implements Serializable{
 
 	public void setAtividades(List<Atividade> atividades) {
 		this.atividades = atividades;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	@Override

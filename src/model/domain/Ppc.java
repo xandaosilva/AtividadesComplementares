@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -22,16 +26,25 @@ public class Ppc implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Column(name="versao",unique=true,nullable=false)
+	@NotNull(message="preencha a versao")
+	@Size(min=10,max=40,message="a versao deve conter entre 10 e 40 caracteres .")
+	@Column(name="versao")
 	private String versao;
 	
-	@Column(name="cargaHoraria",nullable=false)
+	@NotNull(message="preencha a carga horaria")
+	@Column(name="cargaHoraria")
 	private Integer cargaHoraria;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="ativo")
+	private Ativo ativo;
 	
 	@ManyToOne
 	@JoinColumn(name="curso",referencedColumnName="codigo")
@@ -40,39 +53,17 @@ public class Ppc implements Serializable{
 	@OneToMany(mappedBy="ppc")
 	private List<Turma> turmas;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)")
-	private Boolean ativo;
-	
 	public Ppc(){}
 
-	public Ppc(Integer codigo, String versao, Integer cargaHoraria, Curso curso, List<Turma> turmas, Boolean ativo) {
+	public Ppc(Integer codigo, String versao, Integer cargaHoraria, Ativo ativo, Curso curso, List<Turma> turmas) {
 		this.codigo = codigo;
 		this.versao = versao;
 		this.cargaHoraria = cargaHoraria;
+		this.ativo = ativo;
 		this.curso = curso;
 		this.turmas = turmas;
-		this.ativo = ativo;
 	}
 
-	public boolean validar(){
-		if(this.getCurso().getCodigo() != null){
-			if(this.getCurso().validar() == true){
-				if(!this.getVersao().equals("")){
-					return true;
-				}
-				else{
-					return false;
-				}
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
-	}
-	
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -97,6 +88,14 @@ public class Ppc implements Serializable{
 		this.cargaHoraria = cargaHoraria;
 	}
 
+	public Ativo getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Ativo ativo) {
+		this.ativo = ativo;
+	}
+
 	public Curso getCurso() {
 		return curso;
 	}
@@ -112,14 +111,6 @@ public class Ppc implements Serializable{
 
 	public void setTurmas(List<Turma> turmas) {
 		this.turmas = turmas;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	@Override

@@ -7,4 +7,5 @@ public interface AtividadeDao {
 	public Atividade salvar(Atividade atividade);
 	public void atualizar(Atividade atividade);
 	public List<Atividade> getAtividades(Atividade atividade);
+	public List<Atividade> getAtividadesAtivas();
 }

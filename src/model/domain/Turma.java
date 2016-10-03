@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -21,14 +24,21 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Turma implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	@NotNull
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Column(name="anoSemestre",nullable=false)
+	@NotNull(message="preencha o ano/semestre")
+	@Column(name="anoSemestre")
 	private String anoSemestre;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="ativo")
+	private Ativo ativo;
 	
 	@ManyToOne
 	@JoinColumn(name="ppc",referencedColumnName="codigo")
@@ -37,37 +47,14 @@ public class Turma implements Serializable{
 	@OneToMany(mappedBy="turma")
 	private List<Aluno> alunos;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)")
-	private Boolean ativo;
-	
-	public Turma(){
-	}
+	public Turma(){}
 
-	public Turma(Integer codigo, String anoSemestre, Ppc ppc, List<Aluno> alunos, Boolean ativo) {
+	public Turma(Integer codigo, String anoSemestre, Ativo ativo, Ppc ppc, List<Aluno> alunos) {
 		this.codigo = codigo;
 		this.anoSemestre = anoSemestre;
+		this.ativo = ativo;
 		this.ppc = ppc;
 		this.alunos = alunos;
-		this.ativo = ativo;
-	}
-	
-	public boolean validar(){
-		if(this.getPpc().getCodigo() != null){
-			if(this.getPpc().validar() == true){
-				if(!this.getAnoSemestre().equals("")){
-					return true;
-				}
-				else{
-					return false;
-				}
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
 	}
 
 	public Integer getCodigo() {
@@ -86,6 +73,14 @@ public class Turma implements Serializable{
 		this.anoSemestre = anoSemestre;
 	}
 
+	public Ativo getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Ativo ativo) {
+		this.ativo = ativo;
+	}
+
 	public Ppc getPpc() {
 		return ppc;
 	}
@@ -101,14 +96,6 @@ public class Turma implements Serializable{
 
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	@Override

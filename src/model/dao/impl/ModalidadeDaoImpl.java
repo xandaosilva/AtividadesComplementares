@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import model.dao.ModalidadeDao;
+import model.domain.Ativo;
 import model.domain.Modalidade;
 
 public class ModalidadeDaoImpl implements ModalidadeDao {
@@ -42,6 +43,15 @@ public class ModalidadeDaoImpl implements ModalidadeDao {
 		if(modalidade.getNome() != null && !modalidade.getNome().equals(""))
 			query.setParameter("nome","%"+modalidade.getNome()+"%");
 		
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Modalidade> getModalidadesAtivas(){
+		StringBuilder hql = new StringBuilder("from Modalidade m where m.ativo like :ativo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("ativo",Ativo.ATIVO);
 		return query.getResultList();
 	}
 }

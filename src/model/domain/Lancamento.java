@@ -5,14 +5,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -22,72 +23,70 @@ public class Lancamento implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="dataAtividade",nullable=false)
+	@NotNull(message="preencha a data da atividade")
+	@Column(name="dataAtividade")
 	private Date dataAtividade;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="dataRegistro",nullable=false)
+	@NotNull(message="preencha a data do lancamento")
+	@Column(name="dataLancamento")
 	private Date dataRegistro;
 	
-	@Column(name="horas",nullable=false)
-	private Integer horas;
+	@NotNull(message="preencha as horas do lancamento")
+	@Column(name="horasLancamento")
+	private Integer horasLancamento;
 	
+	@NotNull
+	@Column(name="horasAproveitadas")
+	private Integer horasAproveitadas;
+	
+	@NotNull(message="preencha a descricao")
 	@Column(name="descricao")
 	private String descricao;
 	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="ativo")
+	private Ativo ativo;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="instituicao")
+	private Instituicao instituicao;
+	
 	@ManyToOne
-	@JoinColumn(name="aluno",referencedColumnName="cpf")
+	@JoinColumn(name="aluno",referencedColumnName="codigo")
 	private Aluno aluno;
 	
 	@ManyToOne
-	@JoinColumn(name="administrador",referencedColumnName="siape")
+	@JoinColumn(name="administrador",referencedColumnName="codigo")
 	private Administrador administrador;
 	
 	@ManyToOne
 	@JoinColumn(name="atividade",referencedColumnName="codigo")
 	private Atividade atividade;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)")
-	private Boolean ativo;
-	
 	public Lancamento(){}
 
-	public Lancamento(Integer codigo, Date dataAtividade, Date dataRegistro, Integer horas, String descricao,
-			Aluno aluno, Administrador administrador, Atividade atividade, Boolean ativo) {
+	public Lancamento(Integer codigo, Date dataAtividade, Date dataRegistro, Integer horasLancamento,
+			Integer horasAproveitadas, String descricao, Ativo ativo, Instituicao instituicao, Aluno aluno,
+			Administrador administrador, Atividade atividade) {
 		this.codigo = codigo;
 		this.dataAtividade = dataAtividade;
 		this.dataRegistro = dataRegistro;
-		this.horas = horas;
+		this.horasLancamento = horasLancamento;
+		this.horasAproveitadas = horasAproveitadas;
 		this.descricao = descricao;
+		this.ativo = ativo;
+		this.instituicao = instituicao;
 		this.aluno = aluno;
 		this.administrador = administrador;
 		this.atividade = atividade;
-		this.ativo = ativo;
-	}
-	
-	public boolean validar(){
-		if(this.getAdministrador().validar() == true && this.getAluno().validar() == true && this.getAtividade().validar() == true){
-			if(this.getDataAtividade().before(this.getDataRegistro())){
-				if(!this.getDescricao().equals("") && this.getHoras() > 0){
-					return true;
-				}
-				else{
-					return false;
-				}
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
 	}
 
 	public Integer getCodigo() {
@@ -114,12 +113,20 @@ public class Lancamento implements Serializable{
 		this.dataRegistro = dataRegistro;
 	}
 
-	public Integer getHoras() {
-		return horas;
+	public Integer getHorasLancamento() {
+		return horasLancamento;
 	}
 
-	public void setHoras(Integer horas) {
-		this.horas = horas;
+	public void setHorasLancamento(Integer horasLancamento) {
+		this.horasLancamento = horasLancamento;
+	}
+
+	public Integer getHorasAproveitadas() {
+		return horasAproveitadas;
+	}
+
+	public void setHorasAproveitadas(Integer horasAproveitadas) {
+		this.horasAproveitadas = horasAproveitadas;
 	}
 
 	public String getDescricao() {
@@ -128,6 +135,22 @@ public class Lancamento implements Serializable{
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Ativo getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Ativo ativo) {
+		this.ativo = ativo;
+	}
+
+	public Instituicao getInstituicao() {
+		return instituicao;
+	}
+
+	public void setInstituicao(Instituicao instituicao) {
+		this.instituicao = instituicao;
 	}
 
 	public Aluno getAluno() {
@@ -152,14 +175,6 @@ public class Lancamento implements Serializable{
 
 	public void setAtividade(Atividade atividade) {
 		this.atividade = atividade;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	@Override
@@ -190,6 +205,7 @@ public class Lancamento implements Serializable{
 	@Override
 	public String toString() {
 		return "Lancamento [codigo=" + codigo + ", dataAtividade=" + dataAtividade + ", dataRegistro=" + dataRegistro
-				+ ", horas=" + horas + ", descricao=" + descricao + ", ativo=" + ativo + "]";
+				+ ", horasLancamento=" + horasLancamento + ", horasAproveitadas=" + horasAproveitadas + ", descricao="
+				+ descricao + ", ativo=" + ativo + ", instituicao=" + instituicao + "]";
 	}
 }

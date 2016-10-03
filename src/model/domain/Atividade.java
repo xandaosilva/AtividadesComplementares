@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -22,28 +28,37 @@ public class Atividade implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Column(name="nome",unique=true,nullable=false)
+	@NotNull(message="preencha o nome")
+	@Size(min=10,max=40,message="o nome deve conter entre 10 e 40 caracteres .")
+	@Column(name="nome")
 	private String nome;
 	
-	@Column(name="descricao",nullable=false)
+	@NotNull(message="preencha a descricao")
+	@Column(name="descricao")
 	private String descricao;
 	
-	@Column(name="porcentagemSemestral",nullable=false)
-	private Integer porcentagemSemestral;
+	@NotNull(message="preencha a porcentagem da atividade")
+	@Min(1)
+	@Max(100)
+	@Column(name="porcentagem")
+	private Integer porcentagem;
 	
-	@Column(name="porcentagemPorAtividade",nullable=false)
-	private Integer porcentagemPorAtividade;
+	@NotNull(message="preencha a porcentagem aproveitada por atividade")
+	@Min(1)
+	@Max(100)
+	@Column(name="porcentagemAproveitadaPorAtividade")
+	private Integer porcentagemAproveitadaPorAtividade;
 	
-	@Column(name="atividadesPorSemestre",nullable=false)
-	private Integer atividadesPorSemestre;
-	
-	@Column(name="observacoes",nullable=false)
-	private String observacoes;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="ativo")
+	private Ativo ativo;
 	
 	@ManyToOne
 	@JoinColumn(name="modalidade",referencedColumnName="codigo")
@@ -52,51 +67,25 @@ public class Atividade implements Serializable{
 	@OneToMany(mappedBy="atividade")
 	private List<Lancamento> lancamentos;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)")
-	private Boolean ativo;
-	
-	public Atividade(){
-	}
+	public Atividade(){}
 
-	public Atividade(Integer codigo, String nome, String descricao, Integer porcentagemSemestral,
-			Integer porcentagemPorAtividade, Integer atividadesPorSemestre, String observacoes, Modalidade modalidade,
-			List<Lancamento> lancamentos, Boolean ativo) {
+	public Atividade(Integer codigo, String nome, String descricao, Integer porcentagem,
+			Integer porcentagemAproveitadaPorAtividade, Ativo ativo, Modalidade modalidade,
+			List<Lancamento> lancamentos) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.porcentagemSemestral = porcentagemSemestral;
-		this.porcentagemPorAtividade = porcentagemPorAtividade;
-		this.atividadesPorSemestre = atividadesPorSemestre;
-		this.observacoes = observacoes;
+		this.porcentagem = porcentagem;
+		this.porcentagemAproveitadaPorAtividade = porcentagemAproveitadaPorAtividade;
+		this.ativo = ativo;
 		this.modalidade = modalidade;
 		this.lancamentos = lancamentos;
-		this.ativo = ativo;
 	}
 	
-	public boolean validar(){
-		if(this.getModalidade().getCodigo() != null){
-			if(this.getModalidade().validar() == true){
-				if(!this.getNome().equals("") && !this.getDescricao().equals("") && !this.getObservacoes().equals("")){
-					if(this.getporcentagemSemestral() > 0 && this.getPorcentagemPorAtividade() > 0 && this.getAtividadesPorSemestre()  > 0){
-						return true;
-					}
-					else{
-						return false;
-					}
-				}
-				else{
-					return false;
-				}
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
+	public int calcularHorasPorPpc(Ppc ppc){
+		return 0;
 	}
-	
+
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -121,36 +110,28 @@ public class Atividade implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public Integer getporcentagemSemestral() {
-		return porcentagemSemestral;
+	public Integer getPorcentagem() {
+		return porcentagem;
 	}
 
-	public void setporcentagemSemestral(Integer porcentagemSemestral) {
-		this.porcentagemSemestral = porcentagemSemestral;
+	public void setPorcentagem(Integer porcentagem) {
+		this.porcentagem = porcentagem;
 	}
 
-	public Integer getPorcentagemPorAtividade() {
-		return porcentagemPorAtividade;
+	public Integer getPorcentagemAproveitadaPorAtividade() {
+		return porcentagemAproveitadaPorAtividade;
 	}
 
-	public void setPorcentagemPorAtividade(Integer porcentagemPorAtividade) {
-		this.porcentagemPorAtividade = porcentagemPorAtividade;
+	public void setPorcentagemAproveitadaPorAtividade(Integer porcentagemAproveitadaPorAtividade) {
+		this.porcentagemAproveitadaPorAtividade = porcentagemAproveitadaPorAtividade;
 	}
 
-	public Integer getAtividadesPorSemestre() {
-		return atividadesPorSemestre;
+	public Ativo getAtivo() {
+		return ativo;
 	}
 
-	public void setAtividadesPorSemestre(Integer atividadesPorSemestre) {
-		this.atividadesPorSemestre = atividadesPorSemestre;
-	}
-
-	public String getObservacoes() {
-		return observacoes;
-	}
-
-	public void setObservacoes(String observacoes) {
-		this.observacoes = observacoes;
+	public void setAtivo(Ativo ativo) {
+		this.ativo = ativo;
 	}
 
 	public Modalidade getModalidade() {
@@ -168,14 +149,6 @@ public class Atividade implements Serializable{
 
 	public void setLancamentos(List<Lancamento> lancamentos) {
 		this.lancamentos = lancamentos;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	@Override
@@ -205,9 +178,8 @@ public class Atividade implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Atividade [codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao
-				+ ", porcentagemSemestral=" + porcentagemSemestral + ", porcentagemPorAtividade="
-				+ porcentagemPorAtividade + ", atividadesPorSemestre=" + atividadesPorSemestre + ", observacoes="
-				+ observacoes + ", ativo=" + ativo + "]";
+		return "Atividade [codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", porcentagem="
+				+ porcentagem + ", porcentagemAproveitadaPorAtividade=" + porcentagemAproveitadaPorAtividade
+				+ ", ativo=" + ativo + "]";
 	}
 }

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -18,7 +20,9 @@ public class Administrador extends Usuario {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name="siape",unique=true,nullable=false)
+	@NotNull(message="preencha o siape")
+	@Size(min=10,max=20,message="o siape deve conter entre 10 e 20 caracteres .")
+	@Column(name="siape")
 	private String siape;
 	
 	@OneToMany(mappedBy="administrador")
@@ -27,29 +31,14 @@ public class Administrador extends Usuario {
 	@OneToMany(mappedBy="administrador")
 	private List<Curso> cursos;
 	
-	public Administrador(){
-	}
+	public Administrador(){}
 
-	public Administrador(Integer codigo, String nome, String login, String senha, String observacoes, Boolean ativo,
+	public Administrador(Integer codigo, String nome, String login, String senha, String observacoes, Ativo ativo,
 			String siape, List<Lancamento> lancamentos, List<Curso> cursos) {
 		super(codigo, nome, login, senha, observacoes, ativo);
 		this.siape = siape;
 		this.lancamentos = lancamentos;
 		this.cursos = cursos;
-	}
-	
-	public boolean validar(){
-		if(super.validar() == true){
-			if(!this.getSiape().equals("")){
-				return true;
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
 	}
 
 	public String getSiape() {
@@ -74,12 +63,12 @@ public class Administrador extends Usuario {
 		return cursos;
 	}
 
-	public void setCurso(List<Curso> curso) {
-		this.cursos = curso;
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 	@Override
 	public String toString() {
-		return "Administrador [siape=" + siape + ", toString()=" + super.toString() + "]";
+		return "Administrador [siape=" + siape + ", lancamentos=" + lancamentos + ", cursos=" + cursos + "]";
 	}
 }

@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import model.dao.AlunoDao;
 import model.domain.Aluno;
+import model.domain.Ativo;
 
 public class AlunoDaoImpl implements AlunoDao {
 
@@ -42,6 +43,15 @@ public class AlunoDaoImpl implements AlunoDao {
 		if(aluno.getNome() != null && !aluno.getNome().equals(""))
 			query.setParameter("nome","%"+aluno.getNome()+"%");
 		
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Aluno> getAlunosAtivos(){
+		StringBuilder hql = new StringBuilder("from Aluno a where a.ativo like :ativo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("ativo",Ativo.ATIVO);
 		return query.getResultList();
 	}
 }

@@ -20,20 +20,19 @@ public class PpcServiceImpl implements PpcService {
 	}
 	
 	@Override
+	public List<Ppc> getPpcsAtivos(){
+		return ppcDao.getPpcsAtivos();
+	}
+	
+	@Override
 	@Transactional
 	public Ppc salvar(Ppc ppc){
-		if(ppc.validar() == true)
-			return ppcDao.salvar(ppc);
-		else
-			return null;
+		return ppcDao.salvar(ppc);
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Ppc ppc){
-		if(ppc.validar() == true)
-			ppcDao.atualizar(ppc);
-		else
-			return;
+		ppcDao.atualizar(ppc);
 	}
 }

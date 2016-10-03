@@ -20,20 +20,19 @@ public class CursoServiceImpl implements CursoService {
 	}
 	
 	@Override
+	public List<Curso> getCursosAtivos(){
+		return cursoDao.getCursosAtivos();
+	}
+	
+	@Override
 	@Transactional
 	public Curso salvar(Curso curso){
-		if(curso.validar() == true)
-			return cursoDao.salvar(curso);
-		else
-			return null;
+		return cursoDao.salvar(curso);
 	}
 	
 	@Override
 	@Transactional
 	public void atualizar(Curso curso){
-		if(curso.validar() == true)
-			cursoDao.atualizar(curso);
-		else
-			return;
+		cursoDao.atualizar(curso);
 	}
 }

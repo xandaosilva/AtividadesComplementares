@@ -7,4 +7,5 @@ public interface CursoDao {
 	public Curso salvar(Curso curso);
 	public void atualizar(Curso curso);
 	public List<Curso> getCursos(Curso curso);
+	public List<Curso> getCursosAtivos();
 }

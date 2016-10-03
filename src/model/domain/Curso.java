@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -22,52 +26,37 @@ public class Curso implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@Column(name="nome",unique=true,nullable=false)
+	@NotNull(message="preencha o nome")
+	@Size(min=20,max=50,message="o nome deve conter entre 20 e 50 caracteres .")
+	@Column(name="nome")
 	private String nome;
-		
-	@ManyToOne
-	@JoinColumn(name="administrador",referencedColumnName="siape")
-	private Administrador administrador;
 	
-	@Column(name="ativo",columnDefinition="TINYINT(1)")
-	private Boolean ativo;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="ativo")
+	private Ativo ativo;
+	
+	@ManyToOne
+	@JoinColumn(name="administrador",referencedColumnName="codigo")
+	private Administrador administrador;
 	
 	@OneToMany(mappedBy="curso")
 	private List<Ppc> ppcs;
 	
-	public Curso(){
-	}
+	public Curso(){}
 
-	public Curso(Integer codigo, String nome, Administrador administrador, Boolean ativo, List<Ppc> ppcs) {
+	public Curso(Integer codigo, String nome, Ativo ativo, Administrador administrador, List<Ppc> ppcs) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.administrador = administrador;
 		this.ativo = ativo;
+		this.administrador = administrador;
 		this.ppcs = ppcs;
-	}
-	
-	public boolean validar(){
-		if(this.getAdministrador().getCodigo() != null){
-			if(this.getAdministrador().validar() == true){
-				if(!this.getNome().equals("")){
-					return true;
-				}
-				else{
-					return false;
-				}
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
 	}
 
 	public Integer getCodigo() {
@@ -86,6 +75,22 @@ public class Curso implements Serializable{
 		this.nome = nome;
 	}
 
+	public Ativo getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Ativo ativo) {
+		this.ativo = ativo;
+	}
+
+	public Administrador getAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
+	}
+
 	@XmlTransient
 	public List<Ppc> getPpcs() {
 		return ppcs;
@@ -95,28 +100,11 @@ public class Curso implements Serializable{
 		this.ppcs = ppcs;
 	}
 
-	
-	public Administrador getAdministrador() {
-		return administrador;
-	}
-
-	public void setAdministrador(Administrador administrador) {
-		this.administrador = administrador;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
 		return result;
 	}
 
@@ -129,10 +117,7 @@ public class Curso implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Curso other = (Curso) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
+		if (ativo != other.ativo)
 			return false;
 		return true;
 	}

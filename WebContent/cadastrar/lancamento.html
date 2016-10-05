@@ -13,6 +13,100 @@
 </head>
 <body ng-controller="lancamentoController">
 	<div ng-include="'../menu.html'"></div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Cadastro de lançamentos</h3>
+  		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" name="lancamentoForm" ng-submit="lancamentoForm.$valid && salvar()" novalidate>
+				<br>
+					<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+					<div ng-show="lancamentoForm.$submitted">
+						<div ng-show="lancamentoForm.dataAtividade.$error.required">Preencha a data da atividade</div>
+						<div ng-show="lancamentoForm.dataLancamento.$error.required">Preencha a data do lançamento</div>
+						<div ng-show="lancamentoForm.horasLancamento.$error.required">Preencha as horas do lançamento</div>
+						<div ng-show="lancamentoForm.horasAproveitadas.$error.required">Preencha as horas aproveitadas</div>
+						<div ng-show="lancamentoForm.horasAproveitadas.$error.min">As horas aproveitadas devem ser inicialmente 0</div>
+						<div ng-show="lancamentoForm.horasAproveitadas.$error.max">As horas aproveitadas devem ser inicialmente 0</div>
+						<div ng-show="lancamentoForm.descricao.$error.required">Preencha a descrição do lançamento</div>
+						<div ng-show="lancamentoForm.ativo.$error.required">Informe o estado</div>
+						<div ng-show="lancamentoForm.instituicao.$error.required">Informe a instituição</div>
+						<div ng-show="lancamentoForm.aluno.$error.required">Informe o aluno</div>
+						<div ng-show="lancamentoForm.administrador.$error.required">Informe o administrador</div>
+						<div ng-show="lancamentoForm.atividade.$error.required">Informe o atividade</div>
+					</div>
+				<br>
+				<div class="form-group">
+					<label for="inputCodigo" class="col-sm-1 control-label">Código</label>
+					<div class="col-sm-2">
+						<input type="number" name="codigo" ng-model="lancamento.codigo" class="form-control" id="inputCodigo" placeholder="Códgio" disabled>
+					</div>
+					<label for="inputDataAtividade" class="col-sm-2 control-label">Data da atividade</label>
+					<div class="col-sm-2">
+						<input type="date" name="dataAtividade" ng-model="lancamento.dataAtividade" class="form-control" id="inputDataAtividade" placeholder="Data da atividade" required>
+					</div>
+					<label for="inputDataLancamento" class="col-sm-2 control-label">Data do lancamento</label>
+					<div class="col-sm-2">
+						<input type="date" name="dataLancamento" ng-model="lancamento.dataLancamento" class="form-control" id="inputDataLancamento" placeholder="Data do lancamento" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputHorasLancamento" class="col-sm-1 control-label">Horas do lançamento</label>
+					<div class="col-sm-2">
+						<input type="number" name="horasLancamento" ng-model="lancamento.horasLancamento" class="form-control" id="inputHorasLancamento" placeholder="Horas do lançamento" required>
+					</div>
+					<label for="inputHorasAproveitadas" class="col-sm-2 control-label">Horas aproveitadas</label>
+					<div class="col-sm-2">
+						<input type="number" name="horasaproveitadas" min="0" max="0" ng-model="lancamento.horasAproveitadas" class="form-control" id="inputHorasAproveitadas" placeholder="Horas aproveitadas" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputDescricao" class="col-sm-1 control-label">Descrição</label>
+					<div class="col-sm-11">
+						<textarea class="form-control" name="descricao" ng-model="lancamento.descricao" rows="5" required></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEstado" class="col-sm-1 control-label">Estado</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="ativo" ng-model="lancamento.ativo" required>
+							<option value="ATIVO">ATIVO</option>
+							<option value="INATIVO">INATIVO</option>
+						</select>
+					</div>
+					<label for="inputInstituicao" class="col-sm-1 control-label">Instituição</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="instituicao" ng-model="lancamento.instituicao" required>
+							<option value="IFTM">IFTM</option>
+							<option value="OUTROS">OUTROS</option>
+						</select>
+					</div>
+					<label for="inputEstado" class="col-sm-1 control-label">Aluno</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="aluno" ng-model="lancamento.aluno" ng-options="aluno.nome for aluno in alunos track by aluno.codigo" required>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEstado" class="col-sm-1 control-label">Administrador</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="administrador" ng-model="lancamento.administrador" ng-options="administrador.nome for administrador in administradores track by administrador.codigo" required>
+						</select>
+					</div>
+					<label for="inputEstado" class="col-sm-1 control-label">Atividade</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="atividade" ng-model="lancamento.atividade" ng-options="atividade.nome for atividade in atividades track by atividade.codigo" required>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-11">
+						<button type="submit" class="btn btn-success">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 	<div ng-include="'../rodape.html'"></div>
 </body>
 </html>

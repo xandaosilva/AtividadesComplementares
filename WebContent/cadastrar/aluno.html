@@ -27,10 +27,16 @@
 						<div ng-show="alunoForm.nome.$error.maxlength">O nome precisa ter até 50 caracteres</div>
 						<div ng-show="alunoForm.email.$error.required">Preencha o email</div>
 						<div ng-show="alunoForm.senha.$error.required">Preencha senha</div>
+						<div ng-show="alunoForm.totalHoras.$error.required">Informe o total de horas</div>
+						<div ng-show="alunoForm.totalHoras.$error.min">O valor inicial do total de horas deve ser 0</div>
+						<div ng-show="alunoForm.totalHoras.$error.max">O valor inicial do total de horas deve ser 0</div>
+						<div ng-show="alunoForm.horasAproveitadas.$error.required">Informe as horas aproveitadas</div>
+						<div ng-show="alunoForm.horasAproveitadas.$error.min">O valor inicial do aproveitamento de horas deve ser 0</div>
+						<div ng-show="alunoForm.horasAproveitadas.$error.max">O valor inicial do aproveitamento de horas deve ser 0</div>
 						<div ng-show="alunoForm.aprovado.$error.required">Informe a aprovação do aluno</div>
 						<div ng-show="alunoForm.cpf.$error.required">Preencha o cpf</div>
-						<div ng-show="alunoForm.cpf.$error.minlength">O siape precisa ter 11 caracteres</div>
-						<div ng-show="alunoForm.cpf.$error.maxlength">O siape precisa ter 11 caracteres</div>
+						<div ng-show="alunoForm.cpf.$error.minlength">O cpf precisa ter 11 caracteres</div>
+						<div ng-show="alunoForm.cpf.$error.maxlength">O cpf precisa ter 11 caracteres</div>
 						<div ng-show="alunoForm.ativo.$error.required">Informe o estado</div>
 						<div ng-show="alunoForm.turma.$error.required">Informe a turma</div>
 					</div>
@@ -58,16 +64,15 @@
 				<div class="form-group">
 					<label for="inputTotalHoras" class="col-sm-1 control-label">Total Horas</label>
 					<div class="col-sm-2">
-						<input type="number" name="totalHoras" ng-model="aluno.totalHoras" class="form-control" id="inputTotalHoras" placeholder="Total horas" required>
+						<input type="number" name="totalHoras" ng-model="aluno.totalHoras" min="0" max="0" class="form-control" id="inputTotalHoras" placeholder="Total horas" required>
 					</div>
 					<label for="inputHorasAproveitadas" class="col-sm-2 control-label">Horas Aproveitadas</label>
 					<div class="col-sm-2">
-						<input type="number" name="horasAproveitadas" ng-model="aluno.horasAproveitadas" class="form-control" id="inputHorasAproveitadas" placeholder="Horas aproveitadas" required>
+						<input type="number" name="horasAproveitadas" ng-model="aluno.horasAproveitadas" min="0" max="0" class="form-control" id="inputHorasAproveitadas" placeholder="Horas aproveitadas" required>
 					</div>
 					<label for="inputAprovado" class="col-sm-1 control-label">Aprovado</label>
 					<div class="col-sm-4">
 						<select class="form-control" name="aprovado" ng-model="aluno.aprovado" required>
-							<option value="APROVADO">APROVADO</option>
 							<option value="NAO_APROVADO">NÃO APROVADO</option>
 						</select>
 					</div>
@@ -86,7 +91,7 @@
 					</div>
 					<label for="inputTurma" class="col-sm-1 control-label">Turma</label>
 					<div class="col-sm-4">
-						<select class="form-control" ng-model="aluno.turma" ng-options="turma.nome for turma in turmas track by turma.codigo" required>
+						<select class="form-control" name="turma" ng-model="aluno.turma" ng-options="turma.anoSemestre for turma in turmas track by turma.codigo" required>
 						</select>
 					</div>
 				</div>

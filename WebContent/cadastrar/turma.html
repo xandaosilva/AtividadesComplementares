@@ -13,6 +13,52 @@
 </head>
 <body ng-controller="turmaController">
 	<div ng-include="'../menu.html'"></div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Cadastro de turmas</h3>
+  		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" name="turmaForm" ng-submit="turmaForm.$valid && salvar()" novalidate>
+				<br>
+					<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+					<div ng-show="turmaForm.$submitted">
+						<div ng-show="turmaForm.anoSemestre.$error.required">Preencha o ano/semestre</div>
+						<div ng-show="turmaForm.ativo.$error.required">Informe o estado</div>
+						<div ng-show="turmaForm.ppc.$error.required">Informe o ppc</div>
+					</div>
+				<br>
+				<div class="form-group">
+					<label for="inputCodigo" class="col-sm-1 control-label">Código</label>
+					<div class="col-sm-2">
+						<input type="number" name="codigo" ng-model="turma.codigo" class="form-control" id="inputCodigo" placeholder="Códgio" disabled>
+					</div>
+					<label for="inputAnoSemestre" class="col-sm-1 control-label">Ano/semestre</label>
+					<div class="col-sm-8">
+						<input type="text" name="anoSemestre" ng-model="turma.anoSemestre" class="form-control" id="inputAnoSemestre" placeholder="Ano/Semestre" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEstado" class="col-sm-1 control-label">Estado</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="ativo" ng-model="turma.ativo" required>
+							<option value="ATIVO">ATIVO</option>
+							<option value="INATIVO">INATIVO</option>
+						</select>
+					</div>
+					<label for="inputEstado" class="col-sm-1 control-label">Ppc</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="ppc" ng-model="turma.ppc" ng-options="ppc.versao for ppc in ppcs track by ppc.codigo" required>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-11">
+						<button type="submit" class="btn btn-success">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 	<div ng-include="'../rodape.html'"></div>
 </body>
 </html>

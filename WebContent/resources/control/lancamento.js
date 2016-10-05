@@ -62,6 +62,7 @@ lancamentoModule.controller("lancamentoController", function($scope,$http) {
 				$scope.novo();
 				$scope.mensagens.push("Lancamento cadastrado com sucesso");
 			}).error(function(erro){
+				alert($scope.lancamento.dataAtividade+"\n"+$scope.lancamento.dataLancamento);
 				$scope.montaMensagemErro(erro.parameterViolations);
 			});
 		}

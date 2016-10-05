@@ -34,13 +34,13 @@ public class Lancamento implements Serializable{
 	
 	@NotNull(message="preencha a data do lancamento")
 	@Column(name="dataLancamento")
-	private Date dataRegistro;
+	private Date dataLancamento;
 	
 	@NotNull(message="preencha as horas do lancamento")
 	@Column(name="horasLancamento")
 	private Integer horasLancamento;
 	
-	@NotNull
+	@NotNull(message="preencha as horas aproveitadas")
 	@Column(name="horasAproveitadas")
 	private Integer horasAproveitadas;
 	
@@ -72,12 +72,12 @@ public class Lancamento implements Serializable{
 	
 	public Lancamento(){}
 
-	public Lancamento(Integer codigo, Date dataAtividade, Date dataRegistro, Integer horasLancamento,
+	public Lancamento(Integer codigo, Date dataAtividade, Date dataLancamento, Integer horasLancamento,
 			Integer horasAproveitadas, String descricao, Ativo ativo, Instituicao instituicao, Aluno aluno,
 			Administrador administrador, Atividade atividade) {
 		this.codigo = codigo;
 		this.dataAtividade = dataAtividade;
-		this.dataRegistro = dataRegistro;
+		this.dataLancamento = dataLancamento;
 		this.horasLancamento = horasLancamento;
 		this.horasAproveitadas = horasAproveitadas;
 		this.descricao = descricao;
@@ -104,12 +104,12 @@ public class Lancamento implements Serializable{
 		this.dataAtividade = dataAtividade;
 	}
 
-	public Date getDataRegistro() {
-		return dataRegistro;
+	public Date getdataLancamento() {
+		return dataLancamento;
 	}
 
-	public void setDataRegistro(Date dataRegistro) {
-		this.dataRegistro = dataRegistro;
+	public void setdataLancamento(Date dataLancamento) {
+		this.dataLancamento = dataLancamento;
 	}
 
 	public Integer getHorasLancamento() {
@@ -203,7 +203,7 @@ public class Lancamento implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Lancamento [codigo=" + codigo + ", dataAtividade=" + dataAtividade + ", dataRegistro=" + dataRegistro
+		return "Lancamento [codigo=" + codigo + ", dataAtividade=" + dataAtividade + ", dataLancamento=" + dataLancamento
 				+ ", horasLancamento=" + horasLancamento + ", horasAproveitadas=" + horasAproveitadas + ", descricao="
 				+ descricao + ", ativo=" + ativo + ", instituicao=" + instituicao + "]";
 	}

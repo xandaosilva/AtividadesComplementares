@@ -34,7 +34,7 @@ public class Atividade implements Serializable{
 	private Integer codigo;
 	
 	@NotNull(message="preencha o nome")
-	@Size(min=10,max=40,message="o nome deve conter entre 10 e 40 caracteres .")
+	@Size(min=5,max=40,message="o nome deve conter entre 5 e 40 caracteres .")
 	@Column(name="nome")
 	private String nome;
 	

@@ -13,6 +13,78 @@
 </head>
 <body ng-controller="ppcController">
 	<div ng-include="'../menu.html'"></div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Cadastro de ppc</h3>
+  		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" name="ppcForm" ng-submit="ppcForm.$valid && salvar()" novalidate>
+				<br>
+					<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+					<div ng-show="ppcForm.$submitted">
+						<div ng-show="ppcForm.versao.$error.required">Preencha a versão</div>
+						<div ng-show="ppcForm.versao.$error.minlength">A versão precisa ter ao menos 10 caracteres</div>
+						<div ng-show="ppcForm.versao.$error.maxlength">A versão precisa ter até 40 caracteres</div>
+						<div ng-show="ppcForm.cargaHoraria.$error.required">Preencha a carga horária</div>
+						<div ng-show="ppcForm.ativo.$error.required">Informe o estado</div>
+						<div ng-show="ppcForm.curso.$error.required">Informe o curso</div>
+					</div>
+				<br>
+				<div class="form-group">
+					<label for="inputCodigo" class="col-sm-1 control-label">Código</label>
+					<div class="col-sm-2">
+						<input type="number" name="codigo" ng-model="ppc.codigo" class="form-control" id="inputCodigo" placeholder="Códgio" disabled>
+					</div>
+					<label for="inputVersao" class="col-sm-1 control-label">Versão</label>
+					<div class="col-sm-8">
+						<input type="text" name="versao" ng-model="ppc.versao" class="form-control" id="inputVersao" placeholder="Versão" ng-minlength="10" ng-maxlength="40" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputCargaHoraria" class="col-sm-1 control-label">Carga horária</label>
+					<div class="col-sm-2">
+						<input type="number" name="cargaHoraria" ng-model="ppc.cargaHoraria" class="form-control" id="inputCargaHoraria" placeholder="Carga horária" required>
+					</div>
+					<label for="inputEstado" class="col-sm-1 control-label">Estado</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="ativo" ng-model="ppc.ativo" required>
+							<option value="ATIVO">ATIVO</option>
+							<option value="INATIVO">INATIVO</option>
+						</select>
+					</div>
+					<label for="inputEstado" class="col-sm-1 control-label">Curso</label>
+					<div class="col-sm-5">
+						<select class="form-control" name="curso" ng-model="ppc.curso" ng-options="curso.nome for curso in cursos track by curso.codigo" required>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-11">
+						<button type="button" class="btn btn-success" ng-click="novo()">Limpar</button>
+						<button type="submit" class="btn btn-success">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Ppcs cadastrados</h3>
+		</div>
+		<div class="panel-body">
+			<div class="col-sm-12">
+				<input type="text" ng-model="criterio" class="form-control" id="inputCriterio" placeholder="Filtrar cursos">
+				<br>
+				<table class="table table-condensed">
+					<th>Versão</th><th>Curso</th>
+					<tr ng-repeat="ppc in ppcs | filter:criterio" ng-click="seleciona(ppc)">
+						<td>{{ppc.versao}}</td>
+						<td>{{ppc.curso.nome}}</td>					
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 	<div ng-include="'../rodape.html'"></div>
 </body>
 </html>

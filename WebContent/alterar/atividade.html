@@ -13,6 +13,96 @@
 </head>
 <body ng-controller="atividadeController">
 	<div ng-include="'../menu.html'"></div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Alteração de atividades</h3>
+  		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" name="atividadeForm" ng-submit="atividadeForm.$valid && salvar()" novalidate>
+				<br>
+					<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+					<div ng-show="atividadeForm.$submitted">
+						<div ng-show="atividadeForm.nome.$error.required">Preencha o nome</div>
+						<div ng-show="atividadeForm.nome.$error.minlength">O nome precisa ter ao menos 5 caracteres</div>
+						<div ng-show="atividadeForm.nome.$error.maxlength">O nome precisa ter até 40 caracteres</div>
+						<div ng-show="atividadeForm.descricao.$error.required">Informe a descrição</div>
+						<div ng-show="atividadeForm.porcentagem.$error.required">Informe a porcentagem</div>
+						<div ng-show="atividadeForm.porcentagem.$error.min">O valor mínimo do aproveitamento deve ser 1</div>
+						<div ng-show="atividadeForm.porcentagem.$error.max">O valor máximo do aproveitamento deve ser 100</div>
+						<div ng-show="atividadeForm.porcentagemAproveitadaPorAtividade.$error.required">Informe o aproveitamento por atividade</div>
+						<div ng-show="atividadeForm.porcentagemAproveitadaPorAtividade.$error.min">O valor mínimo do aproveitamento por atividade deve ser 1</div>
+						<div ng-show="atividadeForm.porcentagemAproveitadaPorAtividade.$error.max">O valor máximo do aproveitamento por atividade deve ser 100</div>
+						<div ng-show="atividadeForm.ativo.$error.required">Informe o estado</div>
+						<div ng-show="atividadeForm.modalidade.$error.required">Informe a modalidade</div>
+					</div>
+				<br>
+				<div class="form-group">
+					<label for="inputCodigo" class="col-sm-1 control-label">Código</label>
+					<div class="col-sm-2">
+						<input type="number" name="codigo" ng-model="atividade.codigo" class="form-control" id="inputCodigo" placeholder="Códgio" disabled>
+					</div>
+					<label for="inputNome" class="col-sm-1 control-label">Nome</label>
+					<div class="col-sm-8">
+						<input type="text" name="nome" ng-model="atividade.nome" class="form-control" id="inputNome" placeholder="Nome" ng-minlength="5" ng-maxlength="40" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputObservacoes" class="col-sm-1 control-label">Descrição</label>
+					<div class="col-sm-11">
+						<textarea class="form-control" name="descricao" ng-model="atividade.descricao" rows="5" required></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPorcentagem" class="col-sm-1 control-label">Aproveitamento</label>
+					<div class="col-sm-2">
+						<input type="number" name="porcentagem" ng-model="atividade.porcentagem" min="1" max="100" class="form-control" id="inputPorcentagem" placeholder="Aproveitamento" required>
+					</div>
+					<label for="inputporcentagemAproveitadaPorAtividade" class="col-sm-3 control-label">Aproveitamento por atividade</label>
+					<div class="col-sm-3">
+						<input type="number" name="porcentagemAproveitadaPorAtividade" ng-model="atividade.porcentagemAproveitadaPorAtividade" min="1" max="100" class="form-control" id="inputporcentagemAproveitadaPorAtividade" placeholder="Aproveitamento por atividade" required>
+					</div>
+					<label for="inputEstado" class="col-sm-1 control-label">Estado</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="ativo" ng-model="atividade.ativo" required>
+							<option value="ATIVO">ATIVO</option>
+							<option value="INATIVO">INATIVO</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEstado" class="col-sm-1 control-label">Modalidade</label>
+					<div class="col-sm-4">
+						<select class="form-control" ng-model="atividade.modalidade" ng-options="modalidade.nome for modalidade in modalidades track by modalidade.codigo" required>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-11">
+						<button type="button" class="btn btn-success" ng-click="novo()">Limpar</button>
+						<button type="submit" class="btn btn-success">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Atividades cadastradas</h3>
+		</div>
+		<div class="panel-body">
+			<div class="col-sm-12">
+				<input type="text" ng-model="criterio" class="form-control" id="inputCriterio" placeholder="Filtrar cursos">
+				<br>
+				<table class="table table-condensed">
+					<th>Nome</th><th>Modalidade</th>
+					<tr ng-repeat="atividade in atividades | filter:criterio" ng-click="seleciona(atividade)">
+						<td>{{atividade.nome}}</td>
+						<td>{{atividade.modalidade.nome}}</td>					
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 	<div ng-include="'../rodape.html'"></div>
 </body>
 </html>

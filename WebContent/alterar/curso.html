@@ -26,6 +26,7 @@
 						<div ng-show="cursoForm.nome.$error.minlength">O nome precisa ter ao menos 20 caracteres</div>
 						<div ng-show="cursoForm.nome.$error.maxlength">O nome precisa ter até 50 caracteres</div>
 						<div ng-show="cursoForm.ativo.$error.required">Informe o estado</div>
+						<div ng-show="cursoForm.administrador.$error.required">Informe o administrador</div>
 					</div>
 				<br>
 				<div class="form-group">
@@ -48,7 +49,7 @@
 					</div>
 					<label for="inputEstado" class="col-sm-1 control-label">Administrador</label>
 					<div class="col-sm-8">
-						<select class="form-control" ng-model="curso.administrador" ng-options="administrador.nome for administrador in administradores track by administrador.codigo" required>
+						<select class="form-control" name="administrador" ng-model="curso.administrador" ng-options="administrador.nome for administrador in administradores track by administrador.codigo" required>
 						</select>
 					</div>
 				</div>

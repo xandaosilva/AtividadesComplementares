@@ -12,7 +12,120 @@
 	<script src="../resources/control/aluno.js"></script>
 </head>
 <body ng-controller="alunoController">
-	<div ng-include="'../util/menu.html'"></div>
+	<div ng-include="'../menu.html'"></div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Alteração de alunos</h3>
+  		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" name="alunoForm" ng-submit="alunoForm.$valid && salvar()" novalidate>
+				<br>
+					<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+					<div ng-show="alunoForm.$submitted">
+						<div ng-show="alunoForm.nome.$error.required">Preencha o nome</div>
+						<div ng-show="alunoForm.nome.$error.minlength">O nome precisa ter ao menos 10 caracteres</div>
+						<div ng-show="alunoForm.nome.$error.maxlength">O nome precisa ter até 50 caracteres</div>
+						<div ng-show="alunoForm.email.$error.required">Preencha o email</div>
+						<div ng-show="alunoForm.senha.$error.required">Preencha senha</div>
+						<div ng-show="alunoForm.aprovado.$error.required">Informe a aprovação do aluno</div>
+						<div ng-show="alunoForm.cpf.$error.required">Preencha o cpf</div>
+						<div ng-show="alunoForm.cpf.$error.minlength">O siape precisa ter 11 caracteres</div>
+						<div ng-show="alunoForm.cpf.$error.maxlength">O siape precisa ter 11 caracteres</div>
+						<div ng-show="alunoForm.ativo.$error.required">Informe o estado</div>
+						<div ng-show="alunoForm.turma.$error.required">Informe a turma</div>
+					</div>
+				<br>
+				<div class="form-group">
+					<label for="inputCodigo" class="col-sm-1 control-label">Código</label>
+					<div class="col-sm-2">
+						<input type="number" name="codigo" ng-model="aluno.codigo" class="form-control" id="inputCodigo" placeholder="Códgio" disabled>
+					</div>
+					<label for="inputNome" class="col-sm-1 control-label">Nome</label>
+					<div class="col-sm-8">
+						<input type="text" name="nome" ng-model="aluno.nome" class="form-control" id="inputNome" placeholder="Nome" ng-minlength="10" ng-maxlength="50" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail" class="col-sm-1 control-label">Email</label>
+					<div class="col-sm-5">
+						<input type="text" name="email" ng-model="aluno.email" class="form-control" id="inputEmail" placeholder="Email" required>
+					</div>
+					<label for="inputSenha" class="col-sm-1 control-label">Senha</label>
+					<div class="col-sm-5">
+						<input type="password" name="senha" ng-model="aluno.senha" class="form-control" id="inputSenha" placeholder="Senha" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputTotalHoras" class="col-sm-1 control-label">Total Horas</label>
+					<div class="col-sm-2">
+						<input type="number" name="totalHoras" ng-model="aluno.totalHoras" class="form-control" id="inputTotalHoras" placeholder="Total horas" required>
+					</div>
+					<label for="inputHorasAproveitadas" class="col-sm-2 control-label">Horas Aproveitadas</label>
+					<div class="col-sm-2">
+						<input type="number" name="horasAproveitadas" ng-model="aluno.horasAproveitadas" class="form-control" id="inputHorasAproveitadas" placeholder="Horas aproveitadas" required>
+					</div>
+					<label for="inputAprovado" class="col-sm-1 control-label">Aprovado</label>
+					<div class="col-sm-4">
+						<select class="form-control" name="aprovado" ng-model="aluno.aprovado" required>
+							<option value="APROVADO">APROVADO</option>
+							<option value="NAO_APROVADO">NÃO APROVADO</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputCpf" class="col-sm-1 control-label">CPF</label>
+					<div class="col-sm-3">
+						<input type="text" name="cpf" ng-model="aluno.cpf" class="form-control" id="inputCpf" placeholder="CPF" ng-minlength="11" ng-maxlength="11" required>
+					</div>
+					<label for="inputEstado" class="col-sm-1 control-label">Estado</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="ativo" ng-model="aluno.ativo" required>
+							<option value="ATIVO">ATIVO</option>
+							<option value="INATIVO">INATIVO</option>
+						</select>
+					</div>
+					<label for="inputTurma" class="col-sm-1 control-label">Turma</label>
+					<div class="col-sm-4">
+						<select class="form-control" ng-model="aluno.turma" ng-options="turma.nome for turma in turmas track by turma.codigo" required>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputObservacoes" class="col-sm-1 control-label">Observações</label>
+					<div class="col-sm-11">
+						<textarea class="form-control" ng-model="aluno.observacoes" rows="5"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-11">
+						<button type="button" class="btn btn-success" ng-click="novo()">Limpar</button>
+						<button type="submit" class="btn btn-success">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Alunos cadastrados</h3>
+		</div>
+		<div class="panel-body">
+			<div class="col-sm-12">
+				<input type="text" ng-model="criterio" class="form-control" id="inputCriterio" placeholder="Filtrar alunos">
+				<br>
+				<table class="table table-condensed">
+					<th>Nome</th><th>Total horas</th><th>Horas aproveitadas</th><th>Curso</th>
+					<tr ng-repeat="aluno in alunos | filter:criterio" ng-click="seleciona(aluno)">
+						<td>{{aluno.nome}}</td>
+						<td>{{aluno.totalHoras}}</td>
+						<td>{{aluno.horasAproveitadas}}</td>
+						<td>{{aluno.turma.ppc.curso.nome}}</td>					
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 	<div ng-include="'../rodape.html'"></div>
 </body>
 </html>

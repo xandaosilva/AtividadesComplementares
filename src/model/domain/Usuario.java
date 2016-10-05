@@ -20,7 +20,6 @@ public abstract class Usuario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="codigo")
@@ -33,7 +32,7 @@ public abstract class Usuario implements Serializable{
 	
 	@NotNull(message="preencha o email")
 	@Column(name="email",unique=true)
-	private String login;
+	private String email;
 	
 	@NotNull(message="preencha a senha")
 	@Column(name="senha")
@@ -49,10 +48,10 @@ public abstract class Usuario implements Serializable{
 
 	public Usuario(){}
 	
-	public Usuario(Integer codigo, String nome, String login, String senha, String observacoes, Ativo ativo) {
+	public Usuario(Integer codigo, String nome, String email, String senha, String observacoes, Ativo ativo) {
 		this.codigo = codigo;
 		this.nome = nome;
-		this.login = login;
+		this.email = email;
 		this.senha = senha;
 		this.observacoes = observacoes;
 		this.ativo = ativo;
@@ -74,12 +73,12 @@ public abstract class Usuario implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getSenha() {
@@ -133,7 +132,7 @@ public abstract class Usuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", login=" + login + ", senha=" + senha
+		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", email=" + email + ", senha=" + senha
 				+ ", observacoes=" + observacoes + ", ativo=" + ativo + "]";
 	}
 }

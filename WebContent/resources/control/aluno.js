@@ -40,7 +40,7 @@ alunoModule.controller("alunoController", function($scope,$http) {
 	$scope.salvar = function(){
 		if($scope.aluno.codigo === undefined || $scope.aluno.codigo === ""){
 			$http.post(url,$scope.aluno).success(function(aluno) {
-				$scope.aluno.push(aluno);
+				$scope.alunos.push(aluno);
 				$scope.novo();
 				$scope.mensagens.push("Aluno salvo com sucesso");
 			}).error(function(erro){

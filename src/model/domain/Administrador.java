@@ -21,7 +21,7 @@ public class Administrador extends Usuario {
 	private static final long serialVersionUID = 1L;
 	
 	@NotNull(message="preencha o siape")
-	@Size(min=10,max=20,message="o siape deve conter entre 10 e 20 caracteres .")
+	@Size(min=5,max=20,message="o siape deve conter entre 5 e 20 caracteres .")
 	@Column(name="siape")
 	private String siape;
 	
@@ -33,9 +33,9 @@ public class Administrador extends Usuario {
 	
 	public Administrador(){}
 
-	public Administrador(Integer codigo, String nome, String login, String senha, String observacoes, Ativo ativo,
-			String siape, List<Lancamento> lancamentos, List<Curso> cursos) {
-		super(codigo, nome, login, senha, observacoes, ativo);
+	public Administrador(Integer codigo, String nome, String email, String senha, String siape, Ativo ativo, String observacoes, 
+			 List<Lancamento> lancamentos, List<Curso> cursos) {
+		super(codigo, nome, email, senha, observacoes, ativo);
 		this.siape = siape;
 		this.lancamentos = lancamentos;
 		this.cursos = cursos;

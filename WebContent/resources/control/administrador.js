@@ -31,7 +31,7 @@ administradorModule.controller("administradorController", function($scope,$http)
 	$scope.salvar = function(){
 		if($scope.administrador.codigo === undefined || $scope.administrador.codigo === ""){
 			$http.post(url,$scope.administrador).success(function(administrador) {
-				$scope.administrador.push(administrador);
+				$scope.administradores.push(administrador);
 				$scope.novo();
 				$scope.mensagens.push("Administrador salvo com sucesso");
 			}).error(function(erro){

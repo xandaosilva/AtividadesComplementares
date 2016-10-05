@@ -41,7 +41,7 @@ public class Aluno extends Usuario {
 	@Enumerated(EnumType.STRING)
 	@Column(name="aprovado")
 	private Aprovado aprovado;
-	
+		
 	@ManyToOne
 	@JoinColumn(name="turma",referencedColumnName="codigo")
 	private Turma turma;
@@ -51,10 +51,9 @@ public class Aluno extends Usuario {
 	
 	public Aluno(){}
 
-	public Aluno(Integer codigo, String nome, String login, String senha, String observacoes, Ativo ativo, String cpf,
-			Integer totalHoras, Integer horasAproveitadas, Aprovado aprovado, Turma turma,
-			List<Lancamento> lancamentos) {
-		super(codigo, nome, login, senha, observacoes, ativo);
+	public Aluno(Integer codigo, String nome, String email, String senha, Integer totalHoras, Integer horasAproveitadas, 
+			Aprovado aprovado, String cpf, Ativo ativo, Turma turma, String observacoes, List<Lancamento> lancamentos) {
+		super(codigo, nome, email, senha, observacoes, ativo);
 		this.cpf = cpf;
 		this.totalHoras = totalHoras;
 		this.horasAproveitadas = horasAproveitadas;

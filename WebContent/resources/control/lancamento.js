@@ -58,7 +58,7 @@ lancamentoModule.controller("lancamentoController", function($scope,$http) {
 	$scope.salvar = function(){
 		if($scope.lancamento.codigo === undefined || $scope.lancamento.codigo === ""){
 			$http.post(url,$scope.lancamento).success(function(lancamento) {
-				$scope.lancamento.push(lancamento);
+				$scope.lancamentos.push(lancamento);
 				$scope.novo();
 				$scope.mensagens.push("Lancamento cadastrado com sucesso");
 			}).error(function(erro){

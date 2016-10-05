@@ -40,7 +40,7 @@ turmaModule.controller("turmaController", function($scope,$http) {
 	$scope.salvar = function(){
 		if($scope.turma.codigo === undefined || $scope.turma.codigo === ""){
 			$http.post(url,$scope.turma).success(function(turma) {
-				$scope.turma.push(turma);
+				$scope.turmas.push(turma);
 				$scope.novo();
 				$scope.mensagens.push("Turma cadastrada com sucesso");
 			}).error(function(erro){

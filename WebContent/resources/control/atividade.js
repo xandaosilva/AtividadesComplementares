@@ -40,7 +40,7 @@ atividadeModule.controller("atividadeController", function($scope,$http) {
 	$scope.salvar = function(){
 		if($scope.atividade.codigo === undefined || $scope.atividade.codigo === ""){
 			$http.post(url,$scope.atividade).success(function(atividade) {
-				$scope.atividade.push(atividade);
+				$scope.atividades.push(atividade);
 				$scope.novo();
 				$scope.mensagens.push("Atividade salva com sucesso");
 			}).error(function(erro){

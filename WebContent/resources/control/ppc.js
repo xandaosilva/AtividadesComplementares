@@ -40,7 +40,7 @@ ppcModule.controller("ppcController", function($scope,$http) {
 	$scope.salvar = function(){
 		if($scope.ppc.codigo === undefined || $scope.ppc.codigo === ""){
 			$http.post(url,$scope.ppc).success(function(ppc) {
-				$scope.ppc.push(ppc);
+				$scope.ppcs.push(ppc);
 				$scope.novo();
 				$scope.mensagens.push("Ppc cadastrado com sucesso");
 			}).error(function(erro){

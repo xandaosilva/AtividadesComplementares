@@ -31,7 +31,8 @@ modalidadeModule.controller("modalidadeController", function($scope,$http) {
 	$scope.salvar = function(){
 		if($scope.modalidade.codigo === undefined || $scope.modalidade.codigo === ""){
 			$http.post(url,$scope.modalidade).success(function(modalidade) {
-				$scope.modalidade.push(modalidade);
+				$scope.modalidades.push(modalidade);
+				$scope.novo();
 				$scope.mensagens.push("Modalidade cadastrada com sucesso");
 			}).error(function(erro){
 				$scope.montaMensagemErro(erro.parameterViolations);

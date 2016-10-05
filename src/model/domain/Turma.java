@@ -25,9 +25,8 @@ public class Turma implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@NotNull
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="codigo")
 	private Integer codigo;
 	

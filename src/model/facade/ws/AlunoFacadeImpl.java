@@ -1,10 +1,12 @@
 package model.facade.ws;
 
-import java.util.*;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+
 import model.domain.Aluno;
 import model.facade.AlunoFacade;
 import model.service.AlunoService;
@@ -34,7 +36,7 @@ public class AlunoFacadeImpl implements AlunoFacade{
 		aluno.setCodigo(codigo);
 		return alunoService.getAlunos(aluno);
 	}
-	
+		
 	@Override
 	@WebMethod
 	public Aluno salvar(@WebParam(name="aluno") Aluno aluno){

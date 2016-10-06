@@ -63,7 +63,13 @@ public class Aluno extends Usuario {
 	}
 
 	public int calcularHorasPorAtividade(Atividade atividade){
-		return 0;
+		int horasAux = 0;
+		for(Lancamento aux : this.lancamentos){
+			if(aux.getAtividade().equals(atividade) && aux.getAtivo().equals(Ativo.ATIVO)){
+				horasAux = horasAux + aux.getHorasAproveitadas();
+			}
+		}
+		return horasAux;
 	}
 	
 	public int calcularHorasPorSemestre(Atividade atividade){
@@ -71,23 +77,49 @@ public class Aluno extends Usuario {
 	}
 	
 	public int calcularHorasDentroDaInstituicao(){
-		return 0;
+		int horasAux = 0;
+		for(Lancamento aux : this.lancamentos){
+			if(aux.getInstituicao().equals(Instituicao.IFTM) && aux.getAtivo().equals(Ativo.ATIVO)){
+				horasAux = horasAux + aux.getHorasAproveitadas();
+			}
+		}
+		return horasAux;
 	}
 	
 	public int calcularHorasForaDaInstituicao(){
-		return 0;
+		int horasAux = 0;
+		for(Lancamento aux : this.lancamentos){
+			if(aux.getInstituicao().equals(Instituicao.OUTROS) && aux.getAtivo().equals(Ativo.ATIVO)){
+				horasAux = horasAux + aux.getHorasAproveitadas();
+			}
+		}
+		return horasAux;
 	}
 	
 	public int calcularTotalHorasAproveitadas(){
-		return 0;
+		int horasAux = 0;
+		for(Lancamento aux : this.lancamentos){
+			if(aux.getAtivo().equals(Ativo.ATIVO)){
+				horasAux = horasAux + aux.getHorasAproveitadas();
+			}
+		}
+		return horasAux;
 	}
 	
 	public int calcularTotalHoras(){
-		return 0;
+		int horasAux = 0;
+		for(Lancamento aux : this.lancamentos){
+			if(aux.getAtivo().equals(Ativo.ATIVO)){
+				horasAux = horasAux + aux.getHorasLancamento();
+			}
+		}
+		return horasAux;
 	}
 	
 	public void aprovarAluno(){
-		return;
+		if(this.horasAproveitadas >= this.turma.getPpc().getCargaHoraria()){
+			this.setAprovado(Aprovado.APROVADO);
+		}
 	}
 
 	public String getCpf() {

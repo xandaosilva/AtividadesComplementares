@@ -1,6 +1,7 @@
 package model.dao;
 
-import java.util.*;
+import java.util.List;
+
 import model.domain.Turma;
 
 public interface TurmaDao {

@@ -82,7 +82,9 @@ public class Atividade implements Serializable{
 	}
 	
 	public int calcularHorasPorPpc(Ppc ppc){
-		return 0;
+		int horasAux = 0;
+		horasAux = (((this.porcentagem * ppc.getCargaHoraria())/this.porcentagemAproveitadaPorAtividade));
+		return horasAux;
 	}
 
 	public Integer getCodigo() {

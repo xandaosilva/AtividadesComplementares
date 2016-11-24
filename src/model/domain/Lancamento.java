@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,10 +30,18 @@ public class Lancamento implements Serializable{
 	@Column(name="codigo")
 	private Integer codigo;
 	
-	@NotNull(message="preencha a data da atividade")
-	@Column(name="dataAtividade")
-	private Date dataAtividade;
+	@Temporal(TemporalType.DATE)
+	@NotNull(message="preencha a data de inicio da atividade")
+	@Column(name="dataInicioAtividade")
+	private Date dataInicioAtividade;
 	
+	
+	@Temporal(TemporalType.DATE)
+	@NotNull(message="preencha a data final da atividade")
+	@Column(name="dataFinalAtividade")
+	private Date dataFinalAtividade;
+	
+	@Temporal(TemporalType.DATE)
 	@NotNull(message="preencha a data do lancamento")
 	@Column(name="dataLancamento")
 	private Date dataLancamento;
@@ -72,11 +82,12 @@ public class Lancamento implements Serializable{
 	
 	public Lancamento(){}
 
-	public Lancamento(Integer codigo, Date dataAtividade, Date dataLancamento, Integer horasLancamento,
-			Integer horasAproveitadas, String descricao, Ativo ativo, Instituicao instituicao, Aluno aluno,
-			Administrador administrador, Atividade atividade) {
+	public Lancamento(Integer codigo, Date dataInicioAtividade, Date dataFinalAtividade, Date dataLancamento,
+			Integer horasLancamento, Integer horasAproveitadas, String descricao, Ativo ativo, Instituicao instituicao,
+			Aluno aluno, Administrador administrador, Atividade atividade) {
 		this.codigo = codigo;
-		this.dataAtividade = dataAtividade;
+		this.dataInicioAtividade = dataInicioAtividade;
+		this.dataFinalAtividade = dataFinalAtividade;
 		this.dataLancamento = dataLancamento;
 		this.horasLancamento = horasLancamento;
 		this.horasAproveitadas = horasAproveitadas;
@@ -88,6 +99,17 @@ public class Lancamento implements Serializable{
 		this.atividade = atividade;
 	}
 
+	public void calcularLancamento(){
+		Ppc ppcAluno = this.aluno.getTurma().getPpc();
+		int aproveitamentoAtividade = this.atividade.calcularAproveitamentoPorAtividade(ppcAluno);
+		if(this.horasLancamento > aproveitamentoAtividade){
+			this.horasAproveitadas = aproveitamentoAtividade;
+		}
+		else{
+			this.horasAproveitadas = this.horasLancamento;
+		}
+	}
+
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -96,12 +118,20 @@ public class Lancamento implements Serializable{
 		this.codigo = codigo;
 	}
 
-	public Date getDataAtividade() {
-		return dataAtividade;
+	public Date getDataInicioAtividade() {
+		return dataInicioAtividade;
 	}
 
-	public void setDataAtividade(Date dataAtividade) {
-		this.dataAtividade = dataAtividade;
+	public void setDataInicioAtividade(Date dataInicioAtividade) {
+		this.dataInicioAtividade = dataInicioAtividade;
+	}
+	
+	public Date getDataFinalAtividade() {
+		return dataFinalAtividade;
+	}
+
+	public void setDataFinalAtividade(Date dataFinalAtividade) {
+		this.dataFinalAtividade = dataFinalAtividade;
 	}
 
 	public Date getdataLancamento() {
@@ -203,8 +233,9 @@ public class Lancamento implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Lancamento [codigo=" + codigo + ", dataAtividade=" + dataAtividade + ", dataLancamento=" + dataLancamento
-				+ ", horasLancamento=" + horasLancamento + ", horasAproveitadas=" + horasAproveitadas + ", descricao="
-				+ descricao + ", ativo=" + ativo + ", instituicao=" + instituicao + "]";
+		return "Lancamento [codigo=" + codigo + ", dataInicioAtividade=" + dataInicioAtividade + ", dataFinalAtividade="
+				+ dataFinalAtividade + ", dataLancamento=" + dataLancamento + ", horasLancamento=" + horasLancamento
+				+ ", horasAproveitadas=" + horasAproveitadas + ", descricao=" + descricao + ", ativo=" + ativo
+				+ ", instituicao=" + instituicao + "]";
 	}
 }

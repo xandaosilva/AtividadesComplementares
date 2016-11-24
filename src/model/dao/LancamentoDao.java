@@ -1,11 +1,15 @@
 package model.dao;
 
-import java.util.*;
+import java.util.List;
+
 import model.domain.Lancamento;
 
 public interface LancamentoDao {
-	public Lancamento salvar(Lancamento lancamento);
-	public void atualizar(Lancamento lancamento);
-	public List<Lancamento> getLancamentos(Lancamento lancamento);
-	public List<Lancamento> getLancamentosAtivos();
+	Lancamento salvar(Lancamento lancamento);
+	void atualizar(Lancamento lancamento);
+	List<Lancamento> getLancamentos(Lancamento lancamento);
+	List<Lancamento> getLancamentosAtivos();
+	List<Lancamento> getLancamentosPorAluno(int codigo);
+	List<Lancamento> getLancamentosAtivosPorAluno(int codigo);
+	List<Lancamento> getLancamentosPorAdministrador(int codigo);
 }

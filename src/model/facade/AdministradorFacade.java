@@ -8,13 +8,13 @@ import javax.validation.executable.ValidateOnExecution;
 import model.domain.Administrador;
 
 public interface AdministradorFacade {
-	public List<Administrador> getAdministradoresSemParametros();
-	public List<Administrador> getAdministradoresAtivos();
-	public List<Administrador> getAdministradores(Integer codigo);
+	List<Administrador> getAdministradoresSemParametros();
+	List<Administrador> getAdministradoresAtivos();
+	List<Administrador> getAdministradores(Integer codigo);
 	
 	@ValidateOnExecution
-	public Administrador salvar(@Valid Administrador administrador);
+	Administrador salvar(@Valid Administrador administrador);
 	
 	@ValidateOnExecution
-	public void atualizar(@Valid Administrador administrador);
+	void atualizar(@Valid Administrador administrador);
 }

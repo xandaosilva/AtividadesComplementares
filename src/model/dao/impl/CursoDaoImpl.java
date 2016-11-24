@@ -30,19 +30,15 @@ public class CursoDaoImpl implements CursoDao{
 	@SuppressWarnings("unchecked")
 	public List<Curso> getCursos(Curso curso){
 		StringBuilder hql = new StringBuilder("from Curso c where 1 = 1");
-		
 		if(curso.getCodigo() != null)
 			hql.append("and c.codigo = :codigo");
 		if(curso.getNome() != null && !curso.getNome().equals(""))
 			hql.append("and c.nome like :nome");
-		
 		Query query = entityManager.createQuery(hql.toString());
-		
 		if(curso.getCodigo() != null)
 			query.setParameter("codigo",curso.getCodigo());
 		if(curso.getNome() != null && !curso.getNome().equals(""))
 			query.setParameter("nome","%"+curso.getNome()+"%");
-		
 		return query.getResultList();
 	}
 	

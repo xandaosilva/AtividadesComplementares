@@ -30,15 +30,11 @@ public class TurmaDaoImpl implements TurmaDao {
 	@SuppressWarnings("unchecked")
 	public List<Turma> getTurmas(Turma turma){
 		StringBuilder hql = new StringBuilder("from Turma t where 1 = 1");
-		
 		if(turma.getCodigo() != null)
 			hql.append("and t.codigo = :codigo");
-		
 		Query query = entityManager.createQuery(hql.toString());
-		
 		if(turma.getCodigo() != null)
 			query.setParameter("codigo",turma.getCodigo());
-		
 		return query.getResultList();
 	}
 	

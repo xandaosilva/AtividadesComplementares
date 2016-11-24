@@ -30,19 +30,15 @@ public class AtividadeDaoImpl implements AtividadeDao {
 	@SuppressWarnings("unchecked")
 	public List<Atividade> getAtividades(Atividade atividade){
 		StringBuilder hql = new StringBuilder("from Atividade a where 1 = 1");
-		
 		if(atividade.getCodigo() != null)
 			hql.append("and a.codigo = :codigo");
 		if(atividade.getNome() != null && !atividade.getNome().equals(""))
 			hql.append("and a.nome like :nome");
-		
 		Query query = entityManager.createQuery(hql.toString());
-		
 		if(atividade.getCodigo() != null)
 			query.setParameter("codigo",atividade.getCodigo());
 		if(atividade.getNome() != null && !atividade.getNome().equals(""))
 			query.setParameter("nome","%"+atividade.getNome()+"%");
-		
 		return query.getResultList();
 	}
 	

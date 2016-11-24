@@ -4,8 +4,8 @@ import java.util.*;
 import model.domain.Curso;
 
 public interface CursoService {
-	public List<Curso> getCursos(Curso curso);
-	public List<Curso> getCursosAtivos();
-	public Curso salvar(Curso curso);
-	public void atualizar(Curso curso);
+	List<Curso> getCursos(Curso curso);
+	List<Curso> getCursosAtivos();
+	Curso salvar(Curso curso);
+	void atualizar(Curso curso);
 }

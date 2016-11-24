@@ -61,58 +61,79 @@ public class Aluno extends Usuario {
 		this.turma = turma;
 		this.lancamentos = lancamentos;
 	}
-
-	public int calcularHorasPorAtividade(Atividade atividade){
-		int horasAux = 0;
-		for(Lancamento aux : this.lancamentos){
-			if(aux.getAtividade().equals(atividade) && aux.getAtivo().equals(Ativo.ATIVO)){
-				horasAux = horasAux + aux.getHorasAproveitadas();
-			}
-		}
-		return horasAux;
+//
+//	public int calcularHorasPorAtividade(Atividade atividade){
+//		int horasAux = 0;
+//		for(Lancamento aux : this.lancamentos){
+//			if(aux.getAtividade().equals(atividade) && aux.getAtivo().equals(Ativo.ATIVO)){
+//				horasAux = horasAux + aux.getHorasAproveitadas();
+//			}
+//		}
+//		return horasAux;
+//	}
+//	
+//	public int calcularHorasPorSemestre(Atividade atividade){
+//		return 0;
+//	}
+//	
+//	public int calcularHorasDentroDaInstituicao(){
+//		int horasAux = 0;
+//		for(Lancamento aux : this.lancamentos){
+//			if(aux.getInstituicao().equals(Instituicao.IFTM) && aux.getAtivo().equals(Ativo.ATIVO)){
+//				horasAux = horasAux + aux.getHorasAproveitadas();
+//			}
+//		}
+//		return horasAux;
+//	}
+//	
+//	public int calcularHorasForaDaInstituicao(){
+//		int horasAux = 0;
+//		for(Lancamento aux : this.lancamentos){
+//			if(aux.getInstituicao().equals(Instituicao.OUTROS) && aux.getAtivo().equals(Ativo.ATIVO)){
+//				horasAux = horasAux + aux.getHorasAproveitadas();
+//			}
+//		}
+//		return horasAux;
+//	}
+//	
+//	public int calcularTotalHorasAproveitadas(){
+//		int horasAux = 0;
+//		for(Lancamento aux : this.lancamentos){
+//			if(aux.getAtivo().equals(Ativo.ATIVO)){
+//				horasAux = horasAux + aux.getHorasAproveitadas();
+//			}
+//		}
+//		return horasAux;
+//	}
+	
+	public void ordenarLancamentosPorData(List<Lancamento> lancamentos){
+		return;
 	}
 	
-	public int calcularHorasPorSemestre(Atividade atividade){
+	public int calcularAproveitamento(List<Lancamento> lancamentos){
 		return 0;
 	}
 	
-	public int calcularHorasDentroDaInstituicao(){
+	public int calcularHorasDentroDaInstituicao(List<Lancamento> lancamentos){
 		int horasAux = 0;
-		for(Lancamento aux : this.lancamentos){
-			if(aux.getInstituicao().equals(Instituicao.IFTM) && aux.getAtivo().equals(Ativo.ATIVO)){
+		for(Lancamento aux : lancamentos)
+			if(aux.getInstituicao().equals(Instituicao.IFTM))
 				horasAux = horasAux + aux.getHorasAproveitadas();
-			}
-		}
 		return horasAux;
 	}
 	
-	public int calcularHorasForaDaInstituicao(){
+	public int calcularHorasForaDaInstituicao(List<Lancamento> lancamentos){
 		int horasAux = 0;
-		for(Lancamento aux : this.lancamentos){
-			if(aux.getInstituicao().equals(Instituicao.OUTROS) && aux.getAtivo().equals(Ativo.ATIVO)){
+		for(Lancamento aux : lancamentos)
+			if(aux.getInstituicao().equals(Instituicao.OUTROS))
 				horasAux = horasAux + aux.getHorasAproveitadas();
-			}
-		}
 		return horasAux;
 	}
 	
-	public int calcularTotalHorasAproveitadas(){
+	public int calcularTotalHoras(List<Lancamento> lancamentos){
 		int horasAux = 0;
-		for(Lancamento aux : this.lancamentos){
-			if(aux.getAtivo().equals(Ativo.ATIVO)){
-				horasAux = horasAux + aux.getHorasAproveitadas();
-			}
-		}
-		return horasAux;
-	}
-	
-	public int calcularTotalHoras(){
-		int horasAux = 0;
-		for(Lancamento aux : this.lancamentos){
-			if(aux.getAtivo().equals(Ativo.ATIVO)){
-				horasAux = horasAux + aux.getHorasLancamento();
-			}
-		}
+		for(Lancamento aux : lancamentos)
+			horasAux = horasAux + aux.getHorasLancamento();
 		return horasAux;
 	}
 	

@@ -8,13 +8,13 @@ import javax.validation.executable.ValidateOnExecution;
 import model.domain.Ppc;
 
 public interface PpcFacade {
-	public List<Ppc> getPpcsSemParametros();
-	public List<Ppc> getPpcsAtivos();
-	public List<Ppc> getPpcs(Integer codigo);
+	List<Ppc> getPpcsSemParametros();
+	List<Ppc> getPpcsAtivos();
+	List<Ppc> getPpcs(Integer codigo);
 
 	@ValidateOnExecution
-	public Ppc salvar(@Valid Ppc ppc);
+	Ppc salvar(@Valid Ppc ppc);
 
 	@ValidateOnExecution
-	public void atualizar(@Valid Ppc ppc);
+	void atualizar(@Valid Ppc ppc);
 }

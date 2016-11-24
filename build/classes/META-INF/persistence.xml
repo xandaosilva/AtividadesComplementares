@@ -5,7 +5,7 @@
 		<jta-data-source>java:jboss/datasources/ATIVIDADEDS</jta-data-source>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
- 			<property name="hibernate.hbm2ddl.auto" value="none" />
+ 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>

@@ -4,8 +4,8 @@ import java.util.*;
 import model.domain.Atividade;
 
 public interface AtividadeService {
-	public List<Atividade> getAtividades(Atividade atividade);
-	public List<Atividade> getAtividadesAtivas();
-	public Atividade salvar(Atividade atividade);
-	public void atualizar(Atividade atividade);
+	List<Atividade> getAtividades(Atividade atividade);
+	List<Atividade> getAtividadesAtivas();
+	Atividade salvar(Atividade atividade);
+	void atualizar(Atividade atividade);
 }

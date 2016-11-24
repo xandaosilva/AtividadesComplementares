@@ -4,8 +4,8 @@ import java.util.*;
 import model.domain.Lancamento;
 
 public interface LancamentoService {
-	public List<Lancamento> getLancamentos(Lancamento lancamento);
-	public List<Lancamento> getLancamentosAtivos();
-	public Lancamento salvar(Lancamento lancamento);
-	public void atualizar(Lancamento lancamento);
+	List<Lancamento> getLancamentos(Lancamento lancamento);
+	List<Lancamento> getLancamentosAtivos();
+	Lancamento salvar(Lancamento lancamento);
+	void atualizar(Lancamento lancamento);
 }

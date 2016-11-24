@@ -1,6 +1,6 @@
 package model.dao.impl;
 
-import java.util.*;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,15 +30,11 @@ public class LancamentoDaoImpl implements LancamentoDao {
 	@SuppressWarnings("unchecked")
 	public List<Lancamento> getLancamentos(Lancamento lancamento){
 		StringBuilder hql = new StringBuilder("from Lancamento l where 1 = 1");
-		
 		if(lancamento.getCodigo() != null)
 			hql.append("and l.codigo = :codigo");
-		
 		Query query = entityManager.createQuery(hql.toString());
-		
 		if(lancamento.getCodigo() != null)
 			query.setParameter("codigo",lancamento.getCodigo());
-		
 		return query.getResultList();
 	}
 	
@@ -48,6 +44,34 @@ public class LancamentoDaoImpl implements LancamentoDao {
 		StringBuilder hql = new StringBuilder("from Lancamento l where and l.ativo like :ativo");
 		Query query = entityManager.createQuery(hql.toString());
 		query.setParameter("ativo",Ativo.ATIVO);
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Lancamento> getLancamentosPorAluno(int codigo){
+		StringBuilder hql = new StringBuilder(" from Lancamento l where l.aluno = :codigo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("codigo", codigo);
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Lancamento> getLancamentosAtivosPorAluno(int codigo){
+		StringBuilder hql = new StringBuilder(" from Lancamento l where l.aluno = :codigo and l.ativo = :ativo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("codigo", codigo);
+		query.setParameter("ativo", Ativo.ATIVO);
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Lancamento> getLancamentosPorAdministrador(int codigo){
+		StringBuilder hql = new StringBuilder(" from Lancamento l where l.administrador = :codigo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("codigo", codigo);
 		return query.getResultList();
 	}
 }

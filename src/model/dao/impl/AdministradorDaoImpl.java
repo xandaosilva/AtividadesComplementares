@@ -30,19 +30,15 @@ public class AdministradorDaoImpl implements AdministradorDao {
 	@SuppressWarnings("unchecked")
 	public List<Administrador> getAdministradores(Administrador administrador){
 		StringBuilder hql = new StringBuilder("from Administrador a where 1 = 1");
-		
 		if(administrador.getCodigo() != null)
 			hql.append(" and a.codigo = :codigo");
 		if(administrador.getNome() != null && !administrador.getNome().equals(""))
 			hql.append(" and a.nome like :nome");
-		
 		Query query = entityManager.createQuery(hql.toString());
-		
 		if (administrador.getCodigo() != null)
 			query.setParameter("codigo",administrador.getCodigo());
 		if (administrador.getNome() != null && !administrador.getNome().equals(""))
 			query.setParameter("nome","%"+administrador.getNome()+"%");
-		
 		return query.getResultList();
 	}
 	

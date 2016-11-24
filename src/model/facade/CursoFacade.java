@@ -8,13 +8,13 @@ import javax.validation.executable.ValidateOnExecution;
 import model.domain.Curso;
 
 public interface CursoFacade {
-	public List<Curso> getCursosSemParametros();
-	public List<Curso> getCursosAtivos();
-	public List<Curso> getCursos(Integer codigo);
+	List<Curso> getCursosSemParametros();
+	List<Curso> getCursosAtivos();
+	List<Curso> getCursos(Integer codigo);
 
 	@ValidateOnExecution
-	public Curso salvar(@Valid Curso curso);
+	Curso salvar(@Valid Curso curso);
 
 	@ValidateOnExecution
-	public void atualizar(@Valid Curso curso);
+	void atualizar(@Valid Curso curso);
 }

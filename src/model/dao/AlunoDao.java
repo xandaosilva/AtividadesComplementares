@@ -5,8 +5,9 @@ import java.util.List;
 import model.domain.Aluno;
 
 public interface AlunoDao {
-	public Aluno salvar(Aluno aluno);
-	public void atualizar(Aluno aluno);
-	public List<Aluno> getAlunos(Aluno aluno);
-	public List<Aluno> getAlunosAtivos();
+	Aluno salvar(Aluno aluno);
+	void atualizar(Aluno aluno);
+	List<Aluno> getAlunos(Aluno aluno);
+	List<Aluno> getAlunosAtivos();
+	List<Aluno> getAlunosPorTurma(int codigo);
 }

@@ -30,19 +30,15 @@ public class AlunoDaoImpl implements AlunoDao {
 	@SuppressWarnings("unchecked")
 	public List<Aluno> getAlunos(Aluno aluno){
 		StringBuilder hql = new StringBuilder("from Aluno a where 1 = 1");
-		
 		if(aluno.getCodigo() != null)
 			hql.append(" and a.codigo = :codigo");
 		if(aluno.getNome() != null && !aluno.getNome().equals(""))
 			hql.append(" and a.nome like :nome");
-		
 		Query query = entityManager.createQuery(hql.toString());
-		
 		if(aluno.getCodigo() != null)
 			query.setParameter("codigo",aluno.getCodigo());
 		if(aluno.getNome() != null && !aluno.getNome().equals(""))
 			query.setParameter("nome","%"+aluno.getNome()+"%");
-		
 		return query.getResultList();
 	}
 	
@@ -52,6 +48,15 @@ public class AlunoDaoImpl implements AlunoDao {
 		StringBuilder hql = new StringBuilder("from Aluno a where a.ativo like :ativo");
 		Query query = entityManager.createQuery(hql.toString());
 		query.setParameter("ativo",Ativo.ATIVO);
+		return query.getResultList();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Aluno> getAlunosPorTurma(int codigo){
+		StringBuilder hql = new StringBuilder(" from Aluno a where a.turma = :codigo");
+		Query query = entityManager.createQuery(hql.toString());
+		query.setParameter("codigo", codigo);
 		return query.getResultList();
 	}
 }

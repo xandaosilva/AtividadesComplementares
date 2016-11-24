@@ -81,9 +81,22 @@ public class Atividade implements Serializable{
 		this.lancamentos = lancamentos;
 	}
 	
-	public int calcularHorasPorPpc(Ppc ppc){
+	public int calcularAproveitamentoSemestral(Ppc ppc){
 		int horasAux = 0;
-		horasAux = (((this.porcentagem * ppc.getCargaHoraria())/this.porcentagemAproveitadaPorAtividade));
+		horasAux = (this.porcentagem * (ppc.getCargaHoraria()/100));
+		return horasAux;
+	}
+	
+	public int calcularAproveitamentoPorAtividade(Ppc ppc){
+		int horasAux = 0;
+		int cargaHorariaSemestral = this.calcularAproveitamentoSemestral(ppc);
+		horasAux = cargaHorariaSemestral/this.porcentagemAproveitadaPorAtividade;
+		return horasAux;
+	}
+	
+	public int calcularAproveitamentoTotalAtividade(Ppc ppc){
+		int horasAux = 0;
+		horasAux = (this.porcentagem * (ppc.getCargaHoraria()/100));
 		return horasAux;
 	}
 

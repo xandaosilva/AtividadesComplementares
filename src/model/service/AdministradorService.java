@@ -4,8 +4,8 @@ import java.util.*;
 import model.domain.Administrador;
 
 public interface AdministradorService {
-	public List<Administrador> getAdministradores(Administrador administrador);
-	public List<Administrador> getAdministradoresAtivos();
-	public Administrador salvar(Administrador administrador);
-	public void atualizar(Administrador administrador);
+	List<Administrador> getAdministradores(Administrador administrador);
+	List<Administrador> getAdministradoresAtivos();
+	Administrador salvar(Administrador administrador);
+	void atualizar(Administrador administrador);
 }

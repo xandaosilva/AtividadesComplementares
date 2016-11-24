@@ -2,7 +2,7 @@
 <html ng-app="alunoModule">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title>Listar alunos</title>
+	<title>Calcular horas</title>
 	<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../resources/css/sticky-footer.css">
 	<script src="../resources/js/angular.min.js"></script>
@@ -15,7 +15,7 @@
 	<div ng-include="'../menu.html'"></div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Lista de alunos</h3>
+			<h3 class="panel-title">Calcular horas do aluno</h3>
   		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" name="alunoForm" ng-submit="alunoForm.$valid && salvar()" novalidate>
@@ -84,6 +84,7 @@
 				<div class="form-group">
 					<div class="col-sm-offset-1 col-sm-11">
 						<button type="button" class="btn btn-success" ng-click="novo()">Limpar</button>
+						<button type="button" class="btn btn-success" ng-click="calcular()">Calcular</button>
 					</div>
 				</div>
 			</form>

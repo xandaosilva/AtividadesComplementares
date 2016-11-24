@@ -41,17 +41,21 @@
 					<div class="col-sm-2">
 						<input type="number" name="codigo" ng-model="lancamento.codigo" class="form-control" id="inputCodigo" placeholder="Códgio" readonly>
 					</div>
-					<label for="inputDataAtividade" class="col-sm-2 control-label">Data da atividade</label>
+					<label for="inputDataInicioAtividade" class="col-sm-2 control-label">Data início da atividade</label>
 					<div class="col-sm-2">
-						<input type="date" name="dataAtividade" ng-model="lancamento.dataAtividade" class="form-control" id="inputDataAtividade" placeholder="Data da atividade" readonly>
+						<input type="date" name="dataInicioAtividade" ng-model="lancamento.dataInicioAtividade" class="form-control" id="inputDataInicioAtividade" placeholder="Data da inicio atividade" readonly>
 					</div>
-					<label for="inputDataLancamento" class="col-sm-2 control-label">Data do lancamento</label>
+					<label for="inputDataFinalAtividade" class="col-sm-2 control-label">Data final da atividade</label>
 					<div class="col-sm-2">
-						<input type="date" name="dataLancamento" ng-model="lancamento.dataLancamento" class="form-control" id="inputDataLancamento" placeholder="Data do lancamento" readonly>
+						<input type="date" name="dataFinalAtividade" ng-model="lancamento.dataFinalAtividade" class="form-control" id="inputDataFinalAtividade" placeholder="Data da inicio atividade" readonly>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="inputHorasLancamento" class="col-sm-1 control-label">Horas do lançamento</label>
+					<label for="inputDataLancamento" class="col-sm-1 control-label">Data do lancamento</label>
+					<div class="col-sm-2">
+						<input type="date" name="dataLancamento" ng-model="lancamento.dataLancamento" class="form-control" id="inputDataLancamento" placeholder="Data do lancamento" readonly>
+					</div>
+					<label for="inputHorasLancamento" class="col-sm-2 control-label">Horas do lançamento</label>
 					<div class="col-sm-2">
 						<input type="number" name="horasLancamento" ng-model="lancamento.horasLancamento" class="form-control" id="inputHorasLancamento" placeholder="Horas do lançamento" readonly>
 					</div>
@@ -116,12 +120,13 @@
 				<input type="text" ng-model="criterio" class="form-control" id="inputCriterio" placeholder="Filtrar cursos">
 				<br>
 				<table class="table table-condensed">
-					<th>Aluno</th><th>Horas lançamento</th><th>Horas aproveitadas</th><th>Data atividade</th><th>Data lançamento</th>
+					<th>Aluno</th><th>Horas lançamento</th><th>Horas aproveitadas</th><th>Data início atividade</th><th>Data final atividade</th><th>Data lançamento</th>
 					<tr ng-repeat="lancamento in lancamentos | filter:criterio" ng-click="seleciona(lancamento)">
 						<td>{{lancamento.aluno.nome}}</td>
 						<td>{{lancamento.horasLancamento}}</td>
 						<td>{{lancamento.horasAproveitadas}}</td>
-						<td>{{lancamento.dataAtividade | date:"yyyy-MM-dd"}}</td>
+						<td>{{lancamento.dataInicioAtividade | date:"yyyy-MM-dd"}}</td>
+						<td>{{lancamento.dataFinalAtividade | date:"yyyy-MM-dd"}}</td>
 						<td>{{lancamento.dataLancamento | date:"yyyy-MM-dd"}}</td>
 					</tr>
 				</table>

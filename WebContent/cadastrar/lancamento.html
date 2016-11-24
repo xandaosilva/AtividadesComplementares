@@ -22,7 +22,8 @@
 				<br>
 					<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
 					<div ng-show="lancamentoForm.$submitted">
-						<div ng-show="lancamentoForm.dataAtividade.$error.required">Preencha a data da atividade</div>
+						<div ng-show="lancamentoForm.dataInicioAtividade.$error.required">Preencha a data início da atividade</div>
+						<div ng-show="lancamentoForm.dataFinalAtividade.$error.required">Preencha a data final da atividade</div>
 						<div ng-show="lancamentoForm.dataLancamento.$error.required">Preencha a data do lançamento</div>
 						<div ng-show="lancamentoForm.horasLancamento.$error.required">Preencha as horas do lançamento</div>
 						<div ng-show="lancamentoForm.horasAproveitadas.$error.required">Preencha as horas aproveitadas</div>
@@ -41,17 +42,21 @@
 					<div class="col-sm-2">
 						<input type="number" name="codigo" ng-model="lancamento.codigo" class="form-control" id="inputCodigo" placeholder="Códgio" disabled>
 					</div>
-					<label for="inputDataAtividade" class="col-sm-2 control-label">Data da atividade</label>
+					<label for="inputDataInicioAtividade" class="col-sm-2 control-label">Data início da atividade</label>
 					<div class="col-sm-2">
-						<input type="date" name="dataAtividade" ng-model="lancamento.dataAtividade" class="form-control" id="inputDataAtividade" placeholder="Data da atividade" required>
+						<input type="date" name="dataInicioAtividade" ng-model="lancamento.dataInicioAtividade" class="form-control" id="inputDataInicioAtividade" placeholder="Data da inicio atividade" required>
 					</div>
-					<label for="inputDataLancamento" class="col-sm-2 control-label">Data do lancamento</label>
+					<label for="inputDataFinalAtividade" class="col-sm-2 control-label">Data final da atividade</label>
 					<div class="col-sm-2">
-						<input type="date" name="dataLancamento" ng-model="lancamento.dataLancamento" class="form-control" id="inputDataLancamento" placeholder="Data do lancamento" required>
+						<input type="date" name="dataFinalAtividade" ng-model="lancamento.dataFinalAtividade" class="form-control" id="inputDataFinalAtividade" placeholder="Data da inicio atividade" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="inputHorasLancamento" class="col-sm-1 control-label">Horas do lançamento</label>
+					<label for="inputDataLancamento" class="col-sm-1 control-label">Data do lancamento</label>
+					<div class="col-sm-2">
+						<input type="date" name="dataLancamento" ng-model="lancamento.dataLancamento" class="form-control" id="inputDataLancamento" placeholder="Data do lancamento" required>
+					</div>
+					<label for="inputHorasLancamento" class="col-sm-2 control-label">Horas do lançamento</label>
 					<div class="col-sm-2">
 						<input type="number" name="horasLancamento" ng-model="lancamento.horasLancamento" class="form-control" id="inputHorasLancamento" placeholder="Horas do lançamento" required>
 					</div>

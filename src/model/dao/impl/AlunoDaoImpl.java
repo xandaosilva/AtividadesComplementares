@@ -59,4 +59,9 @@ public class AlunoDaoImpl implements AlunoDao {
 		query.setParameter("codigo", codigo);
 		return query.getResultList();
 	}
+	
+	@Override
+	public Aluno getAlunoPorCodigo(int codigo){
+		return entityManager.find(Aluno.class, codigo);
+	}
 }

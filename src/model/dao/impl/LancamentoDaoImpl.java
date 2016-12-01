@@ -59,7 +59,7 @@ public class LancamentoDaoImpl implements LancamentoDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Lancamento> getLancamentosAtivosPorAluno(int codigo){
-		StringBuilder hql = new StringBuilder(" from Lancamento l where l.aluno = :codigo and l.ativo = :ativo");
+		StringBuilder hql = new StringBuilder(" from Lancamento l where l.aluno.codigo = :codigo and l.ativo = :ativo");
 		Query query = entityManager.createQuery(hql.toString());
 		query.setParameter("codigo", codigo);
 		query.setParameter("ativo", Ativo.ATIVO);

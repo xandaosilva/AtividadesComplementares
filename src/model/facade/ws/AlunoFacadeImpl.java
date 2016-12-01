@@ -48,4 +48,10 @@ public class AlunoFacadeImpl implements AlunoFacade{
 	public void atualizar(@WebParam(name="aluno") Aluno aluno){
 		alunoService.atualizar(aluno);
 	}
+	
+	@Override
+	@WebMethod
+	public void calcularAproveitamento(@WebParam(name="codigo") Integer codigo){
+		
+	}
 }

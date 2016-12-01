@@ -35,4 +35,9 @@ public class AlunoServiceImpl implements AlunoService {
 	public void atualizar(Aluno aluno){
 		alunoDao.atualizar(aluno);
 	}
+	
+	@Override
+	public Aluno getAlunoPorCodigo(int codigo){
+		return alunoDao.getAlunoPorCodigo(codigo);
+	}
 }

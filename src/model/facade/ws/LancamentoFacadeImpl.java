@@ -37,6 +37,12 @@ public class LancamentoFacadeImpl implements LancamentoFacade{
 	
 	@Override
 	@WebMethod
+	public List<Lancamento> getLancamentosAtivosPorAluno(@WebParam(name="codigo") Integer codigo){
+		return lancamentoService.getLancamentosAtivosPorAluno(codigo);
+	}
+	
+	@Override
+	@WebMethod
 	public Lancamento salvar(@WebParam(name="lancamento") Lancamento lancamento){
 		return lancamentoService.salvar(lancamento);
 	}

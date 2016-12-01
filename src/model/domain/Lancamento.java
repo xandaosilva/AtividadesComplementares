@@ -1,6 +1,8 @@
 package model.domain;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -98,15 +100,16 @@ public class Lancamento implements Serializable{
 		this.administrador = administrador;
 		this.atividade = atividade;
 	}
-
-	public void calcularLancamento(){
-		Ppc ppcAluno = this.aluno.getTurma().getPpc();
-		int aproveitamentoAtividade = this.atividade.calcularAproveitamentoPorAtividade(ppcAluno);
-		if(this.horasLancamento > aproveitamentoAtividade){
-			this.horasAproveitadas = aproveitamentoAtividade;
-		}
-		else{
-			this.horasAproveitadas = this.horasLancamento;
+	
+	public String getSemestreAtividade() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(dataFinalAtividade);
+		Integer ano = calendar.get(Calendar.YEAR);
+		Integer mes = calendar.get(Calendar.MONTH);
+		if (mes < 6) {
+			return ano+"-"+1;
+		} else {
+			return ano+"-"+2;
 		}
 	}
 
@@ -238,4 +241,18 @@ public class Lancamento implements Serializable{
 				+ ", horasAproveitadas=" + horasAproveitadas + ", descricao=" + descricao + ", ativo=" + ativo
 				+ ", instituicao=" + instituicao + "]";
 	}
+}
+
+class HorasComparator implements Comparator<Lancamento> {
+	@Override
+	public int compare(Lancamento o1, Lancamento o2) {
+		return o2.getHorasLancamento().compareTo(o2.getHorasLancamento());
+	}
+}
+
+class SemestreComparator implements Comparator<Lancamento> {
+	@Override
+	public int compare(Lancamento o1, Lancamento o2) {
+		return o1.getSemestreAtividade().compareTo(o2.getSemestreAtividade());
+	}	
 }

@@ -58,6 +58,21 @@ alunoModule.controller("alunoController", function($scope,$http) {
 		}
 	}
 	
+	$scope.calcular = function() {
+		if($scope.aluno.codigo === undefined || $scope.aluno.codigo === ""){
+			alert("Selecione um aluno");
+		}
+		else{
+			urlAux = url + "/calcular/" + $scope.aluno.codigo;
+			$http.get(urlAux).success(function() {
+				$scope.pesquisar();
+				$scope.novo();
+			}).error(function(erro){
+				$scope.montaMensagemErro(erro.parameterViolations);
+			});
+		}
+	}
+	
 	$scope.pesquisarTurma();
 	$scope.pesquisar();
 	$scope.novo();

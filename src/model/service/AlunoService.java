@@ -8,4 +8,5 @@ public interface AlunoService {
 	List<Aluno> getAlunosAtivos();
 	Aluno salvar(Aluno aluno);
 	void atualizar(Aluno aluno);
+	Aluno getAlunoPorCodigo(int codigo);
 }

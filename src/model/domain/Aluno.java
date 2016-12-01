@@ -1,11 +1,15 @@
 package model.domain;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -46,7 +50,7 @@ public class Aluno extends Usuario {
 	@JoinColumn(name="turma",referencedColumnName="codigo")
 	private Turma turma;
 	
-	@OneToMany(mappedBy="aluno")
+	@OneToMany(mappedBy="aluno",fetch=FetchType.EAGER)
 	private List<Lancamento> lancamentos;
 	
 	public Aluno(){}
@@ -61,59 +65,38 @@ public class Aluno extends Usuario {
 		this.turma = turma;
 		this.lancamentos = lancamentos;
 	}
-//
-//	public int calcularHorasPorAtividade(Atividade atividade){
-//		int horasAux = 0;
-//		for(Lancamento aux : this.lancamentos){
-//			if(aux.getAtividade().equals(atividade) && aux.getAtivo().equals(Ativo.ATIVO)){
-//				horasAux = horasAux + aux.getHorasAproveitadas();
-//			}
-//		}
-//		return horasAux;
-//	}
-//	
-//	public int calcularHorasPorSemestre(Atividade atividade){
-//		return 0;
-//	}
-//	
-//	public int calcularHorasDentroDaInstituicao(){
-//		int horasAux = 0;
-//		for(Lancamento aux : this.lancamentos){
-//			if(aux.getInstituicao().equals(Instituicao.IFTM) && aux.getAtivo().equals(Ativo.ATIVO)){
-//				horasAux = horasAux + aux.getHorasAproveitadas();
-//			}
-//		}
-//		return horasAux;
-//	}
-//	
-//	public int calcularHorasForaDaInstituicao(){
-//		int horasAux = 0;
-//		for(Lancamento aux : this.lancamentos){
-//			if(aux.getInstituicao().equals(Instituicao.OUTROS) && aux.getAtivo().equals(Ativo.ATIVO)){
-//				horasAux = horasAux + aux.getHorasAproveitadas();
-//			}
-//		}
-//		return horasAux;
-//	}
-//	
-//	public int calcularTotalHorasAproveitadas(){
-//		int horasAux = 0;
-//		for(Lancamento aux : this.lancamentos){
-//			if(aux.getAtivo().equals(Ativo.ATIVO)){
-//				horasAux = horasAux + aux.getHorasAproveitadas();
-//			}
-//		}
-//		return horasAux;
-//	}
-	
-	public void ordenarLancamentosPorData(List<Lancamento> lancamentos){
-		return;
+
+	private Map<Atividade,List<Lancamento>> getMapa() {
+		Map<Atividade,List<Lancamento>> mapaAtividades = new LinkedHashMap<>();
+		for (Lancamento lancamento: lancamentos) {
+			if (mapaAtividades.containsKey(lancamento.getAtividade())) {
+				mapaAtividades.get(lancamento.getAtividade()).add(lancamento);
+			} else {
+				List<Lancamento> lista = new ArrayList<>();
+				lista.add(lancamento);
+				mapaAtividades.put(lancamento.getAtividade(), lista);
+			}
+		}
+		return mapaAtividades;
 	}
 	
-	public int calcularAproveitamento(List<Lancamento> lancamentos){
-		return 0;
+	public void calcularAtividades() {
+		Map<Atividade,List<Lancamento>> mapaAtividades = getMapa();
+		for (Atividade aux: mapaAtividades.keySet()) {
+			List<Lancamento> lancamentos = mapaAtividades.get(aux);			
+			aux.calcularHorasPorAtividade(lancamentos);
+		}
 	}
 	
+	public int calcularHorasAproveitadas(List<Lancamento> lancamentos){
+		Integer horas = 0;
+		this.calcularAtividades();
+		for(Lancamento aux : lancamentos){
+			horas = horas + aux.getHorasAproveitadas();
+		}
+		return horas;
+	}
+
 	public int calcularHorasDentroDaInstituicao(List<Lancamento> lancamentos){
 		int horasAux = 0;
 		for(Lancamento aux : lancamentos)
@@ -130,10 +113,11 @@ public class Aluno extends Usuario {
 		return horasAux;
 	}
 	
-	public int calcularTotalHoras(List<Lancamento> lancamentos){
+	public int somarTotalHoras(List<Lancamento> lancamentos){
 		int horasAux = 0;
-		for(Lancamento aux : lancamentos)
+		for(Lancamento aux : lancamentos){
 			horasAux = horasAux + aux.getHorasLancamento();
+		}
 		return horasAux;
 	}
 	

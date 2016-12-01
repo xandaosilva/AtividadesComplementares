@@ -10,4 +10,5 @@ public interface AlunoDao {
 	List<Aluno> getAlunos(Aluno aluno);
 	List<Aluno> getAlunosAtivos();
 	List<Aluno> getAlunosPorTurma(int codigo);
+	Aluno getAlunoPorCodigo(int codigo);
 }

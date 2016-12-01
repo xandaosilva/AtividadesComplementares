@@ -17,4 +17,6 @@ public interface AlunoFacade {
 	
 	@ValidateOnExecution
 	void atualizar(@Valid Aluno aluno);
+	
+	public void calcularAproveitamento(Integer codigo);
 }

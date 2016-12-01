@@ -11,6 +11,7 @@ public interface LancamentoFacade {
 	List<Lancamento> getLancamentosSemParametros();
 	List<Lancamento> getLancamentosAtivos();
 	List<Lancamento> getLancamentos(Integer codigo);
+	List<Lancamento> getLancamentosAtivosPorAluno(Integer codigo);
 	
 	@ValidateOnExecution
 	Lancamento salvar(@Valid Lancamento lancamento);

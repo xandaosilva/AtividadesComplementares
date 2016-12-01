@@ -13,8 +13,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import model.domain.Aluno;
+import model.domain.Lancamento;
 import model.facade.AlunoFacade;
 import model.service.AlunoService;
+import model.service.LancamentoService;
 
 @Path("/aluno")
 @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
@@ -23,6 +25,9 @@ public class AlunoFacadeImpl implements AlunoFacade{
 
 	@Inject
 	private AlunoService alunoService;
+	
+	@Inject
+	private LancamentoService lancamentoService;
 	
 	@Override
 	@GET
@@ -55,6 +60,22 @@ public class AlunoFacadeImpl implements AlunoFacade{
 	@Override
 	@PUT
 	public void atualizar(Aluno aluno){
+		alunoService.atualizar(aluno);
+	}
+	
+	@Override
+	@GET
+	@Path("/calcular/{codigo}")
+	public void calcularAproveitamento(@PathParam("codigo") Integer codigo){
+		int horasAproveitadas = 0;
+		int totalHoras = 0;
+		Aluno aluno = alunoService.getAlunoPorCodigo(codigo);
+		List<Lancamento> lancamentos = lancamentoService.getLancamentosAtivosPorAluno(codigo);
+		horasAproveitadas = aluno.calcularHorasAproveitadas(lancamentos);
+		totalHoras = aluno.somarTotalHoras(lancamentos);
+		aluno.setTotalHoras(totalHoras);
+		aluno.setHorasAproveitadas(horasAproveitadas);
+		aluno.aprovarAluno();
 		alunoService.atualizar(aluno);
 	}
 }

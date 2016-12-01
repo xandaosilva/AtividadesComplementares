@@ -25,6 +25,11 @@ public class LancamentoServiceImpl implements LancamentoService {
 	}
 	
 	@Override
+	public List<Lancamento> getLancamentosAtivosPorAluno(int codigo){
+		return lancamentoDao.getLancamentosAtivosPorAluno(codigo);
+	}
+	
+	@Override
 	@Transactional
 	public Lancamento salvar(Lancamento lancamento){
 		return lancamentoDao.salvar(lancamento);

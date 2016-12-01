@@ -1,50 +1,42 @@
 package model.util;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
-import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
-import model.dao.AlunoDao;
-import model.dao.LancamentoDao;
-import model.domain.Aluno;
-import model.domain.Lancamento;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.JasperRunManager;
 
-public class Relatorio extends Exception{
-
-	private static final long serialVersionUID = 1L;
+public class Relatorio{
 	
-	@Inject
-	private AlunoDao alunoDao;
+	private String nomeRelatorio;
+	private Map<String,Object> parametros;
+	private JRDataSource dataSource;
 	
-	@Inject
-	private LancamentoDao lancamentoDao;
-	
-	public void gerarRelatorioDeAlunosPorTurma(int codigo) throws JRException{
-		try {
-			List<Aluno> alunos = alunoDao.getAlunosPorTurma(codigo);
-			String arquivo = System.getProperty("user.dir") + "/resources/relatorio/alunosDaTurma.jasper";
-			JRBeanCollectionDataSource beanDataSource = new JRBeanCollectionDataSource(alunos);
-			JasperPrint impressao = JasperFillManager.fillReport(arquivo, null,beanDataSource);
-			JasperViewer.viewReport(impressao,false);
-		} catch (JRException e) {
-			e.printStackTrace();
-		}
+	public Relatorio(String nomeRelatorio,Map<String,Object> parametros,JRDataSource dataSource) {
+		this.nomeRelatorio = nomeRelatorio;
+		this.parametros = parametros;
+		this.dataSource = dataSource;
 	}
-	
-	public void gerarRelatorioDeLancamentosPorTurma(int codigo) throws JRException{
+
+	public void executaRetorno(HttpServletResponse response,ServletContext context) throws ServletException,IOException {
 		try {
-			List<Lancamento> lancamentos = lancamentoDao.getLancamentosPorAluno(codigo);
-			String arquivo = System.getProperty("user.dir") + "/resources/relatorio/lancamentosDoAluno.jasper";
-			JRBeanCollectionDataSource beanDataSource = new JRBeanCollectionDataSource(lancamentos);
-			JasperPrint impressao = JasperFillManager.fillReport(arquivo, null,beanDataSource);
-			JasperViewer.viewReport(impressao,false);
+			ServletOutputStream servletOutputStream = response.getOutputStream();
+			String caminho = "/report/";
+			InputStream reportStream = context.getResourceAsStream(caminho + nomeRelatorio);    		 
+			byte[] retorno = JasperRunManager.runReportToPdf(reportStream, parametros,dataSource);
+			response.setContentType("application/pdf");
+			servletOutputStream.write(retorno, 0, retorno.length);  
+			servletOutputStream.flush();
+			servletOutputStream.close();		
 		} catch (JRException e) {
-			e.printStackTrace();
-		}
-	}	
+			throw new IOException("Erro ao tentar executar o relatório "+e);
+		} 
+	}
 }

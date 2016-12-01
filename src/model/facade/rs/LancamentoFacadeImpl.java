@@ -47,6 +47,13 @@ public class LancamentoFacadeImpl implements LancamentoFacade{
 	}
 	
 	@Override
+	@GET
+	@Path("/porAluno/{codigo}")
+	public List<Lancamento> getLancamentosAtivosPorAluno(@PathParam("codigo") Integer codigo){
+		return lancamentoService.getLancamentosAtivosPorAluno(codigo);
+	}
+	
+	@Override
 	@POST
 	public Lancamento salvar(Lancamento lancamento){
 		return lancamentoService.salvar(lancamento);

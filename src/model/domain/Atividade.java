@@ -62,6 +62,10 @@ public class Atividade implements Serializable{
 	private Integer porcentagemAproveitadaPorAtividade;
 	
 	@NotNull
+	@Column(name="observacao")
+	private String observacao;
+	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name="ativo")
 	private Ativo ativo;
@@ -76,19 +80,15 @@ public class Atividade implements Serializable{
 	public Atividade(){}
 
 	public Atividade(Integer codigo, String nome, String descricao, Integer quantidadeDeAtividadesPorSemestre,
-			Integer porcentagem, Integer porcentagemAproveitadaPorAtividade, Ativo ativo, Modalidade modalidade,
-			List<Lancamento> lancamentos) {
+			Integer porcentagem, Integer porcentagemAproveitadaPorAtividade, String observacao, Ativo ativo,
+			Modalidade modalidade, List<Lancamento> lancamentos) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.descricao = descricao;
-		if(quantidadeDeAtividadesPorSemestre == null){
-			this.quantidadeDeAtividadesPorSemestre = Integer.MAX_VALUE;
-		}
-		else{
-			this.quantidadeDeAtividadesPorSemestre = quantidadeDeAtividadesPorSemestre;
-		}
+		this.quantidadeDeAtividadesPorSemestre = quantidadeDeAtividadesPorSemestre;
 		this.porcentagem = porcentagem;
 		this.porcentagemAproveitadaPorAtividade = porcentagemAproveitadaPorAtividade;
+		this.observacao = observacao;
 		this.ativo = ativo;
 		this.modalidade = modalidade;
 		this.lancamentos = lancamentos;
@@ -97,12 +97,12 @@ public class Atividade implements Serializable{
 	private Map<String,List<Lancamento>> getMapa(List<Lancamento> lancamentos){
 		Map<String,List<Lancamento>> mapaAtividades = new LinkedHashMap<>();
 		for (Lancamento lancamento: lancamentos) {
-			if (mapaAtividades.containsKey(lancamento.getSemestreAtividade())) {
-				mapaAtividades.get(lancamento.getSemestreAtividade()).add(lancamento);
+			if (mapaAtividades.containsKey(lancamento.retornarSemestreAtividade())) {
+				mapaAtividades.get(lancamento.retornarSemestreAtividade()).add(lancamento);
 			} else {
 				List<Lancamento> lista = new ArrayList<>();
 				lista.add(lancamento);
-				mapaAtividades.put(lancamento.getSemestreAtividade(), lista);
+				mapaAtividades.put(lancamento.retornarSemestreAtividade(), lista);
 			}
 		}
 		return mapaAtividades;
@@ -119,7 +119,7 @@ public class Atividade implements Serializable{
 			Integer horas = lancamento.getHorasLancamento();
 			int aproveitamento = horas;
 			if (horas > horasMaximaPorSemestre) {
-				aproveitamento = horasMaximaPorSemestre;				
+				aproveitamento = horasMaximaPorSemestre;
 			} 
 			if (aproveitamento > horasMaximaAproveitadas) {
 				aproveitamento = horasMaximaAproveitadas;
@@ -129,6 +129,7 @@ public class Atividade implements Serializable{
 		}
 		return horasMaximaAproveitadas;
 	}
+	
 	
 	public void calcularHorasPorAtividade(List<Lancamento> lancamentos){
 		if(lancamentos.size() == 0){
@@ -196,6 +197,14 @@ public class Atividade implements Serializable{
 
 	public void setPorcentagemAproveitadaPorAtividade(Integer porcentagemAproveitadaPorAtividade) {
 		this.porcentagemAproveitadaPorAtividade = porcentagemAproveitadaPorAtividade;
+	}
+	
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	public Ativo getAtivo() {

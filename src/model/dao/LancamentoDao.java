@@ -12,4 +12,5 @@ public interface LancamentoDao {
 	List<Lancamento> getLancamentosPorAluno(int codigo);
 	List<Lancamento> getLancamentosAtivosPorAluno(int codigo);
 	List<Lancamento> getLancamentosPorAdministrador(int codigo);
+	void atualizarLancamentosCalculados(List<Lancamento> lancamentos);
 }

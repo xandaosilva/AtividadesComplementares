@@ -32,6 +32,7 @@
 						<div ng-show="atividadeForm.porcentagemAproveitadaPorAtividade.$error.required">Informe o aproveitamento por atividade</div>
 						<div ng-show="atividadeForm.porcentagemAproveitadaPorAtividade.$error.min">O valor mínimo do aproveitamento por atividade deve ser 1</div>
 						<div ng-show="atividadeForm.porcentagemAproveitadaPorAtividade.$error.max">O valor máximo do aproveitamento por atividade deve ser 100</div>
+						<div ng-show="atividadeForm.observacao.$error.required">Informe a observação</div>
 						<div ng-show="atividadeForm.ativo.$error.required">Informe o estado</div>
 						<div ng-show="atividadeForm.modalidade.$error.required">Informe a modalidade</div>
 					</div>
@@ -67,6 +68,14 @@
 					</div>
 					
 				</div>
+				
+				<div class="form-group">
+					<label for="inputObservacao" class="col-sm-1 control-label">Observações</label>
+					<div class="col-sm-11">
+						<textarea class="form-control" name="observacao" ng-model="atividade.observacao" rows="5" required></textarea>
+					</div>
+				</div>
+				
 				<div class="form-group">
 					<label for="inputEstado" class="col-sm-1 control-label">Estado</label>
 					<div class="col-sm-2">
@@ -76,8 +85,8 @@
 						</select>
 					</div>
 					<label for="inputModalidade" class="col-sm-1 control-label">Modalidade</label>
-					<div class="col-sm-4">
-						<select class="form-control" ng-model="atividade.modalidade" ng-options="modalidade.nome for modalidade in modalidades track by modalidade.codigo" required>
+					<div class="col-sm-3">
+						<select class="form-control" name="modalidade" ng-model="atividade.modalidade" ng-options="modalidade.nome for modalidade in modalidades track by modalidade.codigo" required>
 						</select>
 					</div>
 				</div>

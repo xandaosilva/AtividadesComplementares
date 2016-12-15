@@ -9,4 +9,5 @@ public interface LancamentoService {
 	List<Lancamento> getLancamentosAtivosPorAluno(int codigo);
 	Lancamento salvar(Lancamento lancamento);
 	void atualizar(Lancamento lancamento);
+	void atualizarLancamentosCalculados(List<Lancamento> lancamentos);
 }

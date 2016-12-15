@@ -40,4 +40,10 @@ public class LancamentoServiceImpl implements LancamentoService {
 	public void atualizar(Lancamento lancamento){
 		lancamentoDao.atualizar(lancamento);
 	}
+	
+	@Override
+	@Transactional
+	public void atualizarLancamentosCalculados(List<Lancamento> lancamentos){
+		lancamentoDao.atualizarLancamentosCalculados(lancamentos);
+	}
 }

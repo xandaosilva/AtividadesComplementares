@@ -36,7 +36,7 @@ public class Relatorio{
 			servletOutputStream.flush();
 			servletOutputStream.close();		
 		} catch (JRException e) {
-			throw new IOException("Erro ao tentar executar o relatório "+e);
+			throw new IOException("Erro ao tentar executar o relatório " + e);
 		} 
 	}
 }

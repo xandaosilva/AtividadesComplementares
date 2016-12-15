@@ -52,7 +52,6 @@ public class Lancamento implements Serializable{
 	@Column(name="horasLancamento")
 	private Integer horasLancamento;
 	
-	@NotNull(message="preencha as horas aproveitadas")
 	@Column(name="horasAproveitadas")
 	private Integer horasAproveitadas;
 	
@@ -101,7 +100,7 @@ public class Lancamento implements Serializable{
 		this.atividade = atividade;
 	}
 	
-	public String getSemestreAtividade() {
+	public String retornarSemestreAtividade() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(dataFinalAtividade);
 		Integer ano = calendar.get(Calendar.YEAR);
@@ -253,6 +252,6 @@ class HorasComparator implements Comparator<Lancamento> {
 class SemestreComparator implements Comparator<Lancamento> {
 	@Override
 	public int compare(Lancamento o1, Lancamento o2) {
-		return o1.getSemestreAtividade().compareTo(o2.getSemestreAtividade());
+		return o1.retornarSemestreAtividade().compareTo(o2.retornarSemestreAtividade());
 	}	
 }

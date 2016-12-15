@@ -51,6 +51,14 @@
 						<input type="number" name="porcentagemAproveitadaPorAtividade" ng-model="atividade.porcentagemAproveitadaPorAtividade" min="1" max="100" class="form-control" id="inputporcentagemAproveitadaPorAtividade" placeholder="por atividade" readonly>
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label for="inputObservacao" class="col-sm-1 control-label">Observações</label>
+					<div class="col-sm-11">
+						<textarea class="form-control" name="observacao" ng-model="atividade.observacao" rows="5" readonly></textarea>
+					</div>
+				</div>
+				
 				<div class="form-group">
 					<label for="inputEstado" class="col-sm-1 control-label">Estado</label>
 					<div class="col-sm-2">
@@ -60,8 +68,8 @@
 						</select>
 					</div>
 					<label for="inputEstado" class="col-sm-1 control-label">Modalidade</label>
-					<div class="col-sm-4">
-						<select class="form-control" ng-model="atividade.modalidade" ng-options="modalidade.nome for modalidade in modalidades track by modalidade.codigo" disabled>
+					<div class="col-sm-3">
+						<select class="form-control" name="modalidade" ng-model="atividade.modalidade" ng-options="modalidade.nome for modalidade in modalidades track by modalidade.codigo" disabled>
 						</select>
 					</div>
 				</div>

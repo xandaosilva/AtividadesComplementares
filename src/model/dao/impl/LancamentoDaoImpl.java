@@ -50,7 +50,7 @@ public class LancamentoDaoImpl implements LancamentoDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Lancamento> getLancamentosPorAluno(int codigo){
-		StringBuilder hql = new StringBuilder(" from Lancamento l where l.aluno = :codigo");
+		StringBuilder hql = new StringBuilder(" from Lancamento l where l.aluno.codigo = :codigo");
 		Query query = entityManager.createQuery(hql.toString());
 		query.setParameter("codigo", codigo);
 		return query.getResultList();
@@ -69,9 +69,16 @@ public class LancamentoDaoImpl implements LancamentoDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Lancamento> getLancamentosPorAdministrador(int codigo){
-		StringBuilder hql = new StringBuilder(" from Lancamento l where l.administrador = :codigo");
+		StringBuilder hql = new StringBuilder(" from Lancamento l where l.administrador.codigo = :codigo");
 		Query query = entityManager.createQuery(hql.toString());
 		query.setParameter("codigo", codigo);
 		return query.getResultList();
+	}
+	
+	@Override
+	public void atualizarLancamentosCalculados(List<Lancamento> lancamentos){
+		for(Lancamento aux : lancamentos){
+			atualizar(aux);
+		}
 	}
 }

@@ -54,4 +54,10 @@ public class AlunoFacadeImpl implements AlunoFacade{
 	public void calcularAproveitamento(@WebParam(name="codigo") Integer codigo){
 		
 	}
+	
+	@Override
+	@WebMethod
+	public void gerarRelatorio(@WebParam(name="codigo") int codigo){
+		
+	}
 }

@@ -78,17 +78,4 @@ public class AlunoFacadeImpl implements AlunoFacade{
 		aluno.aprovarAluno();
 		alunoService.atualizar(aluno);
 	}
-	
-	@Override
-	@GET
-	@Path("/relatorio/{codigo}")
-	public void gerarRelatorio(int codigo){
-//		Aluno aluno = alunoService.getAlunoPorCodigo(codigo);
-//		aluno.setLancamentos(lancamentoService.getLancamentosAtivosPorAluno(codigo));
-//		aluno.calcularAtividades();
-//		JRBeanCollectionDataSource beanDataSource = new JRBeanCollectionDataSource(aluno.getLancamentos());
-//		Relatorio retornavel = new Relatorio("lancamentosDoAluno.jasper", null, beanDataSource);
-//		HttpServletResponse response;
-//		retornavel.executaRetorno(response,getServletContext());
-	}
 }

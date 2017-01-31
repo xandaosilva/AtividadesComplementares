@@ -125,7 +125,7 @@ public class Atividade implements Serializable{
 				aproveitamento = horasMaximaAproveitadas;
 			}
 			horasMaximaAproveitadas = horasMaximaAproveitadas - aproveitamento;
-			lancamento.setHorasAproveitadas(aproveitamento);			
+			lancamento.setHorasAproveitadas(aproveitamento);
 		}
 		return horasMaximaAproveitadas;
 	}

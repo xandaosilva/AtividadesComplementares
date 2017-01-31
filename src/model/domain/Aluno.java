@@ -99,17 +99,21 @@ public class Aluno extends Usuario {
 
 	public int calcularHorasDentroDaInstituicao(List<Lancamento> lancamentos){
 		int horasAux = 0;
-		for(Lancamento aux : lancamentos)
-			if(aux.getInstituicao().equals(Instituicao.IFTM))
+		for(Lancamento aux : lancamentos){
+			if(aux.getInstituicao().equals(Instituicao.IFTM)){
 				horasAux = horasAux + aux.getHorasAproveitadas();
+			}
+		}
 		return horasAux;
 	}
 	
 	public int calcularHorasForaDaInstituicao(List<Lancamento> lancamentos){
 		int horasAux = 0;
-		for(Lancamento aux : lancamentos)
-			if(aux.getInstituicao().equals(Instituicao.OUTROS))
+		for(Lancamento aux : lancamentos){
+			if(aux.getInstituicao().equals(Instituicao.OUTROS)){
 				horasAux = horasAux + aux.getHorasAproveitadas();
+			}
+		}
 		return horasAux;
 	}
 	
@@ -124,6 +128,9 @@ public class Aluno extends Usuario {
 	public void aprovarAluno(){
 		if(this.horasAproveitadas >= this.turma.getPpc().getCargaHoraria()){
 			this.setAprovado(Aprovado.APROVADO);
+		}
+		else{
+			this.setAprovado(Aprovado.NAO_APROVADO);
 		}
 	}
 

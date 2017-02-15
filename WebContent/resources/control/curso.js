@@ -1,6 +1,7 @@
 var cursoModule = angular.module("cursoModule",[]);
 
 cursoModule.controller("cursoController", function($scope,$http) {
+	
 	url = "http://localhost:8080/AtividadesComplementares/rs/curso";
 	urlAdministrador = "http://localhost:8080/AtividadesComplementares/rs/administrador/ativos";
 	
